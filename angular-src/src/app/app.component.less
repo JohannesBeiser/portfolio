@@ -1,0 +1,23 @@
+@import '../globalVariables.less';
+
+.layoutWrapper{
+    width: 100%;
+    height: 100%;
+    background-color: @warmWhite; 
+    display: grid;
+    grid-template-rows: 100px auto;
+    grid-template-columns: auto;
+    grid-template-areas: "navbar"
+                         "body";
+
+    .navbarContainer{
+        grid-area: navbar;
+        position: sticky;
+        top: 0;
+        background-color: @warmWhite 
+    }
+
+    .bodyContainerr{
+        grid-area: body;
+    }
+}

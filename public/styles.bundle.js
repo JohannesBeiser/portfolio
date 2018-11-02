@@ -35,7 +35,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "body{\n   margin-top:70px;\n }\n @media(max-width: 768px){\n   body{\n     margin-top:180px;\n    }\n }\n", ""]);
+exports.push([module.i, "html{\r\n  background-color: #f4eee0;\r\n  height: 100%;\r\n}\r\nbody , app-root{\r\n  height: 100%;\r\n  width: 100%;\r\n  min-width: 320px;\r\n}\r\n", ""]);
 
 // exports
 

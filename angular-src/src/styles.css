@@ -1,8 +1,9 @@
-body{
-   margin-top:70px;
- }
- @media(max-width: 768px){
-   body{
-     margin-top:180px;
-    }
- }
+html{
+  background-color: #f4eee0;
+  height: 100%;
+}
+body , app-root{
+  height: 100%;
+  width: 100%;
+  min-width: 320px;
+}

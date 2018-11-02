@@ -1,0 +1,97 @@
+@import '../../../globalVariables.less';
+
+
+.navBar{
+    height: 100%;
+    display: flex;
+    
+    .navbar-logo-wrapper{
+        flex: 4.5;
+        display: flex;
+
+    
+        .navbar-logo{
+            background-image: url("../../../assets/images/johannesBeiserLogo.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: bottom;
+
+            height: 60px;
+            align-self: flex-end;
+            margin-bottom: 10px;
+            outline: none;
+            cursor: pointer;
+            width: 245px;
+            margin-left: 20%;
+        }
+    }
+  
+
+    .menuWrapper{
+        flex: 6;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        padding-right: 10%;
+
+        .menuEntry{
+            margin-bottom: 15px;
+            margin-left: 4%;
+            text-transform: uppercase;
+            color: @textColor;
+            font-family: ComfortaaLight;
+            font-size: 18px;
+            cursor: pointer;
+            outline: none;
+
+            &:after {
+                content: "";
+                display: block;
+                margin: 0 auto;
+                width: 0;
+                height: 2px;
+                background-color: #c3a368;
+                transition: opacity 0.3s ease, width 0.3s ease;
+              }
+              &:hover , &:focus, &:active, &.active{
+                &:after {
+                  width: 100%;
+                }
+              }
+        }
+    }
+
+    .burgerMenu{
+        display: none;
+    }
+}
+
+
+@media only screen and (max-width: 768px){
+    .navBar{
+
+        .navbar-logo-wrapper{
+                  
+            .navbar-logo{
+               margin-left: auto;
+               margin-right: auto;
+            }
+        }
+
+
+        .menuWrapper{
+            display: none;
+        }
+        .burgerMenu{
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 17px;
+            i{
+                font-size: 30px;
+            }            
+        }
+    }
+
+    
+}
