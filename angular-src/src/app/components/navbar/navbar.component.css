@@ -1,0 +1,78 @@
+@font-face {
+  font-family: ComfortaaLight;
+  src: url('assets/fonts/Comfortaa-Light.ttf');
+}
+.navBar {
+  height: 100%;
+  display: flex;
+}
+.navBar .navbar-logo-wrapper {
+  flex: 4.5;
+  display: flex;
+}
+.navBar .navbar-logo-wrapper .navbar-logo {
+  background-image: url("../../../assets/images/johannesBeiserLogo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  height: 60px;
+  align-self: flex-end;
+  margin-bottom: 10px;
+  outline: none;
+  cursor: pointer;
+  width: 245px;
+  margin-left: 20%;
+}
+.navBar .menuWrapper {
+  flex: 6;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-right: 10%;
+}
+.navBar .menuWrapper .menuEntry {
+  margin-bottom: 15px;
+  margin-left: 4%;
+  text-transform: uppercase;
+  color: #2b2a29;
+  font-family: ComfortaaLight;
+  font-size: 18px;
+  cursor: pointer;
+  outline: none;
+}
+.navBar .menuWrapper .menuEntry:after {
+  content: "";
+  display: block;
+  margin: 0 auto;
+  width: 0;
+  height: 2px;
+  background-color: #c3a368;
+  transition: opacity 0.3s ease, width 0.3s ease;
+}
+.navBar .menuWrapper .menuEntry:hover:after,
+.navBar .menuWrapper .menuEntry:focus:after,
+.navBar .menuWrapper .menuEntry:active:after,
+.navBar .menuWrapper .menuEntry.active:after {
+  width: 100%;
+}
+.navBar .burgerMenu {
+  display: none;
+}
+@media only screen and (max-width: 768px) {
+  .navBar .navbar-logo-wrapper .navbar-logo {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .navBar .menuWrapper {
+    display: none;
+  }
+  .navBar .burgerMenu {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 17px;
+  }
+  .navBar .burgerMenu i {
+    font-size: 30px;
+  }
+}

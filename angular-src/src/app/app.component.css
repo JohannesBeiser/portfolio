@@ -1,0 +1,22 @@
+@font-face {
+  font-family: ComfortaaLight;
+  src: url('assets/fonts/Comfortaa-Light.ttf');
+}
+.layoutWrapper {
+  width: 100%;
+  height: 100%;
+  background-color: #f1ede5;
+  display: grid;
+  grid-template-rows: 100px auto;
+  grid-template-columns: auto;
+  grid-template-areas: "navbar" "body";
+}
+.layoutWrapper .navbarContainer {
+  grid-area: navbar;
+  position: sticky;
+  top: 0;
+  background-color: #f1ede5;
+}
+.layoutWrapper .bodyContainerr {
+  grid-area: body;
+}
