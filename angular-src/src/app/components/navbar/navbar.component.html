@@ -16,11 +16,11 @@
       </div>
 
       <div *ngIf="dropdownActive" @swipe class="dropdownMenu">
-          <div class="menuEntry" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"  [routerLink]="['/']">Home</div>
-          <div class="menuEntry" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"  [routerLink]="['/about']">About</div>
-          <div class="menuEntry" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"  [routerLink]="['/travel']">Travel</div>
-          <div class="menuEntry" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"  [routerLink]="['/photography']">Photography</div>
-          <div class="menuEntry" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"  [routerLink]="['/work']">Work</div>
+          <div (click)="toggleDropdownMenu()" class="menuEntry" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"  [routerLink]="['/']">Home</div>
+          <div (click)="toggleDropdownMenu()" class="menuEntry" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"  [routerLink]="['/about']">About</div>
+          <div (click)="toggleDropdownMenu()" class="menuEntry" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"  [routerLink]="['/travel']">Travel</div>
+          <div (click)="toggleDropdownMenu()" class="menuEntry" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"  [routerLink]="['/photography']">Photography</div>
+          <div (click)="toggleDropdownMenu()" class="menuEntry" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"  [routerLink]="['/work']">Work</div>
       </div>
 
 
