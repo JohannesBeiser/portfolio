@@ -16,6 +16,7 @@
   position: sticky;
   top: 0;
   background-color: #f1ede5;
+  z-index: 1000;
 }
 .layoutWrapper .bodyContainerr {
   grid-area: body;

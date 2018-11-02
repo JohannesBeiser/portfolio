@@ -2,13 +2,40 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { trigger ,state,transition, style, animate} from "@angular/animations";
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.less']
+  styleUrls: ['./navbar.component.less'],
+  animations: [
+    // trigger('fade',[
+    //   transition('void => *', [
+    //     style({ opacity: 0}),
+    //     animate(2000)
+    //   ])
+    // ])
+    trigger('swipe',[
+          transition('void => *', [
+            style({ transform: 'translateY(-110%)'}),
+            animate('200ms ease')
+         ]),
+         transition('* => void',[
+          animate('200ms ease', style({ transform: 'translateY(-110%)'}))
+         ])
+        ]),
+        trigger('fade',[
+          transition('void <=> *', [
+            style({ opacity: 0}),
+            animate(800)
+         ])
+        ])
+    ] 
 })
 export class NavbarComponent implements OnInit {
+
+  dropdownActive: boolean;
+
 
   constructor(
     private authService: AuthService,
@@ -16,6 +43,7 @@ export class NavbarComponent implements OnInit {
     private flashMessage: FlashMessagesService) { }
 
   ngOnInit() {
+    this.dropdownActive= false;
   }
 
   onLogoutClick() {
@@ -26,4 +54,9 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/login']);
     return false;
   }
+
+  toggleDropdownMenu(){
+    this.dropdownActive= !this.dropdownActive;
+  }
+
 }
