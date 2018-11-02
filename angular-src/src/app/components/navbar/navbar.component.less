@@ -3,15 +3,15 @@
 .animated.delay-500ms {
     -webkit-animation-delay: 500ms;
     animation-delay: 500ms;
-  }
-  .animated.delay-1500ms {
+}
+.animated.delay-1500ms {
     -webkit-animation-delay: 1500ms;
     animation-delay: 1500ms;
-  }
-  .animated.delay-2500ms {
+}
+.animated.delay-2500ms {
     -webkit-animation-delay: 2500ms;
     animation-delay: 2500ms;
-  }
+}
 
 
 .navBar{
@@ -24,7 +24,7 @@
         flex: 4.5;
         display: flex;
         z-index: 2000;
-        background: #F1EDE5;
+        background: @backgroundWhite;
     
         .navbar-logo{
             background-image: url("../../../assets/images/johannesBeiserLogo.png");
@@ -50,14 +50,14 @@
         align-items: flex-end;
         padding-right: 10%;
         z-index: 2000;
-        background: #F1EDE5;
+        background: @backgroundWhite;
 
         .menuEntry{
             margin-bottom: 15px;
             margin-left: 4%;
             text-transform: uppercase;
             color: @textColor;
-            font-family: ComfortaaLight;
+            font-family: @defaultFont;
             font-size: 18px;
             cursor: pointer;
             outline: none;
@@ -70,7 +70,7 @@
                 margin: 0 auto;
                 width: 0;
                 height: 2px;
-                background-color: #c3a368;
+                background-color: @menuActiveColor;
                 transition: opacity 0.3s ease, width 0.3s ease;
               }
               &:hover , &:focus, &:active, &.active{
@@ -110,22 +110,23 @@
             display: block;
             position: absolute;
             top: 100px;
+            left: 0; // TODO: Remove me, only for iOS Safary& iOS Chrome --> find solution for non-available css-grid
             width: 100%;
-            background: #e2d9c7;
+            background: @dropdownMenuColor;
             cursor: pointer;
 
             .menuEntry{
-                padding: 10px 0;
+                padding: 5px 0;
                 text-align: center;
                 text-transform: uppercase;
                 color: @textColor;
-                font-family: ComfortaaLight;
-                font-size: 18px;
+                font-family: @defaultFont;
+                font-size: 15px;
                 outline: none;
                 user-select: none;
 
                 &.active{
-                    background: #d4ccbc;
+                    background: @menuActiveColor2;
                 }
             }
         }
@@ -135,7 +136,7 @@
             display: flex;
             align-items: flex-end;
             padding-bottom: 17px;
-            background: #F1EDE5;
+            background: @backgroundWhite;
             z-index: 2000;
 
 
@@ -150,7 +151,5 @@
                 }
             }            
         }
-    }
-
-    
+    }  
 }
