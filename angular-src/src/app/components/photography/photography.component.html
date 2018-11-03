@@ -1,7 +1,7 @@
 
 <div class="galleryWrapper animated fadeIn">
     <div *ngFor="let picture of pictures" class="imagePreviewWrapper animated fadeIn {{picture.animationDelay}}" (click)="showPicture(picture)" >
-        <img class="picture yourDivClass animationFix" src="{{picture.path}}" alt="Photograph">
+        <img class="picture animationFix" src="{{picture.path}}" alt="Photograph">
         <div class="hoverOverlay animated slideInUp">
             <span class="description">{{picture.description}}</span>
         </div>
