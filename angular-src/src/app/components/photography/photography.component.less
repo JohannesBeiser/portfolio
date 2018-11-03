@@ -1,0 +1,84 @@
+@import '../../../globalVariables.less';
+
+
+
+.galleryWrapper{
+        margin: 100px 10% 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    
+        .imagePreviewWrapper{
+            width: 30%;
+            min-width: 290px; //used to be 300 but more conveniant for responsiveness--> 2 columns until break to mobile
+            height: 15vw;
+            min-height: 200px;
+            margin: 5px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+    
+            &:hover{
+                .picture{
+                    //transform: scale(1.05) translateY(-50%);
+                    opacity: 0.85;
+                }
+    
+                .hoverOverlay{
+                    display: flex;
+                }
+            }
+    
+            .picture{
+                opacity: 1;
+                transition: opacity 200ms ease-in-out;
+                width: 100%;
+                min-height: 100%;
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            .hoverOverlay{
+                position: absolute;
+                bottom:0;
+                left: 0;
+                width: 100%;
+                height: 50px;
+                background: rgba(0, 0, 0, 0.75);
+                display: none;
+                .quickAnimation();
+                align-items: center;
+    
+                .description{
+                    text-align: center;
+                    margin: 0 auto;
+                    color: #eee;
+                }
+            }
+        }
+}
+
+@media screen and (max-width: 768px){
+    .galleryWrapper{
+        .imagePreviewWrapper{
+            width: unset; 
+            height: unset; 
+            height: unset; 
+            min-height: unset; 
+            cursor: initial;
+
+            &:hover{
+                .picture{
+                    opacity: 1; 
+                }
+    
+                .hoverOverlay{
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+    
+

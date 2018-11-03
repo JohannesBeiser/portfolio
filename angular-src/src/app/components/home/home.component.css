@@ -1,0 +1,53 @@
+@font-face {
+  font-family: ComfortaaLight;
+  src: url('assets/fonts/Comfortaa-Light.ttf');
+}
+.home-wrapper {
+  height: 100%;
+}
+.home-wrapper .interactiveMenu {
+  width: 600px;
+  margin: 100px auto 0 auto;
+  height: 100%;
+  position: relative;
+}
+.home-wrapper .interactiveMenu > div {
+  width: 200px;
+  height: 200px;
+  background: #444;
+  transform: rotate(45deg);
+  position: absolute;
+  cursor: pointer;
+}
+.home-wrapper .interactiveMenu .first {
+  left: 41px;
+  top: 113px;
+  transition: left 100ms ease-in-out;
+}
+.home-wrapper .interactiveMenu .first:hover {
+  left: 21px;
+}
+.home-wrapper .interactiveMenu .second {
+  top: 42px;
+  left: 251px;
+  transition: top 100ms ease-in-out;
+}
+.home-wrapper .interactiveMenu .second:hover {
+  top: 22px;
+}
+.home-wrapper .interactiveMenu .third {
+  top: 254px;
+  left: 320px;
+  transition: left 100ms ease-in-out;
+}
+.home-wrapper .interactiveMenu .third:hover {
+  left: 340px;
+}
+.home-wrapper .interactiveMenu .forth {
+  top: 325px;
+  left: 110px;
+  transition: top 100ms ease-in-out;
+}
+.home-wrapper .interactiveMenu .forth:hover {
+  top: 345px;
+}

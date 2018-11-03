@@ -12,6 +12,7 @@ import { PhotographyComponent } from './components/photography/photography.compo
 import { AboutComponent } from './components/about/about.component';
 import { TravelComponent } from './components/travel/travel.component';
 import { WorkComponent } from './components/work/work.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -23,6 +24,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
+import { ModalService } from "./services/modal.service";
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
 
@@ -46,6 +48,7 @@ const appRoutes: Routes =  [
     AboutComponent,
     TravelComponent,
     WorkComponent,
+    ModalComponent,
     LoginComponent,
     RegisterComponent,
     HomeComponent,
@@ -60,7 +63,7 @@ const appRoutes: Routes =  [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule.forRoot()
   ],
-  providers: [ValidateService, AuthService, AuthGuard],
+  providers: [ValidateService, AuthService, AuthGuard, ModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,64 @@
+@import '../../../globalVariables.less';
+
+.home-wrapper{
+    height: 100%;
+
+
+    .interactiveMenu{
+        width: 600px;
+        margin: 100px auto 0 auto;
+        height: 100%;
+        position: relative;
+
+        >div{
+            width: 200px;
+            height: 200px;
+            background: #444;
+            transform: rotate(45deg);
+            position: absolute;
+            cursor: pointer;
+        }
+
+        .first{                       
+            left: 41px;
+            top: 113px;
+            transition: left 100ms ease-in-out;
+
+            &:hover{
+                left: 21px;
+            }
+
+        }
+
+        .second{            
+            top: 42px;
+            left: 251px;
+            transition: top 100ms ease-in-out;
+
+            &:hover{
+                top: 22px;
+            }
+        }
+
+        .third{          
+            top: 254px;
+            left: 320px;
+            transition: left 100ms ease-in-out;
+
+            &:hover{
+                left: 340px;
+            }
+        }
+
+        .forth{          
+            top: 325px;
+            left: 110px;
+            transition: top 100ms ease-in-out;
+
+            &:hover{
+                top: 345px;
+            }
+        }
+
+    }
+}
