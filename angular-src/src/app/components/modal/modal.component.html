@@ -1,0 +1,16 @@
+<div class="modalWindow" *ngIf="_modalService.isShown" (click)="_modalService.toggleIsShown()">
+
+    <div class="modalContent" (click)="innerModalClicked($event)"  [ngStyle]="{'background-image': getImageUrl()}">
+        
+        <div class="close">
+            <i (click)="_modalService.toggleIsShown()" class="material-icons closeModal animated fadeIn delay-600ms">close</i>
+        </div>     
+    </div>
+
+</div>    
+
+    
+
+
+
+

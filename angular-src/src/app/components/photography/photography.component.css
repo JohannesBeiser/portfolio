@@ -1,0 +1,115 @@
+@font-face {
+  font-family: ComfortaaLight;
+  src: url('assets/fonts/Comfortaa-Light.ttf');
+}
+.quickAnimation {
+  -webkit-animation-duration: 300ms;
+  animation-duration: 300ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.animationFix {
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0) scale(1, 1);
+  transform: translateZ(0);
+}
+.delay-100ms {
+  -webkit-animation-delay: 100ms;
+  animation-delay: 100ms;
+}
+.delay-200ms {
+  -webkit-animation-delay: 200ms;
+  animation-delay: 200ms;
+}
+.delay-300ms {
+  -webkit-animation-delay: 300ms;
+  animation-delay: 300ms;
+}
+.delay-400ms {
+  -webkit-animation-delay: 400ms;
+  animation-delay: 400ms;
+}
+.delay-500ms {
+  -webkit-animation-delay: 500ms;
+  animation-delay: 500ms;
+}
+.delay-600ms {
+  -webkit-animation-delay: 600ms;
+  animation-delay: 600ms;
+}
+.delay-700ms {
+  -webkit-animation-delay: 700ms;
+  animation-delay: 700ms;
+}
+.delay-800ms {
+  -webkit-animation-delay: 800ms;
+  animation-delay: 800ms;
+}
+.delay-900ms {
+  -webkit-animation-delay: 900ms;
+  animation-delay: 900ms;
+}
+.galleryWrapper {
+  margin: 100px 10% 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.galleryWrapper .imagePreviewWrapper {
+  width: 30%;
+  min-width: 290px;
+  height: 15vw;
+  min-height: 200px;
+  margin: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+.galleryWrapper .imagePreviewWrapper:hover .picture {
+  opacity: 0.85;
+}
+.galleryWrapper .imagePreviewWrapper:hover .hoverOverlay {
+  display: flex;
+}
+.galleryWrapper .imagePreviewWrapper .picture {
+  opacity: 1;
+  transition: opacity 200ms ease-in-out;
+  width: 100%;
+  min-height: 100%;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.galleryWrapper .imagePreviewWrapper .hoverOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.75);
+  display: none;
+  -webkit-animation-duration: 300ms;
+  animation-duration: 300ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  align-items: center;
+}
+.galleryWrapper .imagePreviewWrapper .hoverOverlay .description {
+  text-align: center;
+  margin: 0 auto;
+  color: #eee;
+}
+@media screen and (max-width: 768px) {
+  .galleryWrapper .imagePreviewWrapper {
+    width: unset;
+    height: unset;
+    min-height: unset;
+    cursor: initial;
+  }
+  .galleryWrapper .imagePreviewWrapper:hover .picture {
+    opacity: 1;
+  }
+  .galleryWrapper .imagePreviewWrapper:hover .hoverOverlay {
+    display: none;
+  }
+}

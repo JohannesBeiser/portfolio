@@ -1,5 +1,8 @@
 @import '../../../globalVariables.less';
-
+.animated.delay-100ms {
+    -webkit-animation-delay: 100ms;
+    animation-delay: 100ms;
+}
 .animated.delay-500ms {
     -webkit-animation-delay: 500ms;
     animation-delay: 500ms;
@@ -14,20 +17,27 @@
 }
 
 
+
+
+
 .navBar{
     height: 100%;
     display: flex;
     z-index: 2000;
     height: 100px; // TODO: Remove me, only for iOS Safary& iOS Chrome --> find solution for non-available css-grid
+  //  border-bottom: 1px solid #444;
 
     .navbar-logo-wrapper{
         flex: 4.5;
         display: flex;
         z-index: 2000;
         background: @backgroundWhite;
-    
+        position: relative;
+        padding-left: 4%;
+
+      
         .navbar-logo{
-            background-image: url("../../../assets/images/johannesBeiserLogo.png");
+            background-image: url("../../../assets/images/johannesBeiserLogoPlain.png");
             background-size: contain;
             background-repeat: no-repeat;
             background-position: bottom;
@@ -35,11 +45,43 @@
             height: 60px;
             align-self: flex-end;
             margin-bottom: 10px;
+            margin-left: 2%;
             outline: none;
             cursor: pointer;
             width: 245px;
-            margin-left: 20%;
+            position: relative;
+
+            &:hover{
+                .logoJ{
+                    display: none;
+                }
+                .logoHome{
+                    display: block;
+                }
+            }
+
+            .logoJ{
+                background-image: url("../../../assets/images/johannesBeiserLogoJ.png");
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: bottom;
+                width: 60px;
+                height: 60px;
+            }
+
+            .logoHome{
+                background-image: url("../../../assets/images/johannesBeiserLogoHome.png");
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: bottom;
+                width: 60px;
+                height: 60px;
+                display: none;
+            }
+
         }
+
+        
     }
   
 
@@ -48,7 +90,7 @@
         display: flex;
         justify-content: flex-end;
         align-items: flex-end;
-        padding-right: 10%;
+        padding-right: 6%;
         z-index: 2000;
         background: @backgroundWhite;
 
@@ -92,12 +134,17 @@
 
 @media only screen and (max-width: 768px){
     .navBar{
-
-        .navbar-logo-wrapper{
-                  
+        .navbar-logo-wrapper{                
             .navbar-logo{
-               margin-left: auto;
-               margin-right: auto;
+                &:hover{
+                    .logoHome{
+                        display: none;
+                    }
+                .logoJ{
+                    display: block;
+                }
+               }
+               
             }
         }
 
@@ -135,9 +182,11 @@
             flex: 1;
             display: flex;
             align-items: flex-end;
+            justify-content: flex-end;
             padding-bottom: 17px;
             background: @backgroundWhite;
             z-index: 2000;
+            padding-right: 4%;
 
 
             i{

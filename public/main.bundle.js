@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_lazy_route_resource lazy re
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"layoutWrapper\">\r\n    <app-navbar class=\"navbarContainer\"></app-navbar>\r\n    <div class=\"bodyContainer\">\r\n      <flash-messages></flash-messages>\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class=\"layoutWrapper\">\r\n    <app-navbar class=\"navbarContainer\"></app-navbar>\r\n    <div class=\"bodyContainer\">\r\n      <flash-messages></flash-messages>\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n    <app-modal></app-modal>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -33,7 +33,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "@font-face {\n  font-family: ComfortaaLight;\n  src: url(" + escape(__webpack_require__("../../../../../src/assets/fonts/Comfortaa-Light.ttf")) + ");\n}\n.layoutWrapper {\n  width: 100%;\n  height: 100%;\n  background-color: #f1ede5;\n  display: -ms-grid;\n  display: grid;\n  -ms-grid-rows: 100px auto;\n      grid-template-rows: 100px auto;\n  -ms-grid-columns: auto;\n      grid-template-columns: auto;\n  grid-template-areas: \"navbar\" \"body\";\n}\n.layoutWrapper .navbarContainer {\n  grid-area: navbar;\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  background-color: #f1ede5;\n  z-index: 1000;\n}\n.layoutWrapper .bodyContainerr {\n  grid-area: body;\n}\n", ""]);
+exports.push([module.i, "@font-face {\n  font-family: ComfortaaLight;\n  src: url(" + escape(__webpack_require__("../../../../../src/assets/fonts/Comfortaa-Light.ttf")) + ");\n}\n.quickAnimation {\n  animation-duration: 300ms;\n  animation-fill-mode: both;\n}\n.animationFix {\n  -webkit-backface-visibility: hidden;\n  transform: translateZ(0);\n}\n.delay-100ms {\n  animation-delay: 100ms;\n}\n.delay-200ms {\n  animation-delay: 200ms;\n}\n.delay-300ms {\n  animation-delay: 300ms;\n}\n.delay-400ms {\n  animation-delay: 400ms;\n}\n.delay-500ms {\n  animation-delay: 500ms;\n}\n.delay-600ms {\n  animation-delay: 600ms;\n}\n.delay-700ms {\n  animation-delay: 700ms;\n}\n.delay-800ms {\n  animation-delay: 800ms;\n}\n.delay-900ms {\n  animation-delay: 900ms;\n}\n.layoutWrapper {\n  width: 100%;\n  height: 100%;\n  background-color: white;\n  display: -ms-grid;\n  display: grid;\n  -ms-grid-rows: 100px auto;\n      grid-template-rows: 100px auto;\n  -ms-grid-columns: auto;\n      grid-template-columns: auto;\n  grid-template-areas: \"navbar\" \"body\";\n}\n.layoutWrapper .navbarContainer {\n  grid-area: navbar;\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  background-color: white;\n  z-index: 1000;\n}\n.layoutWrapper .bodyContainerr {\n  grid-area: body;\n}\n", ""]);
 
 // exports
 
@@ -90,17 +90,19 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_about_about_component__ = __webpack_require__("../../../../../src/app/components/about/about.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_travel_travel_component__ = __webpack_require__("../../../../../src/app/components/travel/travel.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_work_work_component__ = __webpack_require__("../../../../../src/app/components/work/work.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_navbar_navbar_component__ = __webpack_require__("../../../../../src/app/components/navbar/navbar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_register_register_component__ = __webpack_require__("../../../../../src/app/components/register/register.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_home_home_component__ = __webpack_require__("../../../../../src/app/components/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/components/dashboard/dashboard.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_profile_profile_component__ = __webpack_require__("../../../../../src/app/components/profile/profile.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__services_validate_service__ = __webpack_require__("../../../../../src/app/services/validate.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_angular2_flash_messages__ = __webpack_require__("../../../../angular2-flash-messages/module/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19_angular2_flash_messages__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_modal_modal_component__ = __webpack_require__("../../../../../src/app/components/modal/modal.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_navbar_navbar_component__ = __webpack_require__("../../../../../src/app/components/navbar/navbar.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_register_register_component__ = __webpack_require__("../../../../../src/app/components/register/register.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_home_home_component__ = __webpack_require__("../../../../../src/app/components/home/home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/components/dashboard/dashboard.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_profile_profile_component__ = __webpack_require__("../../../../../src/app/components/profile/profile.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__services_validate_service__ = __webpack_require__("../../../../../src/app/services/validate.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__services_modal_service__ = __webpack_require__("../../../../../src/app/services/modal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21_angular2_flash_messages__ = __webpack_require__("../../../../angular2-flash-messages/module/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21_angular2_flash_messages__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -129,16 +131,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
 var appRoutes = [
-    { path: '', component: __WEBPACK_IMPORTED_MODULE_14__components_home_home_component__["a" /* HomeComponent */] },
+    { path: '', component: __WEBPACK_IMPORTED_MODULE_15__components_home_home_component__["a" /* HomeComponent */] },
     { path: 'photography', component: __WEBPACK_IMPORTED_MODULE_7__components_photography_photography_component__["a" /* PhotographyComponent */] },
     { path: 'about', component: __WEBPACK_IMPORTED_MODULE_8__components_about_about_component__["a" /* AboutComponent */] },
     { path: 'travel', component: __WEBPACK_IMPORTED_MODULE_9__components_travel_travel_component__["a" /* TravelComponent */] },
     { path: 'work', component: __WEBPACK_IMPORTED_MODULE_10__components_work_work_component__["a" /* WorkComponent */] },
-    { path: 'register', component: __WEBPACK_IMPORTED_MODULE_13__components_register_register_component__["a" /* RegisterComponent */] },
-    { path: 'login', component: __WEBPACK_IMPORTED_MODULE_12__components_login_login_component__["a" /* LoginComponent */] },
-    { path: 'dashboard', component: __WEBPACK_IMPORTED_MODULE_15__components_dashboard_dashboard_component__["a" /* DashboardComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'profile', component: __WEBPACK_IMPORTED_MODULE_16__components_profile_profile_component__["a" /* ProfileComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */]] }
+    { path: 'register', component: __WEBPACK_IMPORTED_MODULE_14__components_register_register_component__["a" /* RegisterComponent */] },
+    { path: 'login', component: __WEBPACK_IMPORTED_MODULE_13__components_login_login_component__["a" /* LoginComponent */] },
+    { path: 'dashboard', component: __WEBPACK_IMPORTED_MODULE_16__components_dashboard_dashboard_component__["a" /* DashboardComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_22__guards_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'profile', component: __WEBPACK_IMPORTED_MODULE_17__components_profile_profile_component__["a" /* ProfileComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_22__guards_auth_guard__["a" /* AuthGuard */]] }
 ];
 var AppModule = (function () {
     function AppModule() {
@@ -147,16 +151,17 @@ var AppModule = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["NgModule"])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_11__components_navbar_navbar_component__["a" /* NavbarComponent */],
+                __WEBPACK_IMPORTED_MODULE_12__components_navbar_navbar_component__["a" /* NavbarComponent */],
                 __WEBPACK_IMPORTED_MODULE_7__components_photography_photography_component__["a" /* PhotographyComponent */],
                 __WEBPACK_IMPORTED_MODULE_8__components_about_about_component__["a" /* AboutComponent */],
                 __WEBPACK_IMPORTED_MODULE_9__components_travel_travel_component__["a" /* TravelComponent */],
                 __WEBPACK_IMPORTED_MODULE_10__components_work_work_component__["a" /* WorkComponent */],
-                __WEBPACK_IMPORTED_MODULE_12__components_login_login_component__["a" /* LoginComponent */],
-                __WEBPACK_IMPORTED_MODULE_13__components_register_register_component__["a" /* RegisterComponent */],
-                __WEBPACK_IMPORTED_MODULE_14__components_home_home_component__["a" /* HomeComponent */],
-                __WEBPACK_IMPORTED_MODULE_15__components_dashboard_dashboard_component__["a" /* DashboardComponent */],
-                __WEBPACK_IMPORTED_MODULE_16__components_profile_profile_component__["a" /* ProfileComponent */]
+                __WEBPACK_IMPORTED_MODULE_11__components_modal_modal_component__["a" /* ModalComponent */],
+                __WEBPACK_IMPORTED_MODULE_13__components_login_login_component__["a" /* LoginComponent */],
+                __WEBPACK_IMPORTED_MODULE_14__components_register_register_component__["a" /* RegisterComponent */],
+                __WEBPACK_IMPORTED_MODULE_15__components_home_home_component__["a" /* HomeComponent */],
+                __WEBPACK_IMPORTED_MODULE_16__components_dashboard_dashboard_component__["a" /* DashboardComponent */],
+                __WEBPACK_IMPORTED_MODULE_17__components_profile_profile_component__["a" /* ProfileComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -164,9 +169,9 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_http__["HttpModule"],
                 __WEBPACK_IMPORTED_MODULE_5__angular_router__["b" /* RouterModule */].forRoot(appRoutes),
-                __WEBPACK_IMPORTED_MODULE_19_angular2_flash_messages__["FlashMessagesModule"].forRoot()
+                __WEBPACK_IMPORTED_MODULE_21_angular2_flash_messages__["FlashMessagesModule"].forRoot()
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_17__services_validate_service__["a" /* ValidateService */], __WEBPACK_IMPORTED_MODULE_18__services_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_18__services_validate_service__["a" /* ValidateService */], __WEBPACK_IMPORTED_MODULE_19__services_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_22__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_20__services_modal_service__["a" /* ModalService */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
@@ -299,28 +304,29 @@ var DashboardComponent = (function () {
 
 /***/ }),
 
-/***/ "../../../../../src/app/components/home/home.component.css":
+/***/ "../../../../../src/app/components/home/home.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"home-wrapper\">     \r\n        <div class=\"interactiveMenu\">\r\n                <div class=\"first\"></div>\r\n                <div class=\"second\"></div>\r\n                <div class=\"third\"></div>\r\n                <div class=\"forth\"></div>\r\n        </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/home/home.component.less":
 /***/ (function(module, exports, __webpack_require__) {
 
+var escape = __webpack_require__("../../../../css-loader/lib/url/escape.js");
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
 // imports
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "@font-face {\n  font-family: ComfortaaLight;\n  src: url(" + escape(__webpack_require__("../../../../../src/assets/fonts/Comfortaa-Light.ttf")) + ");\n}\n.quickAnimation {\n  animation-duration: 300ms;\n  animation-fill-mode: both;\n}\n.animationFix {\n  -webkit-backface-visibility: hidden;\n  transform: translateZ(0);\n}\n.delay-100ms {\n  animation-delay: 100ms;\n}\n.delay-200ms {\n  animation-delay: 200ms;\n}\n.delay-300ms {\n  animation-delay: 300ms;\n}\n.delay-400ms {\n  animation-delay: 400ms;\n}\n.delay-500ms {\n  animation-delay: 500ms;\n}\n.delay-600ms {\n  animation-delay: 600ms;\n}\n.delay-700ms {\n  animation-delay: 700ms;\n}\n.delay-800ms {\n  animation-delay: 800ms;\n}\n.delay-900ms {\n  animation-delay: 900ms;\n}\n.home-wrapper {\n  height: 100%;\n}\n.home-wrapper .interactiveMenu {\n  width: 600px;\n  margin: 100px auto 0 auto;\n  height: 100%;\n  position: relative;\n}\n.home-wrapper .interactiveMenu > div {\n  width: 200px;\n  height: 200px;\n  background: #444;\n  transform: rotate(45deg);\n  position: absolute;\n  cursor: pointer;\n}\n.home-wrapper .interactiveMenu .first {\n  left: 41px;\n  top: 113px;\n  transition: left 100ms ease-in-out;\n}\n.home-wrapper .interactiveMenu .first:hover {\n  left: 21px;\n}\n.home-wrapper .interactiveMenu .second {\n  top: 42px;\n  left: 251px;\n  transition: top 100ms ease-in-out;\n}\n.home-wrapper .interactiveMenu .second:hover {\n  top: 22px;\n}\n.home-wrapper .interactiveMenu .third {\n  top: 254px;\n  left: 320px;\n  transition: left 100ms ease-in-out;\n}\n.home-wrapper .interactiveMenu .third:hover {\n  left: 340px;\n}\n.home-wrapper .interactiveMenu .forth {\n  top: 325px;\n  left: 110px;\n  transition: top 100ms ease-in-out;\n}\n.home-wrapper .interactiveMenu .forth:hover {\n  top: 345px;\n}\n", ""]);
 
 // exports
 
 
 /*** EXPORTS FROM exports-loader ***/
 module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/home/home.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"home-wrapper\">\r\n        <h1 >Example</h1>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -349,7 +355,7 @@ var HomeComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-home',
             template: __webpack_require__("../../../../../src/app/components/home/home.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/components/home/home.component.css")]
+            styles: [__webpack_require__("../../../../../src/app/components/home/home.component.less")]
         }),
         __metadata("design:paramtypes", [])
     ], HomeComponent);
@@ -451,10 +457,91 @@ var LoginComponent = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/components/modal/modal.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"modalWindow\" *ngIf=\"_modalService.isShown\" (click)=\"_modalService.toggleIsShown()\">\r\n\r\n    <div class=\"modalContent\" (click)=\"innerModalClicked($event)\"  [ngStyle]=\"{'background-image': getImageUrl()}\">\r\n        \r\n        <div class=\"close\">\r\n            <i (click)=\"_modalService.toggleIsShown()\" class=\"material-icons closeModal animated fadeIn delay-600ms\">close</i>\r\n        </div>     \r\n    </div>\r\n\r\n</div>    \r\n\r\n    \r\n\r\n\r\n\r\n\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/modal/modal.component.less":
+/***/ (function(module, exports, __webpack_require__) {
+
+var escape = __webpack_require__("../../../../css-loader/lib/url/escape.js");
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "@font-face {\n  font-family: ComfortaaLight;\n  src: url(" + escape(__webpack_require__("../../../../../src/assets/fonts/Comfortaa-Light.ttf")) + ");\n}\n.quickAnimation {\n  animation-duration: 300ms;\n  animation-fill-mode: both;\n}\n.animationFix {\n  -webkit-backface-visibility: hidden;\n  transform: translateZ(0);\n}\n.delay-100ms {\n  animation-delay: 100ms;\n}\n.delay-200ms {\n  animation-delay: 200ms;\n}\n.delay-300ms {\n  animation-delay: 300ms;\n}\n.delay-400ms {\n  animation-delay: 400ms;\n}\n.delay-500ms {\n  animation-delay: 500ms;\n}\n.delay-600ms {\n  animation-delay: 600ms;\n}\n.delay-700ms {\n  animation-delay: 700ms;\n}\n.delay-800ms {\n  animation-delay: 800ms;\n}\n.delay-900ms {\n  animation-delay: 900ms;\n}\n.modalWindow {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.8);\n  z-index: 9000;\n}\n.modalWindow .modalContent {\n  width: 80%;\n  height: 60vw;\n  max-height: 80vh;\n  margin: 0 auto;\n  position: relative;\n  top: 10%;\n  background-size: cover;\n  background-repeat: no-repeat;\n  background-position: center;\n}\n.modalWindow .modalContent .close {\n  opacity: 0.8;\n  transition: opacity 200ms ease-in-out;\n}\n.modalWindow .modalContent .close:hover {\n  opacity: 1;\n}\n.modalWindow .modalContent .close .closeModal {\n  background: #ddd;\n  position: absolute;\n  right: 0;\n  top: 0;\n  padding: 10px;\n  cursor: pointer;\n  color: #2b2a29;\n  transition: all 200ms ease-in-out;\n}\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/modal/modal.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_modal_service__ = __webpack_require__("../../../../../src/app/services/modal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var ModalComponent = (function () {
+    function ModalComponent(_modalService) {
+        this._modalService = _modalService;
+        this.sanitizer = __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["c" /* DomSanitizer */].prototype;
+    }
+    ModalComponent.prototype.ngOnInit = function () {
+    };
+    ModalComponent.prototype.innerModalClicked = function (e) {
+        e.stopPropagation();
+    };
+    ModalComponent.prototype.getStyle = function () {
+        // snip snip -> fetch the url from somewhere
+        var path = this._modalService.modalContent.path;
+        var style = "background-image: url(" + path + ")";
+        // sanitize the style expression
+        return this.sanitizer.bypassSecurityTrustStyle(style);
+    };
+    ModalComponent.prototype.getImageUrl = function () {
+        return "url(" + this._modalService.modalContent.path + ")";
+    };
+    ModalComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-modal',
+            template: __webpack_require__("../../../../../src/app/components/modal/modal.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/components/modal/modal.component.less")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_modal_service__["a" /* ModalService */]])
+    ], ModalComponent);
+    return ModalComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/components/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navBar\">\r\n      <div class=\"navbar-logo-wrapper fadeIn animated\">\r\n        <div class=\"navbar-logo\"  [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/']\"></div>\r\n      </div>\r\n\r\n      <div class=\"menuWrapper\">\r\n        <div class=\"menuEntry fadeIn animated delay-500ms\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/about']\">About</div>\r\n        <div class=\"menuEntry fadeIn animated delay-1s\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/travel']\">Travel</div>\r\n        <div class=\"menuEntry fadeIn animated delay-1500ms\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/photography']\">Photography</div>\r\n        <div class=\"menuEntry fadeIn animated delay-2s\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/work']\">Work</div>\r\n      </div>\r\n\r\n      <div class=\"burgerMenu fadeIn animated\">\r\n          <i (click)=\"toggleDropdownMenu()\" class=\"material-icons\" *ngIf=\"!dropdownActive\">menu</i>\r\n          <i (click)=\"toggleDropdownMenu()\" class=\"material-icons\" *ngIf=\"dropdownActive\">close</i>\r\n      </div>\r\n\r\n      <div *ngIf=\"dropdownActive\" @swipe class=\"dropdownMenu\">\r\n          <div (click)=\"toggleDropdownMenu()\" class=\"menuEntry\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/']\">Home</div>\r\n          <div (click)=\"toggleDropdownMenu()\" class=\"menuEntry\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/about']\">About</div>\r\n          <div (click)=\"toggleDropdownMenu()\" class=\"menuEntry\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/travel']\">Travel</div>\r\n          <div (click)=\"toggleDropdownMenu()\" class=\"menuEntry\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/photography']\">Photography</div>\r\n          <div (click)=\"toggleDropdownMenu()\" class=\"menuEntry\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/work']\">Work</div>\r\n      </div>\r\n\r\n\r\n\r\n      <!-- <a class=\"navbar-brand\" href=\"#\">Johannes Beiser</a>\r\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarsExampleDefault\" aria-controls=\"navbarsExampleDefault\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n        <span class=\"navbar-toggler-icon\"></span>\r\n      </button>\r\n\r\n      <div class=\"collapse navbar-collapse\" id=\"navbarsExampleDefault\">\r\n        <ul class=\"navbar-nav mr-auto\">\r\n          <li class=\"nav-item\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\">\r\n            <a class=\"nav-link\" [routerLink]=\"['/']\">Home<span></span></a>\r\n          </li>\r\n        </ul>\r\n        <ul class=\"navbar-nav ml-auto\">\r\n          <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\">\r\n            <a class=\"nav-link\" [routerLink]=\"['/dashboard']\">Dashboard </a>\r\n          </li>\r\n          <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\">\r\n            <a class=\"nav-link\" [routerLink]=\"['/profile']\">Profile </a>\r\n          </li>\r\n          <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\">\r\n            <a class=\"nav-link\" [routerLink]=\"['/login']\">Login </a>\r\n          </li>\r\n          <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\">\r\n            <a class=\"nav-link\" [routerLink]=\"['/register']\">Register</a>\r\n          </li>\r\n          <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\"><a class=\"nav-link\" (click)=\"onLogoutClick()\" href=\"#\">Logout</a>\r\n          </li>\r\n        </ul>\r\n      </div> -->\r\n    </nav>\r\n"
+module.exports = "<nav class=\"navBar\">\r\n      <div class=\"navbar-logo-wrapper fadeIn animated\">\r\n        <div class=\"navbar-logo\"  [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/']\">\r\n          <div class=\"logoJ animated fadeIn\"></div>\r\n          <div class=\"logoHome animated fadeIn\"></div>\r\n\r\n\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"menuWrapper\">\r\n        <div class=\"menuEntry fadeIn animated delay-500ms\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/about']\">About</div>\r\n        <div class=\"menuEntry fadeIn animated delay-1s\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/travel']\">Travel</div>\r\n        <div class=\"menuEntry fadeIn animated delay-1500ms\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/photography']\">Photography</div>\r\n        <div class=\"menuEntry fadeIn animated delay-2s\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/work']\">Work</div>\r\n      </div>\r\n\r\n      <div class=\"burgerMenu fadeIn animated\">\r\n          <i (click)=\"toggleDropdownMenu()\" class=\"material-icons\" *ngIf=\"!dropdownActive\">menu</i>\r\n          <i (click)=\"toggleDropdownMenu()\" class=\"material-icons\" *ngIf=\"dropdownActive\">close</i>\r\n\r\n      </div>\r\n\r\n      <div *ngIf=\"dropdownActive\" @swipe class=\"dropdownMenu\">\r\n          <div (click)=\"toggleDropdownMenu()\" class=\"menuEntry\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/']\">Home</div>\r\n          <div (click)=\"toggleDropdownMenu()\" class=\"menuEntry\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/about']\">About</div>\r\n          <div (click)=\"toggleDropdownMenu()\" class=\"menuEntry\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/travel']\">Travel</div>\r\n          <div (click)=\"toggleDropdownMenu()\" class=\"menuEntry\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/photography']\">Photography</div>\r\n          <div (click)=\"toggleDropdownMenu()\" class=\"menuEntry\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\"  [routerLink]=\"['/work']\">Work</div>\r\n      </div>\r\n\r\n\r\n\r\n      <!-- <a class=\"navbar-brand\" href=\"#\">Johannes Beiser</a>\r\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarsExampleDefault\" aria-controls=\"navbarsExampleDefault\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n        <span class=\"navbar-toggler-icon\"></span>\r\n      </button>\r\n\r\n      <div class=\"collapse navbar-collapse\" id=\"navbarsExampleDefault\">\r\n        <ul class=\"navbar-nav mr-auto\">\r\n          <li class=\"nav-item\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\">\r\n            <a class=\"nav-link\" [routerLink]=\"['/']\">Home<span></span></a>\r\n          </li>\r\n        </ul>\r\n        <ul class=\"navbar-nav ml-auto\">\r\n          <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\">\r\n            <a class=\"nav-link\" [routerLink]=\"['/dashboard']\">Dashboard </a>\r\n          </li>\r\n          <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\">\r\n            <a class=\"nav-link\" [routerLink]=\"['/profile']\">Profile </a>\r\n          </li>\r\n          <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\">\r\n            <a class=\"nav-link\" [routerLink]=\"['/login']\">Login </a>\r\n          </li>\r\n          <li class=\"nav-item\" *ngIf=\"!authService.loggedIn()\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions] = \"{exact:true}\">\r\n            <a class=\"nav-link\" [routerLink]=\"['/register']\">Register</a>\r\n          </li>\r\n          <li class=\"nav-item\" *ngIf=\"authService.loggedIn()\"><a class=\"nav-link\" (click)=\"onLogoutClick()\" href=\"#\">Logout</a>\r\n          </li>\r\n        </ul>\r\n      </div> -->\r\n    </nav>\r\n"
 
 /***/ }),
 
@@ -467,7 +554,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "@font-face {\n  font-family: ComfortaaLight;\n  src: url(" + escape(__webpack_require__("../../../../../src/assets/fonts/Comfortaa-Light.ttf")) + ");\n}\n.animated.delay-500ms {\n  animation-delay: 500ms;\n}\n.animated.delay-1500ms {\n  animation-delay: 1500ms;\n}\n.animated.delay-2500ms {\n  animation-delay: 2500ms;\n}\n.navBar {\n  height: 100%;\n  display: -ms-flexbox;\n  display: flex;\n  z-index: 2000;\n  height: 100px;\n}\n.navBar .navbar-logo-wrapper {\n  -ms-flex: 4.5;\n      flex: 4.5;\n  display: -ms-flexbox;\n  display: flex;\n  z-index: 2000;\n  background: #f1ede5;\n}\n.navBar .navbar-logo-wrapper .navbar-logo {\n  background-image: url(\"data:image/png;base64,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\");\n  background-size: contain;\n  background-repeat: no-repeat;\n  background-position: bottom;\n  height: 60px;\n  -ms-flex-item-align: end;\n      align-self: flex-end;\n  margin-bottom: 10px;\n  outline: none;\n  cursor: pointer;\n  width: 245px;\n  margin-left: 20%;\n}\n.navBar .menuWrapper {\n  -ms-flex: 6;\n      flex: 6;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: end;\n      justify-content: flex-end;\n  -ms-flex-align: end;\n      align-items: flex-end;\n  padding-right: 10%;\n  z-index: 2000;\n  background: #f1ede5;\n}\n.navBar .menuWrapper .menuEntry {\n  margin-bottom: 15px;\n  margin-left: 4%;\n  text-transform: uppercase;\n  color: #2b2a29;\n  font-family: ComfortaaLight;\n  font-size: 18px;\n  cursor: pointer;\n  outline: none;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n.navBar .menuWrapper .menuEntry:after {\n  content: \"\";\n  display: block;\n  margin: 0 auto;\n  width: 0;\n  height: 2px;\n  background-color: #c3a368;\n  transition: opacity 0.3s ease, width 0.3s ease;\n}\n.navBar .menuWrapper .menuEntry:hover:after,\n.navBar .menuWrapper .menuEntry:focus:after,\n.navBar .menuWrapper .menuEntry:active:after,\n.navBar .menuWrapper .menuEntry.active:after {\n  width: 100%;\n}\n.navBar .dropdownMenu {\n  display: none;\n}\n.navBar .burgerMenu {\n  display: none;\n}\n@media only screen and (max-width: 768px) {\n  .navBar .navbar-logo-wrapper .navbar-logo {\n    margin-left: auto;\n    margin-right: auto;\n  }\n  .navBar .menuWrapper {\n    display: none;\n  }\n  .navBar .dropdownMenu {\n    display: block;\n    position: absolute;\n    top: 100px;\n    left: 0;\n    width: 100%;\n    background: #e2d9c7;\n    cursor: pointer;\n  }\n  .navBar .dropdownMenu .menuEntry {\n    padding: 5px 0;\n    text-align: center;\n    text-transform: uppercase;\n    color: #2b2a29;\n    font-family: ComfortaaLight;\n    font-size: 15px;\n    outline: none;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n  }\n  .navBar .dropdownMenu .menuEntry.active {\n    background: #d4ccbc;\n  }\n  .navBar .burgerMenu {\n    -ms-flex: 1;\n        flex: 1;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: end;\n        align-items: flex-end;\n    padding-bottom: 17px;\n    background: #f1ede5;\n    z-index: 2000;\n  }\n  .navBar .burgerMenu i {\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    font-size: 30px;\n    cursor: pointer;\n    color: #2b2a29;\n  }\n  .navBar .burgerMenu i.inactive {\n    display: none;\n  }\n}\n", ""]);
+exports.push([module.i, "@font-face {\n  font-family: ComfortaaLight;\n  src: url(" + escape(__webpack_require__("../../../../../src/assets/fonts/Comfortaa-Light.ttf")) + ");\n}\n.quickAnimation {\n  animation-duration: 300ms;\n  animation-fill-mode: both;\n}\n.animationFix {\n  -webkit-backface-visibility: hidden;\n  transform: translateZ(0);\n}\n.delay-100ms {\n  animation-delay: 100ms;\n}\n.delay-200ms {\n  animation-delay: 200ms;\n}\n.delay-300ms {\n  animation-delay: 300ms;\n}\n.delay-400ms {\n  animation-delay: 400ms;\n}\n.delay-500ms {\n  animation-delay: 500ms;\n}\n.delay-600ms {\n  animation-delay: 600ms;\n}\n.delay-700ms {\n  animation-delay: 700ms;\n}\n.delay-800ms {\n  animation-delay: 800ms;\n}\n.delay-900ms {\n  animation-delay: 900ms;\n}\n.animated.delay-100ms {\n  animation-delay: 100ms;\n}\n.animated.delay-500ms {\n  animation-delay: 500ms;\n}\n.animated.delay-1500ms {\n  animation-delay: 1500ms;\n}\n.animated.delay-2500ms {\n  animation-delay: 2500ms;\n}\n.navBar {\n  height: 100%;\n  display: -ms-flexbox;\n  display: flex;\n  z-index: 2000;\n  height: 100px;\n}\n.navBar .navbar-logo-wrapper {\n  -ms-flex: 4.5;\n      flex: 4.5;\n  display: -ms-flexbox;\n  display: flex;\n  z-index: 2000;\n  background: white;\n  position: relative;\n  padding-left: 4%;\n}\n.navBar .navbar-logo-wrapper .navbar-logo {\n  background-image: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbMAAABqCAYAAAA2q7/UAAAVA0lEQVR4nO2dT4wcV17Hv79XNR47cRKPnY12s7CR7ASF7t7LjiUOQSC09gkhxME+ICG0F1sghBYkNL5w4eQ5rHICZF/gAgf7uBIcPAKFs2cv6W6EsnEWsUpYsfHYHo894+l6Pw7vVXd1u6u7qrqqusbz/ShtZzzd72/1+73fe78/AgBvvPkmPrhwAQf7+99Tg98Ri18FYAEoJhCBACLuJ1XVl98zj4kyoAq7WBm+lLxtEYgkyijUH1eA+69oGQBEYBJlmGBl5fFXX/3vJxb6b++9/Q21Bwf4yU9/mrdYQgg5FoQAMDg8BKA/BPRj0cS6PAVN/Alg5ntrLaNwOWWUMdGWEsoYHB7inW+c+2sLuX14cPjnoeIgf6mEEHI8CM+ePYvV1RO/OxgcfjympACIjIECWLHWL9Cj36vmVj588eWW4XWyo1nGqKCpZagCAlzT0PxsoNgE8muwhBByHAjf+853Tlprrx8evoD4hVUBKOTHbz5//q+hWnn4+mkN7WLrqEgBdWV6SWM/FZCHzSlDXi5Dob8hkD9O/CsGxvxQVf4RwFcFaiGEkFee8MX+/lsQfDgUZCKA6F9alb977eDFwaod4P9Ov+HOIxdAVUsUaK8y8vfGmDvWRv8AyDsAYBTvKGQNFGaEEDIVo0aMJqRMMBj87crg8OMgig4iYxAZU+QKiCyAmOBfxAR/MfoHYIotDiGEEE+I+FQRwGEY6gdf/Oyf3n7+HA9PnMDDd7/FW5raUXhzyE9U9b9F5D0AWFkJKc0IISSFsdNDUd3be/21J0FgsHtiFUYVobXUCWomGhwCgmci8nMA76kqzp5bW3azCCGksYwJszCKoi/ffVd+bgwA4K1nexgEAcJiFhIkB2rdGEt8qBsP+cijz9TfKkIIORqM23WImJUoEkQRBMCz1ZN4uupN8z2fdns1N/Fo02m35r4nFmRzoDAjhJAUQlVnIT6Kx+F0AgVgrIXBS0oCKZG5gkwS2hohhJCpmLffXnPOyzp/weRhY7nMEWTiw20NfySEEDKdMAwDt0qKxn+QGjBi5sknAWBG4bZ4cUkIIWmEqjoM+6GFAkyRWUxzFjeS9/pLEQRBVF6rCCHk1WK4qg6dzUipBEHg/Mb8NiG/IANUBbu7T8tuGiGEvDLETtOkIsKVFYgxTphls1pMIk6zA5483q2ieYQQ8kowFgGElI+qIggCWGsxGBxm/pxAVEWHR4tBEFTSPkIIeRUwX3+9A2EE4EpRVYgxMP7IMdNniiQbJYSQY4oZDGhXUC0+oQ50MuMLIYSQkgiplFVNMlKzgv5ihBBSPgyRRAgh5MhDYVYbsUbGazBCCCmbRRNIkzlE0ehOUm3xOIt0ZyeEkHQozCrGDjMOKKAGRa1AaJpPCCHp8JixNoobfqgqzr3N5JyEEJLGmDATmto1Gc4NIYSkMJmcUyjQGgvPGQkhJAXj73Q0IcVoadAw6AtICCGzMefOrUFVJUtyTlIrAkkKMs4PIYSkEa6unkgoZFwwq0MhYiDZU8AIgIDJOQkhZD6htXYowVQ1f5ISkhNB/pNcJuckhJBZMDnnEUAV2Nt7tuxmEEJIY6GfWc1kPcj1kUJ8ck7Bo53HFbaKEEKONqGIsaBSVgMCVYV1Ma3molBV6DDkPiOAEEJIOiGTc1ZLcmgVQI5bSQVgaZNDCCHzCV+8OIQxXDGrIgy9X7oAdqAYRJRPhBBSNoaCrB6KRssnhBAyHxqA1AavJQkhpCqYAqZihndmAkBiBwhqaYQQUiYUZhUzGAwAuDRmdoHknIQQQtKhMKuYspJz0uCUEELS4Z1ZbSyWnPPsOSbnJISQNCaFGbf/DSWg2SkhhKQydszonae5aDYQhTIECCGEpGCiiMk5mw7vywghZDbm7NkzTM7ZVJickxBCMhGeOrUqjx4B9H+qHhHkSc5pxo8WmZyTEELSGE/OCbVcMqtC4extsifnFIiozzRnjLFzP0AIIceUoQGIgnv/BqKAm5f9/YOFZ6fTbq0BuA9gDcCFbq+/s2iZhCyTTrt1E8BGzo/tANgEsNXt9bfLb1V5dNqtDQA34dp8uentXSb0M6uZHMk5XQAsn5xz5+GjMqpfB3AeTpitl1EgIUvmSoHPrMEJiPudduuO3+Q1Dt+um/7HNeQX2seK0JiAyTlrQlVhke20UKE2mZzTGO47CJnBNoC7Od5/BW5DdwXAeqfdutzt9R9U0jJSC+HDh4+YnLNCxpJzqk/OmW20mZyTkOxsd3v9zRzv3+y0W1cA3II7rbgH4EIlLStIt9ff6bRbN+C0swdwR6MkhXB/f5+7/goJAmeQKCKwkcXA6kvyqdvvT/voDoDfrLh5hBxbur3+3U67tQMnyM532q2NnAKxcnx7GtWmpmIoyKpFRIYvuj4Q0iy6vf4WRseTRe7fSEOgJKsNXksS0lBiC8H1phqDkPlQmFXMUCsbxgujUCOkYSRdVCjMjijMZ1YxURQN/1+tMjknIc0jKcDoe3lEoTCrmJEwy5ac0x9zXMPIbDjJAwC34Sy3tspsZ6fdiuu8VkedVfcz4SAOABeTDuJV9XUZdc5oywacld5kfbEJ+91FTNG9JeB5jPygkmwCeNDt9W8XLb9mLvm/t4sGEqhqvDvt1jrcM7Xd7fUv5vxsLXNUdt/nfI82MHKrSNZzg8KsNuYKsfihm3UJPXwwO+3WNoAbiy6ACfPktOOVUuussZ+xg3j8/1s19HUZdY7hheatOW1cB3Cz027dBXA9zwLuF9dbmO10v+Hfu+HLL3XjVSaddusSRsIs98Je9XhjNM7rnXbrfBahUNccVdj3tO/RnRnvvySt1q9/E8B/CPCBAk8AfASgm1ZLrzfVjJyk0Ol8OPpBBVOzEwimTdRtuF37JJO7rM1ur38jU1vcF/ee//EynEBJ7qbS6tzA+GJ8o4gJc8oDWXo/fV2197UB43sPo4UZALb8a5Lk2GYOk5TQEmJirXKSaxgtRkDB/mSh02597uu63e31r+f87DrcfK2hmOZT6Xj7OpIC48I8YVbXHFXZ9ynfo/VEOVP70+31N6cl5yR1Ipjc3cxbtDf9Ax6r9huddmst7xcZ7uGId25Z6kxqGDc77RZyPvzL6idQc1+XUefE4rIFtzilLRqbiZh/awDuddqtixl2/cmNyNVur58WcWNafx7MeH+t+AX/CkbhobbhFs08ZdQx3kWofI5q7vsluHnagdPsUttn/J1OMjknqQtBfBwAjHYtc7UPf859EaOd0DUfcDUP8UKbtc67vs74Ibzpjwznkjj2ABbvZ5H4dLX1dRl1+jEZHpV1e/25u18vKC/Czcca0o9w4jouYbSTn7mo+PIn+zN5n1I21zrtlmZ5wWku8XO02e31x+5l5lHHeBehjjlaQt83fPsuzuuPOXPmLSbnrJNxy/zkpF7Oc27d7fV3ur3+ZYx8ZDa80MjD1Zx1PsD4DjarYCmzn0UEC1BfX2utM3EHCbijssyaq1+E4veve004jeGzldVowPfnKoAbiXqaxlqe702N412ESudoiX2/nkWTM6dPv+alGP2fqkUh4gIGO7+zsTPrWWr6PK4m/j+PdrZV5NjHP1Tx8de1eU6m/qFdZj+Bmvq6pDqTi8LV1Hel13cXozuILAI7l7Vft9ff7vb6mzUE8d2GW5CzvoZjDBc9P+szVfd4F6GqOVpG37eybghNFEXJ5Jyqqpj1IvlQDfwrhKrx2aYFGD0YDxa5HJ9Y/C7l0FoWsTBLLtKXUt/lqKKfV3JqZ3X1dRl1xuO7iKl9XN/5GVpKXPaaP85qGvGCnPV1A8BZjPq+0Wm3shx/1TXeRah6jpbR98zfo2EEEJ+ck9KqdHT0Eh8KX21ssgoUMAeeQnLxyxpfrnCSP69dxbu/1AfSP6zL7idQQ1+XUacf31hzK2xc4Xe+cX1pi+AWRovlrZIX4aXgj7DjIzbAbZJSNYaax7sIlc3REvue+XvEcFYVY4LIvwYwYuHNbJJaxcI+OBOLX5H7pCLE9c06BnsV+glk6+sy6kwuVose48WLxtRx9QYS1xPviRNbHvmEkf7EIH4+N2Yc7dY23kWoeI4a3XcACIOAyTkrZRjNSuCSv1hgfBLLukvYhtvp1LXIP/B1zarvVegnkK2vy6gzueje77RbZdSbKjy7vf5Wp926iJFD7hU4bSa+b7oLv1AtcqS8JDbhnqs4Ms209tc63kWocI4a33ezs/OY/mUVYtX4V+CSc07eO+rxiAWXx/SZNBdvLHARzgBg8uj4Cpxxzk1vBn/nqBxHThx/HYk2p/GqztE8wr29Z8MEkqR8BE7tTd0tCNZwDIKbeofnV76fS2QTJTxHWXfr3jLtLoDr3hgnvsNMxtqMtYLKIoCUTKz1Z9EYah3vgmVXNUeN7HtIQVYtgQmc4YcqrB1qZckjt/NYwFggQby7qtoEOg9V9pOMLyh3F3B7WIgJS1MAQ5eMOHpL0SgqdRM/r2lHu40Y7yKUMEeN7zsNQComDAxCEyAQk7yYTC7yC1szTVgaNVWYld1PMr45aJS5fLfXv93t9S9g3Km/6XMXC7G071Bjx7sIOeeo8X2nMKsYGymstbCqSDj0bWP0cJQRBSD5cDUi/h0wtD6sqp/HHj++8cLb1LGJnWvX0Nw2xsw83Tgi412EuXN0FPpOYVYxkSgiKOzLBqPxxez5RcLa+LPw2PR2q4ZIC3mpop9kRDy+l5rozDzxPNZpDZoLP3ZZTjcaPd5FyDFHje47hVnFSCAwgYExZtwBQsfSgdxcwKLoDkZfwswpUurCx4gru59kxG2M7jNuVXWU12m31ovExJxoT5MNgGLT9R3MdvCvZbyLUMMcNbbvAIVZ5ahV2Mi6jNMvmzQm1ft7OQOervlUDMk0I427lPWU2c+maZ5LZYqj7L08i4xfADdm7bQ7oxxZnxfYkSe16UYm6fQ+WMnvUeqCXsd4F6GOOWpq32MozKom9i2b5pbu7s7ih2MNGQOedlweovsYT8XQOK0sZiJi9iL9vA4Ks5fwJtixFdo63IKWNZ3HfTitZNYR7g5GO/J7WYPy+vKTqVYaNXd+o3QHibxmWSwuaxjvItQyRw3tOwBgMjknhVvJ2MjOfoPiNgQ7GKVJ2fATnzUrca4MzMui2+vf7rRbi/TzarfXv+sFHJmg2+vf8OMbJ0G81Wm3bmH60XPSzwhw45/6DHV7/Qeddusy3NzFiVJnzR0wntlgq4ZndD1n2KbzGDdK2kaOSPBVjncR6pyjpvU9JoyiCEEQDLOZMa5VyYhiXq44v0hfgHs44omft9vZhkup0sijm2kU7Oe8TLbE0+31Nzvt1jbGs1zP26Fncpbt9vrbPkxSciefxaCnLofpZFDrvNzOk5srpsrxLkKdc9S0vgNA+Oabb2Dv6Z6ASlkliFFoND9amFfvr/oz6Gt4eUcDuF3NbbjjkCJCLGleu6hwiKMl5GpHxn5uw7kYbE0RYlu+3nntX0ZfmzC+WwAu+nuJdWAsb17MJlxKnlyZDPydyQ0AN/yufw3Tj4w2AezUJMRuI39+O2D0jC2SzqTS8U60E3Df+bntrHOOKux7oe+RfP/7v/2tL7/8xSeByAcQ2VXgIwCfpnag28vRJvLd734I2NlRVj7tcUwJIWQRwmFyTomTc/KksUxEA4BxnAkhpFKGBiDe4I6CrHQoyAghpGp4UVY5FGaEEFI1YRAECmpkleHyl3F4CSGkSsLHT3ZVeKlTGapz/MwAdFpTs7auAfgxBB/5n1vdXv8/S2waIYS8MpjdJ095EkYIIeRIY5ics2LMfM2MEELIYtAApA4o0AghpFIozOqCAo0QQiqDwqxOKNAIIaQSKMzqpqBAi+ZF3yeEkGNMOP8t47TbLYShwBhxUUNUYa31/lTZEBEYYyAiEJFEGXF5AhEdlikAxNcnKjBhAIE4s3drEamFwgD+T4jAqgIQiFoXTkoELmCXM90MDGBEnAeYAsYIrFVIEMJGEVQHrmaZ3y9jfCZpj7UW1s4QPsYCNvs+QlWxdvatzO8nhJDjRm7NzBiFiAt/VQaxwFJVqEYAFMZYiDhhNOUTQMpvRr+d+IdMbRWYQKA6gMJnhc4gyAqTU0M7deoUHSgIISSFieScMLOdziIAXkOqZGkdL9SYpDBxQtQJmFgTcx+R+HOJdkn8R/xK1iIKhcJipCEOJV6dETtyaGjWRjwSJoSQFCaSc8qMZTyqq01zEFgbQcR6QWSG6uXoeM8LPigQ+L9jjS6hbeU5Gq2MDAJNhnkNCCGETMOcPv06hhdJqTRFkJWLNCWKV3zkOK6IAojb2JB2EkJIQzFnzrw50lVEXEIz1YTW8moKskYhgAm9kYv1xjBQMcbI2JsIIYRMZTw5ZxSFKysnEIQhrI3w4sUBQxDXgQJiAAkEb505g5UTKzg4OJDHj3dXzOiMkbsKQghJYSw5p7X2lDHmbBDE/9yAO6VjgnofgZOnVnHq1Emotd9Wa99HEDh3BbWcDEIIScHAnV8FAGCCQA5e7P/Zs73dlYP95+DR1nLY23uGnUdP/jAwZk1VISL4+pc7nAxCCEkhDIJgAOgAI/P2Kwr9pQh+BODzaR8a+iAvQqKM2NQ/n3FhbJ04KiMvOrSycL0vqvrENhpxGYXGxrsY7D/f//bTp89+EA0Gf5X8tbVNML0khJBmEu7tPd0RkfsAfg0YWvj9CaC/J8C/A/IEsXO1W6nFWoSxe5c6l61BZg9jdbWoRWiHZaiqlQhANk9iVwZUEdoIxkkRhVoMAMlRBqCKEBGMekmkzmM62/2U9+tWlbEybIEyYMWo4NSjncffEzGdsbeo/peq/iJTeYQQcgwJnz3be7G6Gv5ocKi/b6Po9ZFaIb8C4I+S6oqTPIBaQEW9f3FeD2r3XrVOMxqVMfpdrjLU61cFypBEGYDX1HKqVgIppwwFYBVizJj/mwUQrqz8TWDMw8wFEkLIMcN88cX/4LPPvvjJL79++AdBGH4205FYkn97R+ScR2rja3wJZUg5ZSSPHIuVgXLKSIy/iuyuPt//05OKfw5PnMxeKCGEHDPC3d09AICIuff+++//1rO9x53nz59/U1zgXH8oKCIixt9MiXNDszbfoj1eBhRq85YBETGJMgC1Nl8ZgIgZlQEAKFAGXBlAPETWqoXku9cyYszwsBYQjctQGJjwoZigHw4GX5gowiEtSwkhJJX/B6kUD3+EUUcZAAAAAElFTkSuQmCC\");\n  background-size: contain;\n  background-repeat: no-repeat;\n  background-position: bottom;\n  height: 60px;\n  -ms-flex-item-align: end;\n      align-self: flex-end;\n  margin-bottom: 10px;\n  margin-left: 2%;\n  outline: none;\n  cursor: pointer;\n  width: 245px;\n  position: relative;\n}\n.navBar .navbar-logo-wrapper .navbar-logo:hover .logoJ {\n  display: none;\n}\n.navBar .navbar-logo-wrapper .navbar-logo:hover .logoHome {\n  display: block;\n}\n.navBar .navbar-logo-wrapper .navbar-logo .logoJ {\n  background-image: url(\"data:image/png;base64,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\");\n  background-size: contain;\n  background-repeat: no-repeat;\n  background-position: bottom;\n  width: 60px;\n  height: 60px;\n}\n.navBar .navbar-logo-wrapper .navbar-logo .logoHome {\n  background-image: url(\"data:image/png;base64,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\");\n  background-size: contain;\n  background-repeat: no-repeat;\n  background-position: bottom;\n  width: 60px;\n  height: 60px;\n  display: none;\n}\n.navBar .menuWrapper {\n  -ms-flex: 6;\n      flex: 6;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: end;\n      justify-content: flex-end;\n  -ms-flex-align: end;\n      align-items: flex-end;\n  padding-right: 6%;\n  z-index: 2000;\n  background: white;\n}\n.navBar .menuWrapper .menuEntry {\n  margin-bottom: 15px;\n  margin-left: 4%;\n  text-transform: uppercase;\n  color: #2b2a29;\n  font-family: ComfortaaLight;\n  font-size: 18px;\n  cursor: pointer;\n  outline: none;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n.navBar .menuWrapper .menuEntry:after {\n  content: \"\";\n  display: block;\n  margin: 0 auto;\n  width: 0;\n  height: 2px;\n  background-color: #c3a368;\n  transition: opacity 0.3s ease, width 0.3s ease;\n}\n.navBar .menuWrapper .menuEntry:hover:after,\n.navBar .menuWrapper .menuEntry:focus:after,\n.navBar .menuWrapper .menuEntry:active:after,\n.navBar .menuWrapper .menuEntry.active:after {\n  width: 100%;\n}\n.navBar .dropdownMenu {\n  display: none;\n}\n.navBar .burgerMenu {\n  display: none;\n}\n@media only screen and (max-width: 768px) {\n  .navBar .navbar-logo-wrapper .navbar-logo:hover .logoHome {\n    display: none;\n  }\n  .navBar .navbar-logo-wrapper .navbar-logo:hover .logoJ {\n    display: block;\n  }\n  .navBar .menuWrapper {\n    display: none;\n  }\n  .navBar .dropdownMenu {\n    display: block;\n    position: absolute;\n    top: 100px;\n    left: 0;\n    width: 100%;\n    background: #d4d2cf;\n    cursor: pointer;\n  }\n  .navBar .dropdownMenu .menuEntry {\n    padding: 5px 0;\n    text-align: center;\n    text-transform: uppercase;\n    color: #2b2a29;\n    font-family: ComfortaaLight;\n    font-size: 15px;\n    outline: none;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n  }\n  .navBar .dropdownMenu .menuEntry.active {\n    background: #bfbeba;\n  }\n  .navBar .burgerMenu {\n    -ms-flex: 1;\n        flex: 1;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: end;\n        align-items: flex-end;\n    -ms-flex-pack: end;\n        justify-content: flex-end;\n    padding-bottom: 17px;\n    background: white;\n    z-index: 2000;\n    padding-right: 4%;\n  }\n  .navBar .burgerMenu i {\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    font-size: 30px;\n    cursor: pointer;\n    color: #2b2a29;\n  }\n  .navBar .burgerMenu i.inactive {\n    display: none;\n  }\n}\n", ""]);
 
 // exports
 
@@ -565,19 +652,20 @@ var NavbarComponent = (function () {
 /***/ "../../../../../src/app/components/photography/photography.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 class=\"page-header\">Photography</h2>\r\n<p>Welcome to my Photography</p>\r\n"
+module.exports = "\r\n<div class=\"galleryWrapper animated fadeIn\">\r\n    <div *ngFor=\"let picture of pictures\" class=\"imagePreviewWrapper animated fadeIn {{picture.animationDelay}}\" (click)=\"showPicture(picture)\" >\r\n        <img class=\"picture yourDivClass animationFix\" src=\"{{picture.path}}\" alt=\"Photograph\">\r\n        <div class=\"hoverOverlay animated slideInUp\">\r\n            <span class=\"description\">{{picture.description}}</span>\r\n        </div>\r\n    </div>\r\n    <div class=\"imagePreviewWrapper\" *ngFor=\"let pseudo of pseudoElements\" ></div>\r\n</div>    \r\n\r\n    \r\n\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
 /***/ "../../../../../src/app/components/photography/photography.component.less":
 /***/ (function(module, exports, __webpack_require__) {
 
+var escape = __webpack_require__("../../../../css-loader/lib/url/escape.js");
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
 // imports
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "@font-face {\n  font-family: ComfortaaLight;\n  src: url(" + escape(__webpack_require__("../../../../../src/assets/fonts/Comfortaa-Light.ttf")) + ");\n}\n.quickAnimation {\n  animation-duration: 300ms;\n  animation-fill-mode: both;\n}\n.animationFix {\n  -webkit-backface-visibility: hidden;\n  transform: translateZ(0);\n}\n.delay-100ms {\n  animation-delay: 100ms;\n}\n.delay-200ms {\n  animation-delay: 200ms;\n}\n.delay-300ms {\n  animation-delay: 300ms;\n}\n.delay-400ms {\n  animation-delay: 400ms;\n}\n.delay-500ms {\n  animation-delay: 500ms;\n}\n.delay-600ms {\n  animation-delay: 600ms;\n}\n.delay-700ms {\n  animation-delay: 700ms;\n}\n.delay-800ms {\n  animation-delay: 800ms;\n}\n.delay-900ms {\n  animation-delay: 900ms;\n}\n.galleryWrapper {\n  margin: 100px 10% 0;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -ms-flex-pack: center;\n      justify-content: center;\n}\n.galleryWrapper .imagePreviewWrapper {\n  width: 30%;\n  min-width: 290px;\n  height: 15vw;\n  min-height: 200px;\n  margin: 5px;\n  overflow: hidden;\n  cursor: pointer;\n  position: relative;\n}\n.galleryWrapper .imagePreviewWrapper:hover .picture {\n  opacity: 0.85;\n}\n.galleryWrapper .imagePreviewWrapper:hover .hoverOverlay {\n  display: -ms-flexbox;\n  display: flex;\n}\n.galleryWrapper .imagePreviewWrapper .picture {\n  opacity: 1;\n  transition: opacity 200ms ease-in-out;\n  width: 100%;\n  min-height: 100%;\n  position: relative;\n  top: 50%;\n  transform: translateY(-50%);\n}\n.galleryWrapper .imagePreviewWrapper .hoverOverlay {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 50px;\n  background: rgba(0, 0, 0, 0.75);\n  display: none;\n  animation-duration: 300ms;\n  animation-fill-mode: both;\n  -ms-flex-align: center;\n      align-items: center;\n}\n.galleryWrapper .imagePreviewWrapper .hoverOverlay .description {\n  text-align: center;\n  margin: 0 auto;\n  color: #eee;\n}\n@media screen and (max-width: 768px) {\n  .galleryWrapper .imagePreviewWrapper {\n    width: unset;\n    height: unset;\n    min-height: unset;\n    cursor: initial;\n  }\n  .galleryWrapper .imagePreviewWrapper:hover .picture {\n    opacity: 1;\n  }\n  .galleryWrapper .imagePreviewWrapper:hover .hoverOverlay {\n    display: none;\n  }\n}\n", ""]);
 
 // exports
 
@@ -593,6 +681,7 @@ module.exports = module.exports.toString();
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PhotographyComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_modal_service__ = __webpack_require__("../../../../../src/app/services/modal.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -603,10 +692,141 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var PhotographyComponent = (function () {
-    function PhotographyComponent() {
+    function PhotographyComponent(_modalService) {
+        this._modalService = _modalService;
     }
     PhotographyComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.buildPicturesArray();
+        this.pseudoElements = [1, 2]; // Adds 2 empty pseudo elements to fill flex design for last row
+        this.initializeIsInMobile();
+        window.onresize = function () {
+            _this.initializeIsInMobile();
+        };
+    };
+    PhotographyComponent.prototype.initializeIsInMobile = function () {
+        var w = window, d = document, e = d.documentElement, g = d.getElementsByTagName('body')[0], x = w.innerWidth || e.clientWidth || g.clientWidth, y = w.innerHeight || e.clientHeight || g.clientHeight;
+        if (x <= 768) {
+            this.isInMobile = true;
+        }
+        else {
+            this.isInMobile = false;
+        }
+    };
+    PhotographyComponent.prototype.showPicture = function (picture) {
+        if (!this.isInMobile) {
+            this._modalService.showModal(picture);
+        }
+    };
+    PhotographyComponent.prototype.buildPicturesArray = function () {
+        this.pictures = [];
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (1) + ".jpg",
+            'description': "Laos - Luang Prabang",
+            'animationDelay': "delay-100ms"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (2) + ".jpg",
+            'description': "Japan - Tokyo",
+            'animationDelay': "delay-200ms"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (3) + ".jpg",
+            'description': "Norway - Jotunheimen",
+            'animationDelay': "delay-300ms"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (10) + ".jpg",
+            'description': "Tokyo - Shibuya",
+            'animationDelay': "delay-400ms"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (11) + ".jpg",
+            'description': "Cambodia - Phnom Penh",
+            'animationDelay': "delay-500ms"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (12) + ".jpg",
+            'description': "Myanmar - Yangon",
+            'animationDelay': "delay-600ms"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (13) + ".jpg",
+            'description': "Philippines - Bohol",
+            'animationDelay': "delay-700ms"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (5) + ".jpg",
+            'description': "Norway - Jotunheimen",
+            'animationDelay': "delay-800ms"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (6) + ".jpg",
+            'description': "New Zealand - Canterbury",
+            'animationDelay': "delay-900ms"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (7) + ".jpg",
+            'description': "Philippines - Virgin Island",
+            'animationDelay': "delay-1s"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (8) + ".jpg",
+            'description': "South Korea - Seoul",
+            'animationDelay': "delay-1s"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (9) + ".jpg",
+            'description': "Philippines - Panglao Island",
+            'animationDelay': "delay-1s"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (4) + ".jpg",
+            'description': "Laos",
+            'animationDelay': "delay-1s"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (14) + ".jpg",
+            'description': "Austria - Hinterglemm",
+            'animationDelay': "delay-1s"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (15) + ".jpg",
+            'description': "Philippines",
+            'animationDelay': "delay-1s"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (16) + ".jpg",
+            'description': "After the rain",
+            'animationDelay': "delay-1s"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (17) + ".jpg",
+            'description': "Kea - New Zealand",
+            'animationDelay': "delay-1s"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (18) + ".jpg",
+            'description': "Philippines - Virgin Island",
+            'animationDelay': "delay-1s"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (19) + ".jpg",
+            'description': "Laos - Luang Prabang",
+            'animationDelay': "delay-1s"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (20) + ".jpg",
+            'description': "Philippines",
+            'animationDelay': "delay-1s"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (21) + ".jpg",
+            'description': "New Zealand - Richmond Forest Park",
+            'animationDelay': "delay-1s"
+        });
     };
     PhotographyComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -614,7 +834,7 @@ var PhotographyComponent = (function () {
             template: __webpack_require__("../../../../../src/app/components/photography/photography.component.html"),
             styles: [__webpack_require__("../../../../../src/app/components/photography/photography.component.less")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_modal_service__["a" /* ModalService */]])
     ], PhotographyComponent);
     return PhotographyComponent;
 }());
@@ -1042,6 +1262,47 @@ var AuthService = (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]])
     ], AuthService);
     return AuthService;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/services/modal.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ModalService = (function () {
+    function ModalService() {
+        this.isShown = false;
+    }
+    ModalService.prototype.setIsShown = function (isShown) {
+        this.isShown = isShown;
+    };
+    ModalService.prototype.toggleIsShown = function () {
+        this.isShown = !this.isShown;
+    };
+    ModalService.prototype.showModal = function (content) {
+        this.setIsShown(true);
+        this.modalContent = content;
+    };
+    ModalService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [])
+    ], ModalService);
+    return ModalService;
 }());
 
 

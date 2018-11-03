@@ -1,9 +1,20 @@
+
+@font-face { font-family: ComfortaaLight; src: url('assets/fonts/Comfortaa-Light.ttf'); }
+
 html{
-  background-color: #f4eee0;
   height: 100%;
 }
-body , app-root{
+app-root{
   height: 100%;
   width: 100%;
   min-width: 320px;
+}
+body{
+  min-height: 100%;
+  width: 100%;
+  min-width: 320px;
+}
+
+html,body,div,a,li,span{
+  font-family: ComfortaaLight;
 }

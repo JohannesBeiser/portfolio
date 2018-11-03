@@ -1,5 +1,12 @@
 webpackJsonp(["styles"],{
 
+/***/ "../../../../../src/assets/fonts/Comfortaa-Light.ttf":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "Comfortaa-Light.866333be226453f3a24c.ttf";
+
+/***/ }),
+
 /***/ "../../../../../src/styles.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -30,12 +37,13 @@ if(false) {
 /***/ "../../../../css-loader/index.js?{\"sourceMap\":false,\"importLoaders\":1}!../../../../postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"sourceMap\":false}!../../../../../src/styles.css":
 /***/ (function(module, exports, __webpack_require__) {
 
+var escape = __webpack_require__("../../../../css-loader/lib/url/escape.js");
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
 // imports
 
 
 // module
-exports.push([module.i, "html{\r\n  background-color: #f4eee0;\r\n  height: 100%;\r\n}\r\nbody , app-root{\r\n  height: 100%;\r\n  width: 100%;\r\n  min-width: 320px;\r\n}\r\n", ""]);
+exports.push([module.i, "\r\n@font-face { font-family: ComfortaaLight; src: url(" + escape(__webpack_require__("../../../../../src/assets/fonts/Comfortaa-Light.ttf")) + "); }\r\n\r\nhtml{\r\n  height: 100%;\r\n}\r\napp-root{\r\n  height: 100%;\r\n  width: 100%;\r\n  min-width: 320px;\r\n}\r\nbody{\r\n  min-height: 100%;\r\n  width: 100%;\r\n  min-width: 320px;\r\n}\r\n\r\nhtml,body,div,a,li,span{\r\n  font-family: ComfortaaLight;\r\n}\r\n", ""]);
 
 // exports
 
@@ -120,6 +128,29 @@ function toComment(sourceMap) {
 	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
 
 	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+
+/***/ "../../../../css-loader/lib/url/escape.js":
+/***/ (function(module, exports) {
+
+module.exports = function escape(url) {
+    if (typeof url !== 'string') {
+        return url
+    }
+    // If url is already wrapped in quotes, remove them
+    if (/^['"].*['"]$/.test(url)) {
+        url = url.slice(1, -1);
+    }
+    // Should url be wrapped?
+    // See https://drafts.csswg.org/css-values-3/#urls
+    if (/["'() \t\n]/.test(url)) {
+        return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"'
+    }
+
+    return url
 }
 
 

@@ -1,6 +1,11 @@
 <nav class="navBar">
       <div class="navbar-logo-wrapper fadeIn animated">
-        <div class="navbar-logo"  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"  [routerLink]="['/']"></div>
+        <div class="navbar-logo"  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"  [routerLink]="['/']">
+          <div class="logoJ animated fadeIn"></div>
+          <div class="logoHome animated fadeIn"></div>
+
+
+        </div>
       </div>
 
       <div class="menuWrapper">
@@ -13,6 +18,7 @@
       <div class="burgerMenu fadeIn animated">
           <i (click)="toggleDropdownMenu()" class="material-icons" *ngIf="!dropdownActive">menu</i>
           <i (click)="toggleDropdownMenu()" class="material-icons" *ngIf="dropdownActive">close</i>
+
       </div>
 
       <div *ngIf="dropdownActive" @swipe class="dropdownMenu">
