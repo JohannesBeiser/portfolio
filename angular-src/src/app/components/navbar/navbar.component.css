@@ -2,6 +2,10 @@
   font-family: ComfortaaLight;
   src: url('assets/fonts/Comfortaa-Light.ttf');
 }
+.animated.delay-100ms {
+  -webkit-animation-delay: 100ms;
+  animation-delay: 100ms;
+}
 .animated.delay-500ms {
   -webkit-animation-delay: 500ms;
   animation-delay: 500ms;
@@ -25,9 +29,10 @@
   display: flex;
   z-index: 2000;
   background: #f1ede5;
+  position: relative;
 }
 .navBar .navbar-logo-wrapper .navbar-logo {
-  background-image: url("../../../assets/images/johannesBeiserLogo.png");
+  background-image: url("../../../assets/images/johannesBeiserLogoPlain.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom;
@@ -38,6 +43,30 @@
   cursor: pointer;
   width: 245px;
   margin-left: 20%;
+  position: relative;
+}
+.navBar .navbar-logo-wrapper .navbar-logo:hover .logoJ {
+  display: none;
+}
+.navBar .navbar-logo-wrapper .navbar-logo:hover .logoHome {
+  display: block;
+}
+.navBar .navbar-logo-wrapper .navbar-logo .logoJ {
+  background-image: url("../../../assets/images/johannesBeiserLogoJ.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  width: 60px;
+  height: 60px;
+}
+.navBar .navbar-logo-wrapper .navbar-logo .logoHome {
+  background-image: url("../../../assets/images/johannesBeiserLogoHome.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  width: 60px;
+  height: 60px;
+  display: none;
 }
 .navBar .menuWrapper {
   flex: 6;
@@ -84,6 +113,12 @@
   .navBar .navbar-logo-wrapper .navbar-logo {
     margin-left: auto;
     margin-right: auto;
+  }
+  .navBar .navbar-logo-wrapper .navbar-logo:hover .logoHome {
+    display: none;
+  }
+  .navBar .navbar-logo-wrapper .navbar-logo:hover .logoJ {
+    display: block;
   }
   .navBar .menuWrapper {
     display: none;
