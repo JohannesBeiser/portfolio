@@ -460,7 +460,7 @@ var LoginComponent = (function () {
 /***/ "../../../../../src/app/components/modal/modal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modalWindow animated animated-300ms fadeIn\" *ngIf=\"_modalService.isShown\" (click)=\"_modalService.toggleIsShown()\">\r\n\r\n    <div class=\"modalContent animated animated-300ms zoomIn\" (click)=\"innerModalClicked($event)\"  [ngStyle]=\"{'background-image': getImageUrl()}\">\r\n        \r\n        <div class=\"close\">\r\n            <i (click)=\"_modalService.toggleIsShown()\" class=\"material-icons closeModal animated fadeIn delay-600ms\">close</i>\r\n        </div>     \r\n    </div>\r\n\r\n</div>    \r\n\r\n    \r\n\r\n\r\n\r\n\r\n"
+module.exports = "<div class=\"modalWindow animated animated-300ms fadeIn\" *ngIf=\"_modalService.isShown\" (click)=\"_modalService.toggleIsShown()\">\r\n\r\n    <!-- <div class=\"modalContent animated animated-300ms zoomIn\" (click)=\"innerModalClicked($event)\"  [ngStyle]=\"{'background-image': getImageUrl()}\"> -->\r\n    <div class=\"imageWrapper animated animated-300ms zoomIn\">\r\n        <img  class=\"modalContent\" src=\"{{getImageUrl()}}\" (click)=\"innerModalClicked($event)\"  alt=\"image\">    \r\n        <div class=\"close\">\r\n            <i (click)=\"_modalService.toggleIsShown()\" class=\"material-icons closeModal animated fadeIn delay-600ms\">close</i>\r\n        </div>     \r\n\r\n    </div>\r\n    \r\n        \r\n</div>    \r\n\r\n    \r\n\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -473,7 +473,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "@font-face {\n  font-family: ComfortaaLight;\n  src: url(" + escape(__webpack_require__("../../../../../src/assets/fonts/Comfortaa-Light.ttf")) + ");\n}\n.quickAnimation {\n  animation-duration: 300ms;\n  animation-fill-mode: both;\n}\n.animated-300ms {\n  animation-duration: 300ms;\n  animation-fill-mode: both;\n}\n.animationFix {\n  -webkit-backface-visibility: hidden;\n  transform: translateZ(0);\n}\n.delay-100ms {\n  animation-delay: 100ms;\n}\n.delay-200ms {\n  animation-delay: 200ms;\n}\n.delay-300ms {\n  animation-delay: 300ms;\n}\n.delay-400ms {\n  animation-delay: 400ms;\n}\n.delay-500ms {\n  animation-delay: 500ms;\n}\n.delay-600ms {\n  animation-delay: 600ms;\n}\n.delay-700ms {\n  animation-delay: 700ms;\n}\n.delay-800ms {\n  animation-delay: 800ms;\n}\n.delay-900ms {\n  animation-delay: 900ms;\n}\n.modalWindow {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.8);\n  z-index: 9000;\n}\n.modalWindow .modalContent {\n  width: 80%;\n  height: 60vw;\n  max-height: 80vh;\n  margin: 0 auto;\n  position: relative;\n  top: 10%;\n  background-size: cover;\n  background-repeat: no-repeat;\n  background-position: center;\n}\n.modalWindow .modalContent .close {\n  opacity: 0.8;\n  transition: opacity 200ms ease-in-out;\n}\n.modalWindow .modalContent .close:hover {\n  opacity: 1;\n}\n.modalWindow .modalContent .close .closeModal {\n  background: #ddd;\n  position: absolute;\n  right: 0;\n  top: 0;\n  padding: 10px;\n  cursor: pointer;\n  color: #2b2a29;\n  transition: all 200ms ease-in-out;\n}\n", ""]);
+exports.push([module.i, "@font-face {\n  font-family: ComfortaaLight;\n  src: url(" + escape(__webpack_require__("../../../../../src/assets/fonts/Comfortaa-Light.ttf")) + ");\n}\n.quickAnimation {\n  animation-duration: 300ms;\n  animation-fill-mode: both;\n}\n.animated-300ms {\n  animation-duration: 300ms;\n  animation-fill-mode: both;\n}\n.animationFix {\n  -webkit-backface-visibility: hidden;\n  transform: translateZ(0);\n}\n.delay-100ms {\n  animation-delay: 100ms;\n}\n.delay-200ms {\n  animation-delay: 200ms;\n}\n.delay-300ms {\n  animation-delay: 300ms;\n}\n.delay-400ms {\n  animation-delay: 400ms;\n}\n.delay-500ms {\n  animation-delay: 500ms;\n}\n.delay-600ms {\n  animation-delay: 600ms;\n}\n.delay-700ms {\n  animation-delay: 700ms;\n}\n.delay-800ms {\n  animation-delay: 800ms;\n}\n.delay-900ms {\n  animation-delay: 900ms;\n}\n.modalWindow {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.8);\n  z-index: 9000;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-align: center;\n      align-items: center;\n  -ms-flex-pack: center;\n      justify-content: center;\n}\n.modalWindow .imageWrapper {\n  margin: 0 auto;\n  display: inline-block;\n  position: relative;\n}\n.modalWindow .imageWrapper .modalContent {\n  max-height: 90vh;\n  max-width: 90vw;\n}\n.modalWindow .imageWrapper .close {\n  opacity: 0.8;\n  transition: opacity 200ms ease-in-out;\n  position: absolute;\n  right: 0;\n  top: 0;\n}\n.modalWindow .imageWrapper .close:hover {\n  opacity: 1;\n}\n.modalWindow .imageWrapper .close .closeModal {\n  background: #ddd;\n  padding: 10px;\n  cursor: pointer;\n  color: #2b2a29;\n  transition: all 200ms ease-in-out;\n}\n", ""]);
 
 // exports
 
@@ -521,7 +521,8 @@ var ModalComponent = (function () {
         return this.sanitizer.bypassSecurityTrustStyle(style);
     };
     ModalComponent.prototype.getImageUrl = function () {
-        return "url(" + this._modalService.modalContent.path + ")";
+        // return "url(" + this._modalService.modalContent.path + ")";
+        return "" + this._modalService.modalContent.path;
     };
     ModalComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
