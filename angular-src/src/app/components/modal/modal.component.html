@@ -1,15 +1,12 @@
 <div class="modalWindow animated animated-300ms fadeIn" *ngIf="_modalService.isShown" (click)="_modalService.toggleIsShown()">
 
     <!-- <div class="modalContent animated animated-300ms zoomIn" (click)="innerModalClicked($event)"  [ngStyle]="{'background-image': getImageUrl()}"> -->
-    <div class="imageWrapper animated animated-300ms zoomIn">
+    <div class="imageWrapper animated animated-300ms zoomIn" >
         <img  class="modalContent" src="{{getImageUrl()}}" (click)="innerModalClicked($event)"  alt="image">    
         <div class="close">
             <i (click)="_modalService.toggleIsShown()" class="material-icons closeModal animated fadeIn delay-600ms">close</i>
         </div>     
-
     </div>
-    
-        
 </div>    
 
     

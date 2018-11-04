@@ -460,7 +460,7 @@ var LoginComponent = (function () {
 /***/ "../../../../../src/app/components/modal/modal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modalWindow animated animated-300ms fadeIn\" *ngIf=\"_modalService.isShown\" (click)=\"_modalService.toggleIsShown()\">\r\n\r\n    <!-- <div class=\"modalContent animated animated-300ms zoomIn\" (click)=\"innerModalClicked($event)\"  [ngStyle]=\"{'background-image': getImageUrl()}\"> -->\r\n    <div class=\"imageWrapper animated animated-300ms zoomIn\">\r\n        <img  class=\"modalContent\" src=\"{{getImageUrl()}}\" (click)=\"innerModalClicked($event)\"  alt=\"image\">    \r\n        <div class=\"close\">\r\n            <i (click)=\"_modalService.toggleIsShown()\" class=\"material-icons closeModal animated fadeIn delay-600ms\">close</i>\r\n        </div>     \r\n\r\n    </div>\r\n    \r\n        \r\n</div>    \r\n\r\n    \r\n\r\n\r\n\r\n\r\n"
+module.exports = "<div class=\"modalWindow animated animated-300ms fadeIn\" *ngIf=\"_modalService.isShown\" (click)=\"_modalService.toggleIsShown()\">\r\n\r\n    <!-- <div class=\"modalContent animated animated-300ms zoomIn\" (click)=\"innerModalClicked($event)\"  [ngStyle]=\"{'background-image': getImageUrl()}\"> -->\r\n    <div class=\"imageWrapper animated animated-300ms zoomIn\" >\r\n        <img  class=\"modalContent\" src=\"{{getImageUrl()}}\" (click)=\"innerModalClicked($event)\"  alt=\"image\">    \r\n        <div class=\"close\">\r\n            <i (click)=\"_modalService.toggleIsShown()\" class=\"material-icons closeModal animated fadeIn delay-600ms\">close</i>\r\n        </div>     \r\n    </div>\r\n</div>    \r\n\r\n    \r\n\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -729,14 +729,14 @@ var PhotographyComponent = (function () {
             'animationDelay': "delay-100ms"
         });
         this.pictures.push({
-            'path': "../../../assets/pictures/" + (2) + ".jpg",
-            'description': "Japan - Tokyo",
-            'animationDelay': "delay-200ms"
-        });
-        this.pictures.push({
             'path': "../../../assets/pictures/" + (3) + ".jpg",
             'description': "Norway - Jotunheimen",
             'animationDelay': "delay-300ms"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (2) + ".jpg",
+            'description': "Japan - Tokyo",
+            'animationDelay': "delay-200ms"
         });
         this.pictures.push({
             'path': "../../../assets/pictures/" + (10) + ".jpg",
@@ -759,14 +759,14 @@ var PhotographyComponent = (function () {
             'animationDelay': "delay-700ms"
         });
         this.pictures.push({
-            'path': "../../../assets/pictures/" + (5) + ".jpg",
-            'description': "Norway - Jotunheimen",
-            'animationDelay': "delay-800ms"
-        });
-        this.pictures.push({
             'path': "../../../assets/pictures/" + (6) + ".jpg",
             'description': "New Zealand - Canterbury",
             'animationDelay': "delay-900ms"
+        });
+        this.pictures.push({
+            'path': "../../../assets/pictures/" + (5) + ".jpg",
+            'description': "Norway - Jotunheimen",
+            'animationDelay': "delay-800ms"
         });
         this.pictures.push({
             'path': "../../../assets/pictures/" + (7) + ".jpg",
@@ -789,8 +789,8 @@ var PhotographyComponent = (function () {
             'animationDelay': "delay-1s"
         });
         this.pictures.push({
-            'path': "../../../assets/pictures/" + (14) + ".jpg",
-            'description': "Austria - Hinterglemm",
+            'path': "../../../assets/pictures/" + (21) + ".jpg",
+            'description': "New Zealand - Richmond Forest Park",
             'animationDelay': "delay-1s"
         });
         this.pictures.push({
@@ -824,8 +824,8 @@ var PhotographyComponent = (function () {
             'animationDelay': "delay-1s"
         });
         this.pictures.push({
-            'path': "../../../assets/pictures/" + (21) + ".jpg",
-            'description': "New Zealand - Richmond Forest Park",
+            'path': "../../../assets/pictures/" + (14) + ".jpg",
+            'description': "Austria - Hinterglemm",
             'animationDelay': "delay-1s"
         });
     };
@@ -1028,7 +1028,7 @@ var RegisterComponent = (function () {
 /***/ "../../../../../src/app/components/travel/travel.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 class=\"page-header\">Travel</h2>\r\n<p>Welcome to Travels</p>\r\n"
+module.exports = "\r\n<div class=\"mapWrapper\">\r\n\r\n    \r\n</div>"
 
 /***/ }),
 
@@ -1040,7 +1040,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".mapWrapper {\n  width: 50%;\n}\n", ""]);
 
 // exports
 
