@@ -30,7 +30,9 @@ export class ModalComponent implements OnInit {
   }
 
   getImageUrl(){
-    return "url(" + this._modalService.modalContent.path + ")";
+    // return "url(" + this._modalService.modalContent.path + ")";
+    return "" + this._modalService.modalContent.path;
+
   }
 
 }

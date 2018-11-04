@@ -8,6 +8,12 @@
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
+.animated-300ms {
+  -webkit-animation-duration: 300ms;
+  animation-duration: 300ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
 .animationFix {
   -webkit-backface-visibility: hidden;
   -webkit-transform: translateZ(0) scale(1, 1);
@@ -57,30 +63,31 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.modalWindow .modalContent {
-  width: 80%;
-  height: 60vw;
-  max-height: 80vh;
+.modalWindow .imageWrapper {
   margin: 0 auto;
+  display: inline-block;
   position: relative;
-  top: 10%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
 }
-.modalWindow .modalContent .close {
+.modalWindow .imageWrapper .modalContent {
+  max-height: 90vh;
+  max-width: 90vw;
+}
+.modalWindow .imageWrapper .close {
   opacity: 0.8;
   transition: opacity 200ms ease-in-out;
-}
-.modalWindow .modalContent .close:hover {
-  opacity: 1;
-}
-.modalWindow .modalContent .close .closeModal {
-  background: #ddd;
   position: absolute;
   right: 0;
   top: 0;
+}
+.modalWindow .imageWrapper .close:hover {
+  opacity: 1;
+}
+.modalWindow .imageWrapper .close .closeModal {
+  background: #ddd;
   padding: 10px;
   cursor: pointer;
   color: #2b2a29;

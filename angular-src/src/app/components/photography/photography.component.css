@@ -50,7 +50,7 @@
   animation-delay: 900ms;
 }
 .galleryWrapper {
-  margin: 100px 10% 0;
+  margin: 5% 10% 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -98,6 +98,9 @@
   text-align: center;
   margin: 0 auto;
   color: #eee;
+}
+.galleryWrapper .pseudoElement {
+  cursor: initial;
 }
 @media screen and (max-width: 768px) {
   .galleryWrapper .imagePreviewWrapper {

@@ -65,14 +65,14 @@ export class PhotographyComponent implements OnInit {
       'animationDelay' : "delay-100ms"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (2) + ".jpg",
-      'description': "Japan - Tokyo",
-      'animationDelay' : "delay-200ms"
-    });
-    this.pictures.push({
       'path' : "../../../assets/pictures/"+ (3) + ".jpg",
       'description': "Norway - Jotunheimen",
       'animationDelay' : "delay-300ms"
+    });
+    this.pictures.push({
+      'path' : "../../../assets/pictures/"+ (2) + ".jpg",
+      'description': "Japan - Tokyo",
+      'animationDelay' : "delay-200ms"
     });
     this.pictures.push({
       'path' : "../../../assets/pictures/"+ (10) + ".jpg",
@@ -95,14 +95,14 @@ export class PhotographyComponent implements OnInit {
       'animationDelay' : "delay-700ms"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (5) + ".jpg",
-      'description': "Norway - Jotunheimen",
-      'animationDelay' : "delay-800ms"
-    });
-    this.pictures.push({
       'path' : "../../../assets/pictures/"+ (6) + ".jpg",
       'description': "New Zealand - Canterbury",
       'animationDelay' : "delay-900ms"
+    });
+    this.pictures.push({
+      'path' : "../../../assets/pictures/"+ (5) + ".jpg",
+      'description': "Norway - Jotunheimen",
+      'animationDelay' : "delay-800ms"
     });
     this.pictures.push({
       'path' : "../../../assets/pictures/"+ (7) + ".jpg",
@@ -124,10 +124,9 @@ export class PhotographyComponent implements OnInit {
       'description': "Laos",
       'animationDelay' : "delay-1s"
     });
-  
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (14) + ".jpg",
-      'description': "Austria - Hinterglemm",
+      'path' : "../../../assets/pictures/"+ (21) + ".jpg",
+      'description': "New Zealand - Richmond Forest Park",
       'animationDelay' : "delay-1s"
     });
     this.pictures.push({
@@ -161,8 +160,8 @@ export class PhotographyComponent implements OnInit {
       'animationDelay' : "delay-1s"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (21) + ".jpg",
-      'description': "New Zealand - Richmond Forest Park",
+      'path' : "../../../assets/pictures/"+ (14) + ".jpg",
+      'description': "Austria - Hinterglemm",
       'animationDelay' : "delay-1s"
     });
   }

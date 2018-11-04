@@ -9,34 +9,35 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.8);
     z-index: 9000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    .modalContent{
-        width: 80%;
-        height: 60vw;
-        max-height: 80vh;
+
+    .imageWrapper{
+
         margin: 0 auto;
+        display: inline-block;
         position: relative;
-        top: 10%; 
-        background-size: cover;
-        background-repeat: no-repeat; 
-        background-position: center;
+
+        .modalContent{
+            max-height: 90vh;
+            max-width: 90vw;
+        }
 
         .close{
-
             opacity: 0.8;
             transition: opacity 200ms ease-in-out;
+            position: absolute;
+            right: 0;
+            top: 0;
 
             &:hover{
                 opacity: 1;
-
-               
             }
             
             .closeModal{
                 background: #ddd;
-                position: absolute;
-                right: 0;
-                top: 0;
                 padding: 10px;
                 cursor: pointer;
                 color: @textColor;
@@ -46,9 +47,9 @@
                
             }
         }
-        
+    
     }
-
+    
     
 
 }
