@@ -1,4 +1,45 @@
-.mapWrapper{
-    width: 50%;
+@import '../../../globalVariables.less';
+
+.travelSiteWrapper{
+
+    width: 100%;
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 70% 30%;
+    grid-template-areas: "content timeline";
+
+
+    .contentArea{
+        grid-area: content;
+
+        .contentAreaHeader{
+            width: 70%;
+            margin: 50px auto 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #aaa;
+        }
+
+        .article{
+            width: 70%;
+            height: 300px;
+            border: 1px solid #DDD;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.14);
+            overflow: auto;
+            padding: 16px;
+            margin: 30px auto;
+        }
+    }
+
+    .timelineArea{
+        grid-area: timeline;
+
+        .timelineHeader{
+            width: 70%;
+            margin: 50px auto 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #aaa;
+        }
+    }
 }
 
