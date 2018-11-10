@@ -1,45 +1,231 @@
 @import '../../../globalVariables.less';
 
-.travelSiteWrapper{
 
-    width: 100%;
-    min-height: 100%;
-    display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: 70% 30%;
-    grid-template-areas: "content timeline";
+@media screen and (min-width: calc(@mobileBreakpoint + 1px)){
+    .travelSiteWrapper{
 
-
-    .contentArea{
-        grid-area: content;
-
-        .contentAreaHeader{
-            width: 70%;
-            margin: 50px auto 0;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #aaa;
+        width: 100%;
+        min-height: 100%;
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: 70% 30%;
+        grid-template-areas: "content timeline";
+        padding: 0 5%;
+    
+        .content-area{
+            grid-area: content;
+    
+            .content-area-header{
+                width: 90%;
+                max-width: 850px;
+                margin-top: 50px;
+                padding-bottom: 8px;
+                border-bottom: @defaultBorder
+            }
+    
+            .articles{
+                .article {
+                    height: 250px;
+                    display: flex;
+                    width: 90%;
+                    max-width: 850px;
+                    border: 1px solid #DDD;
+                    box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.14);
+                    margin: 30px 0;
+                    cursor: pointer;
+                    position: relative;
+    
+                    .articleInfo{
+                        flex: 1;
+                        padding: 16px;
+                        display: flex;
+                        flex-direction: column;
+    
+                        .article-title{
+                            margin-bottom: 16px;
+                        }
+            
+                        .article-description{
+                            overflow: hidden;
+                        }
+                    }
+                   
+                    .article-thumbnail{
+                        width: 250px;
+                        height: 250px;
+                        background-size: cover;
+                        background-repeat: no-repeat;
+    
+                        &.test-article-1{
+                            background-image: ~'url("../../../assets/pictures/1.jpg")';
+                        }
+                        &.test-article-2{
+                            background-image: ~'url("../../../assets/pictures/5.jpg")';
+                        }
+                        &.test-article-3{
+                            background-image: ~'url("../../../assets/pictures/15.jpg")';
+                        }
+                    }       
+                }            
+            }     
         }
 
-        .article{
-            width: 70%;
-            height: 300px;
-            border: 1px solid #DDD;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.14);
-            overflow: auto;
-            padding: 16px;
-            margin: 30px auto;
+        .timelineArea{
+            grid-area: timeline;
+    
+            .timelineHeader{
+                width: 80%;
+                margin: 50px 0 0 auto;
+                padding-bottom: 8px;
+                border-bottom: @defaultBorder;
+            }
+            .timelineContent{
+                width: 80%;
+                display: flex;
+                flex-direction: column;
+                margin: 20px 0 0 auto;
+                
+                &:after{
+                    content: "";
+                    width: 11px;
+                    height: 11px;
+                    background: darken(@defaultBorderColor,30%);
+                    border-radius: 50%;
+                    position: relative;
+                    left: 19px;
+                }
+
+                .timelineSection{
+                    display: flex;
+                    flex-direction: column;
+
+                    .timelineSectionHeader{
+                        padding: 8px;
+                        cursor: pointer;
+
+
+                        &:hover{
+                            color: @textColorHover;
+                        }
+                    }
+                    .timelineSectionContent{
+                        margin-left: 24px;
+                        padding-left: 24px;
+                        border-left: @defaultBorder;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+
+                        .timelineSectionItem{
+                            margin: 8px;
+                            padding: @paddingSmall;
+                            cursor: pointer;
+                            position: relative;
+                            .defaultTextTransition();
+                            &:before{
+                                opacity: 0;
+                                transition: opacity 200ms ease-in-out;
+                                content: "";
+                            }
+
+                            &:after{
+                                content: "";
+                                opacity: 0;
+                                transition: opacity 200ms ease-in-out;
+                            }
+                          
+                            &:hover{   
+                                color: @textColorHover;                            
+                                &:before{
+                                    opacity: 1;
+                                    content: "- ";
+                                    position: absolute;
+                                    left: -3px;
+                                }
+                                &:after{
+                                    opacity: 1;
+                                    content: " -";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
-
-    .timelineArea{
-        grid-area: timeline;
-
-        .timelineHeader{
-            width: 70%;
-            margin: 50px auto 0;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #aaa;
-        }
-    }
+    
 }
 
+@media screen and (max-width: @mobileBreakpoint){
+    .travelSiteWrapper{   
+        padding: 6.5%;
+        display: flex;
+        flex-direction: column;
+
+        .content-area{
+            order:2;
+            margin-top: 30px;
+
+            .content-area-header{
+                border-bottom: @defaultBorder;
+            }
+    
+            .articles{
+                .article {
+                    height: 250px;
+                    display: flex;
+                    flex-direction: column;
+                    border: 1px solid #DDD;
+                    box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.14);
+                    margin: 30px 0;
+                    position: relative;
+    
+                    .articleInfo{
+                        order:1;
+                        flex: 1;
+                        padding: 8px;
+                        width:100%;
+                        display: flex;
+                        flex-direction: column;
+                        background: rgba(255,255,255,0.7);      
+                        position: absolute;              
+
+                        .article-title{
+                            z-index: 1000;
+                        }
+            
+                        .article-description{
+                            overflow: hidden;
+                            display: none;
+                        }
+                    }
+                   
+                    .article-thumbnail{
+                        order:2;
+                        height: 100%;
+                        background-size: cover;
+                        background-repeat: no-repeat;
+    
+                        &.test-article-1{
+                            background-image: ~'url("../../../assets/pictures/1.jpg")';
+                        }
+                        &.test-article-2{
+                            background-image: ~'url("../../../assets/pictures/5.jpg")';
+                        }
+                        &.test-article-3{
+                            background-image: ~'url("../../../assets/pictures/15.jpg")';
+                        }
+                    }       
+                }      
+        }
+    
+        .timelineArea{
+            order: 1;
+
+            .timelineHeader{
+                border-bottom: @defaultBorder;
+            }
+        }   
+    }
+    }
+}

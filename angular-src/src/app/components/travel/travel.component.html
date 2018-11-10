@@ -1,31 +1,34 @@
 <div class="travelSiteWrapper">
 
-    <div class="contentArea animated slideInLeft ">
+    <div class="content-area animated slideInLeft ">
 
-        <h2 class="contentAreaHeader  ">Articles</h2>
+        <h2 class="content-area-header  ">Articles</h2>
 
-        <div class="article animated fadeIn">
-            <h3>Trip to Asia</h3>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium aspernatur exercitationem a doloremque voluptatibus officiis molestiae id repudiandae! Consequuntur hic corrupti sapiente fuga iste eligendi accusamus laborum quae beatae vero.
+        <div class="articles">
+            <ng-container *ngFor="let article of articles">
+                    <div class="article animated fadeIn" *ngIf="article.isShown">
+                            <div class="article-thumbnail test-article-1"></div>
+                            <div class="articleInfo">
+                                <h3 class="article-title">{{article.articleTitle}}</h3>
+                                <div class="article-description">{{article.article}}</div>
+                            </div>
+                        </div>
+            </ng-container>
+            
         </div>
-
-        <div class="article animated fadeIn">
-            <h3>Trip to Europe</h3>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium aspernatur exercitationem a doloremque voluptatibus officiis molestiae id repudiandae! Consequuntur hic corrupti sapiente fuga iste eligendi accusamus laborum quae beatae vero.
-        </div>
-
-        <div class="article animated fadeIn">
-            <h3>Trip to Africa</h3>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium aspernatur exercitationem a doloremque voluptatibus officiis molestiae id repudiandae! Consequuntur hic corrupti sapiente fuga iste eligendi accusamus laborum quae beatae vero.
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium aspernatur exercitationem a doloremque voluptatibus officiis molestiae id repudiandae! Consequuntur hic corrupti sapiente fuga iste eligendi accusamus laborum quae beatae vero.
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium aspernatur exercitationem a doloremque voluptatibus officiis molestiae id repudiandae! Consequuntur hic corrupti sapiente fuga iste eligendi accusamus laborum quae beatae vero.
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium aspernatur exercitationem a doloremque voluptatibus officiis molestiae id repudiandae! Consequuntur hic corrupti sapiente fuga iste eligendi accusamus laborum quae beatae vero.
-        </div>
+        
 
     </div>
     <div class="timelineArea animated slideInRight">
         <h2 class="timelineHeader">Timeline</h2>
-        
+        <div class="timelineContent">
+            <div class="timelineSection" *ngFor="let timelineSection of timelineList">
+                <div class="timelineSectionHeader" (click)="timelineYearSelected(timelineSection)">{{timelineSection.year}}</div>
+                <div class="timelineSectionContent">
+                    <span class="timelineSectionItem" *ngFor="let articleGroupItem of timelineSection.articleGroups">{{articleGroupItem.groupName}}</span>
+                </div>
+            </div>
+        </div>
     </div>
     
 </div>

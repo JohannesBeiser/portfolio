@@ -1,8 +1,8 @@
 <div class="layoutWrapper">
-    <app-navbar class="navbarContainer" id="navbarContainer"></app-navbar>
+    <app-navbar #navBarComp class="navbarContainer" id="navbarContainer"></app-navbar>
     <div class="bodyContainer">
       <flash-messages></flash-messages>
-      <router-outlet></router-outlet>
+      <router-outlet (onHomeSite)="navBarComp.hideMenuBackground()"></router-outlet>
     </div>
     <app-modal></app-modal>
 </div>

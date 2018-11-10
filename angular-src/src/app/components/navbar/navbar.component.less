@@ -17,9 +17,6 @@
 }
 
 
-
-
-
 .navBar{
     height: 100%;
     display: flex;
@@ -92,7 +89,7 @@
         align-items: flex-end;
         padding-right: 6%;
         z-index: 2000;
-        background: @backgroundWhite;
+        background-color: @backgroundWhite;
 
         .menuEntry{
             margin-bottom: 15px;
@@ -129,11 +126,26 @@
     .burgerMenu{
         display: none;
     }
+    &.onHomeSite{
+        .navbar-logo-wrapper{
+            background-color: unset;
+        }
+        .menuWrapper{
+            background-color: unset;
+        }
+    }
 }
 
 
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: @mobileBreakpoint){
     .navBar{
+
+        &.onHomeSite{
+            .burgerMenu{
+                background-color: unset;
+            }
+        }
+
         .navbar-logo-wrapper{                
             .navbar-logo{
                 &:hover{
@@ -147,7 +159,6 @@
                
             }
         }
-
 
         .menuWrapper{
             display: none;

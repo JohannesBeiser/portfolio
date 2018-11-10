@@ -3,7 +3,7 @@ webpackJsonp(["styles"],{
 /***/ "./node_modules/raw-loader/index.js!./node_modules/postcss-loader/lib/index.js??embedded!./src/styles.css":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n@font-face { font-family: ComfortaaLight; src: url('Comfortaa-Light.866333be226453f3a24c.ttf'); }\r\n\r\nhtml{\r\n  height: 100%;\r\n}\r\n\r\napp-root{\r\n  height: 100%;\r\n  width: 100%;\r\n  min-width: 320px;\r\n}\r\n\r\nbody{\r\n  min-height: 100%;\r\n  width: 100%;\r\n  min-width: 320px;\r\n}\r\n\r\nhtml,body,div,a,li,span{\r\n  font-family: ComfortaaLight;\r\n}\r\n"
+module.exports = "\r\n@font-face { font-family: ComfortaaLight; src: url('Comfortaa-Light.866333be226453f3a24c.ttf'); }\r\n\r\nhtml{\r\n  height: 100%;\r\n}\r\n\r\napp-root{\r\n  height: 100%;\r\n  width: 100%;\r\n  min-width: 320px;\r\n}\r\n\r\nbody{\r\n  min-height: 100%;\r\n  width: 100%;\r\n  min-width: 320px;\r\n}\r\n\r\nhtml,body,div,a,li,span,h1,h2,h3,h4,h5,h6{\r\n  font-family: ComfortaaLight;\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n\r\n\r\n"
 
 /***/ }),
 

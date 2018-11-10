@@ -1,4 +1,4 @@
-<nav class="navBar">
+<nav class="navBar" [class.onHomeSite]="!_compCoService.backgroundVisible">
       <div class="navbar-logo-wrapper fadeIn animated">
         <div class="navbar-logo"  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"  [routerLink]="['/']">
           <div class="logoJ animated fadeIn"></div>

@@ -8,6 +8,12 @@
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
+.animated-300ms {
+  -webkit-animation-duration: 300ms;
+  animation-duration: 300ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
 .animationFix {
   -webkit-backface-visibility: hidden;
   -webkit-transform: translateZ(0) scale(1, 1);
@@ -48,6 +54,38 @@
 .delay-900ms {
   -webkit-animation-delay: 900ms;
   animation-delay: 900ms;
+}
+.delay-1000ms {
+  -webkit-animation-delay: 1000ms;
+  animation-delay: 1000ms;
+}
+.delay-1100ms {
+  -webkit-animation-delay: 1100ms;
+  animation-delay: 1100ms;
+}
+.delay-1200ms {
+  -webkit-animation-delay: 1200ms;
+  animation-delay: 1200ms;
+}
+.delay-1300ms {
+  -webkit-animation-delay: 1300ms;
+  animation-delay: 1300ms;
+}
+.delay-1400ms {
+  -webkit-animation-delay: 1400ms;
+  animation-delay: 1400ms;
+}
+.delay-1500ms {
+  -webkit-animation-delay: 1500ms;
+  animation-delay: 1500ms;
+}
+.delay-1600ms {
+  -webkit-animation-delay: 1600ms;
+  animation-delay: 1600ms;
+}
+.delay-1700ms {
+  -webkit-animation-delay: 1700ms;
+  animation-delay: 1700ms;
 }
 .galleryWrapper {
   margin: 5% 10% 0;

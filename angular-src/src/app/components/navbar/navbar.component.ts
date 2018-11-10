@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { CompCommunicationService } from "../../services/comp-communication.service";
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { trigger ,state,transition, style, animate} from "@angular/animations";
@@ -17,11 +18,11 @@ import { trigger ,state,transition, style, animate} from "@angular/animations";
     // ])
     trigger('swipe',[
           transition('void => *', [
-            style({ transform: 'translateY(-110%)'}),
+            style({ transform: 'translateX(+110%)'}),
             animate('200ms ease')
          ]),
          transition('* => void',[
-          animate('200ms ease', style({ transform: 'translateY(-110%)'}))
+          animate('200ms ease', style({ transform: 'translateX(+110%)'}))
          ])
         ]),
         trigger('fade',[
@@ -36,11 +37,11 @@ export class NavbarComponent implements OnInit {
 
   dropdownActive: boolean;
 
-
   constructor(
     private authService: AuthService,
     private router: Router,
-    private flashMessage: FlashMessagesService) { }
+    private flashMessage: FlashMessagesService,
+    private _compCoService: CompCommunicationService) { }
 
   ngOnInit() {
     this.dropdownActive= false;
