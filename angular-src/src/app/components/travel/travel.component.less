@@ -1,9 +1,12 @@
 @import '../../../globalVariables.less';
 
+.active{
+    font-weight: bold;
+    color: black;
+}
 
-@media screen and (min-width: calc(@mobileBreakpoint + 1px)){
-    .travelSiteWrapper{
-
+@media screen and (min-width: calc(@mobileBreakpoint + 1px)) {
+    .travelSiteWrapper {
         width: 100%;
         min-height: 100%;
         display: grid;
@@ -11,138 +14,142 @@
         grid-template-columns: 70% 30%;
         grid-template-areas: "content timeline";
         padding: 0 5%;
-    
-        .content-area{
+        .content-area {
             grid-area: content;
-    
-            .content-area-header{
+            .content-area-header {
                 width: 90%;
                 max-width: 850px;
                 margin-top: 50px;
                 padding-bottom: 8px;
                 border-bottom: @defaultBorder
             }
-    
-            .articles{
+            .articles {
                 .article {
                     height: 250px;
                     display: flex;
                     width: 90%;
                     max-width: 850px;
                     border: 1px solid #DDD;
-                    box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.14);
+                    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);
                     margin: 30px 0;
                     cursor: pointer;
                     position: relative;
-    
-                    .articleInfo{
+                    .articleInfo {
                         flex: 1;
                         padding: 16px;
                         display: flex;
                         flex-direction: column;
-    
-                        .article-title{
+                        .article-title {
                             margin-bottom: 16px;
                         }
-            
-                        .article-description{
+                        .article-description {
                             overflow: hidden;
                         }
                     }
-                   
-                    .article-thumbnail{
+                    .article-thumbnail {
                         width: 250px;
                         height: 250px;
                         background-size: cover;
                         background-repeat: no-repeat;
-    
-                        &.test-article-1{
+                        &.test-article-1 {
                             background-image: ~'url("../../../assets/pictures/1.jpg")';
                         }
-                        &.test-article-2{
-                            background-image: ~'url("../../../assets/pictures/5.jpg")';
-                        }
-                        &.test-article-3{
-                            background-image: ~'url("../../../assets/pictures/15.jpg")';
-                        }
-                    }       
-                }            
-            }     
+                    }
+                }
+            }
         }
-
-        .timelineArea{
+        .timelineArea {
             grid-area: timeline;
-    
-            .timelineHeader{
+            .timelineHeader {
                 width: 80%;
                 margin: 50px 0 0 auto;
                 padding-bottom: 8px;
                 border-bottom: @defaultBorder;
             }
-            .timelineContent{
+            .timelineContent {
                 width: 80%;
                 display: flex;
                 flex-direction: column;
                 margin: 20px 0 0 auto;
-                
-                &:after{
+                &:after {
                     content: "";
                     width: 11px;
                     height: 11px;
-                    background: darken(@defaultBorderColor,30%);
+                    background: darken(@defaultBorderColor, 30%);
                     border-radius: 50%;
                     position: relative;
                     left: 19px;
                 }
-
-                .timelineSection{
+                .timelineSection {
                     display: flex;
                     flex-direction: column;
-
-                    .timelineSectionHeader{
+                    .timelineSectionHeader {
                         padding: 8px;
+                        position: relative;
                         cursor: pointer;
+                        user-select: none;
 
-
-                        &:hover{
-                            color: @textColorHover;
+                        &:before {
+                            opacity: 0;
+                            transition: opacity 200ms ease-in-out;
+                            content: "";
                         }
+                        &:after {
+                            content: "";
+                            opacity: 0;
+                            transition: opacity 200ms ease-in-out;
+                        }
+                        &:hover {
+                            color: @textColorHover;
+                            &:before {
+                                opacity: 1;
+                                content: "- ";
+                                position: absolute;
+                                left: -3px;
+                            }
+                            &:after {
+                                opacity: 1;
+                                content: " -";
+                            }
+                        }
+                        
                     }
-                    .timelineSectionContent{
+                    .timelineSectionContent {
                         margin-left: 24px;
                         padding-left: 24px;
                         border-left: @defaultBorder;
                         display: flex;
                         flex-direction: column;
                         align-items: flex-start;
-
-                        .timelineSectionItem{
+                        .timelineSectionItem {
                             margin: 8px;
                             padding: @paddingSmall;
                             cursor: pointer;
                             position: relative;
+                            user-select: none;
                             .defaultTextTransition();
-                            &:before{
-                                opacity: 0;
-                                transition: opacity 200ms ease-in-out;
-                                content: "";
-                            }
 
-                            &:after{
-                                content: "";
+
+                            &:before {
                                 opacity: 0;
                                 transition: opacity 200ms ease-in-out;
+                                content: "";
                             }
-                          
-                            &:hover{   
-                                color: @textColorHover;                            
-                                &:before{
+                            &:after {
+                                content: "";
+                                opacity: 0;
+                                transition: opacity 200ms ease-in-out, text-shadow 200ms ease-in-out;
+                            }
+                            &:hover {
+                                color: @textColorHover;
+
+                                &:before {
                                     opacity: 1;
                                     content: "- ";
                                     position: absolute;
                                     left: -3px;
                                 }
-                                &:after{
+                                &:after {
                                     opacity: 1;
                                     content: " -";
                                 }
@@ -153,79 +160,68 @@
             }
         }
     }
-    
 }
 
-@media screen and (max-width: @mobileBreakpoint){
-    .travelSiteWrapper{   
+@media screen and (max-width: @mobileBreakpoint) {
+    .travelSiteWrapper {
         padding: 6.5%;
         display: flex;
         flex-direction: column;
-
-        .content-area{
-            order:2;
+        .content-area {
+            order: 2;
             margin-top: 30px;
-
-            .content-area-header{
+            .content-area-header {
                 border-bottom: @defaultBorder;
             }
-    
-            .articles{
+            .articles {
                 .article {
                     height: 250px;
                     display: flex;
                     flex-direction: column;
                     border: 1px solid #DDD;
-                    box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.14);
+                    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);
                     margin: 30px 0;
                     position: relative;
-    
-                    .articleInfo{
-                        order:1;
+                    .articleInfo {
+                        order: 1;
                         flex: 1;
                         padding: 8px;
-                        width:100%;
+                        width: 100%;
                         display: flex;
                         flex-direction: column;
-                        background: rgba(255,255,255,0.7);      
-                        position: absolute;              
-
-                        .article-title{
+                        background: rgba(255, 255, 255, 0.7);
+                        position: absolute;
+                        .article-title {
                             z-index: 1000;
                         }
-            
-                        .article-description{
+                        .article-description {
                             overflow: hidden;
                             display: none;
                         }
                     }
-                   
-                    .article-thumbnail{
-                        order:2;
+                    .article-thumbnail {
+                        order: 2;
                         height: 100%;
                         background-size: cover;
                         background-repeat: no-repeat;
-    
-                        &.test-article-1{
+                        &.test-article-1 {
                             background-image: ~'url("../../../assets/pictures/1.jpg")';
                         }
-                        &.test-article-2{
+                        &.test-article-2 {
                             background-image: ~'url("../../../assets/pictures/5.jpg")';
                         }
-                        &.test-article-3{
+                        &.test-article-3 {
                             background-image: ~'url("../../../assets/pictures/15.jpg")';
                         }
-                    }       
-                }      
-        }
-    
-        .timelineArea{
-            order: 1;
-
-            .timelineHeader{
-                border-bottom: @defaultBorder;
+                    }
+                }
             }
-        }   
-    }
+            .timelineArea {
+                order: 1;
+                .timelineHeader {
+                    border-bottom: @defaultBorder;
+                }
+            }
+        }
     }
 }

@@ -90,6 +90,10 @@
   -webkit-animation-delay: 1700ms;
   animation-delay: 1700ms;
 }
+.active {
+  font-weight: bold;
+  color: black;
+}
 @media screen and (min-width: calc(768px + 1px)) {
   .travelSiteWrapper {
     width: 100%;
@@ -142,12 +146,6 @@
   .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-1 {
     background-image: url("../../../assets/pictures/1.jpg");
   }
-  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-2 {
-    background-image: url("../../../assets/pictures/5.jpg");
-  }
-  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-3 {
-    background-image: url("../../../assets/pictures/15.jpg");
-  }
   .travelSiteWrapper .timelineArea {
     grid-area: timeline;
   }
@@ -178,10 +176,32 @@
   }
   .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader {
     padding: 8px;
+    position: relative;
     cursor: pointer;
+    user-select: none;
+  }
+  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:before {
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+    content: "";
+  }
+  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:after {
+    content: "";
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
   }
   .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:hover {
     color: #000000;
+  }
+  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:hover:before {
+    opacity: 1;
+    content: "- ";
+    position: absolute;
+    left: -3px;
+  }
+  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:hover:after {
+    opacity: 1;
+    content: " -";
   }
   .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent {
     margin-left: 24px;
@@ -196,6 +216,7 @@
     padding: 8px;
     cursor: pointer;
     position: relative;
+    user-select: none;
     transition: color 200ms ease-in-out;
   }
   .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:before {
@@ -206,7 +227,7 @@
   .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:after {
     content: "";
     opacity: 0;
-    transition: opacity 200ms ease-in-out;
+    transition: opacity 200ms ease-in-out, text-shadow 200ms ease-in-out;
   }
   .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:hover {
     color: #000000;

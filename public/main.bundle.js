@@ -897,14 +897,14 @@ exports.RegisterComponent = RegisterComponent;
 /***/ "./src/app/components/travel/travel.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"travelSiteWrapper\">\r\n\r\n    <div class=\"content-area animated slideInLeft \">\r\n\r\n        <h2 class=\"content-area-header  \">Articles</h2>\r\n\r\n        <div class=\"articles\">\r\n            <ng-container *ngFor=\"let article of articles\">\r\n                    <div class=\"article animated fadeIn\" *ngIf=\"article.isShown\">\r\n                            <div class=\"article-thumbnail test-article-1\"></div>\r\n                            <div class=\"articleInfo\">\r\n                                <h3 class=\"article-title\">{{article.articleTitle}}</h3>\r\n                                <div class=\"article-description\">{{article.article}}</div>\r\n                            </div>\r\n                        </div>\r\n            </ng-container>\r\n            \r\n        </div>\r\n        \r\n\r\n    </div>\r\n    <div class=\"timelineArea animated slideInRight\">\r\n        <h2 class=\"timelineHeader\">Timeline</h2>\r\n        <div class=\"timelineContent\">\r\n            <div class=\"timelineSection\" *ngFor=\"let timelineSection of timelineList\">\r\n                <div class=\"timelineSectionHeader\" (click)=\"timelineYearSelected(timelineSection)\">{{timelineSection.year}}</div>\r\n                <div class=\"timelineSectionContent\">\r\n                    <span class=\"timelineSectionItem\" *ngFor=\"let articleGroupItem of timelineSection.articleGroups\">{{articleGroupItem.groupName}}</span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    \r\n</div>"
+module.exports = "<div class=\"travelSiteWrapper\">\r\n\r\n    <div class=\"content-area animated slideInLeft \">\r\n\r\n        <h2 class=\"content-area-header  \">Articles</h2>\r\n\r\n        <div class=\"articles\">\r\n            <div class=\"article animated fadeIn\" *ngFor=\"let article of renderedArticles\">\r\n                <div class=\"article-thumbnail test-article-1\"></div>\r\n                <div class=\"articleInfo\">\r\n                    <h3 class=\"article-title\">{{article.articleTitle}}</h3>\r\n                    <div class=\"article-description\">{{article.article}}</div>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n\r\n\r\n    </div>\r\n    <div class=\"timelineArea animated slideInRight\">\r\n        <h2 class=\"timelineHeader\">Timeline</h2>\r\n        <div class=\"timelineContent\">\r\n            <div class=\"timelineSection\" *ngFor=\"let timelineSection of timelineList\">\r\n                <div [class.active]=\"timelineActiveStateArray[timelineSection.id]\" class=\"timelineSectionHeader\" (click)=\"timelineYearSelected(timelineSection)\">{{timelineSection.year}}</div>\r\n                <div class=\"timelineSectionContent\">\r\n                    <span [class.active]=\"timelineActiveStateArray[articleGroupItem.id]\" class=\"timelineSectionItem\" *ngFor=\"let articleGroupItem of timelineSection.articleGroups\"\r\n                        (click)=\"articleGroupSelected(articleGroupItem)\">{{articleGroupItem.groupName}}</span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</div>"
 
 /***/ }),
 
 /***/ "./src/app/components/travel/travel.component.less":
 /***/ (function(module, exports) {
 
-module.exports = "@font-face {\n  font-family: ComfortaaLight;\n  src: url('Comfortaa-Light.866333be226453f3a24c.ttf');\n}\n.defaultTextTransition {\n  -webkit-transition: color 200ms ease-in-out;\n  transition: color 200ms ease-in-out;\n}\n.quickAnimation {\n  -webkit-animation-duration: 300ms;\n  animation-duration: 300ms;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.animated-300ms {\n  -webkit-animation-duration: 300ms;\n  animation-duration: 300ms;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.animationFix {\n  -webkit-backface-visibility: hidden;\n  -webkit-transform: translateZ(0) scale(1, 1);\n  transform: translateZ(0);\n}\n.delay-100ms {\n  -webkit-animation-delay: 100ms;\n  animation-delay: 100ms;\n}\n.delay-200ms {\n  -webkit-animation-delay: 200ms;\n  animation-delay: 200ms;\n}\n.delay-300ms {\n  -webkit-animation-delay: 300ms;\n  animation-delay: 300ms;\n}\n.delay-400ms {\n  -webkit-animation-delay: 400ms;\n  animation-delay: 400ms;\n}\n.delay-500ms {\n  -webkit-animation-delay: 500ms;\n  animation-delay: 500ms;\n}\n.delay-600ms {\n  -webkit-animation-delay: 600ms;\n  animation-delay: 600ms;\n}\n.delay-700ms {\n  -webkit-animation-delay: 700ms;\n  animation-delay: 700ms;\n}\n.delay-800ms {\n  -webkit-animation-delay: 800ms;\n  animation-delay: 800ms;\n}\n.delay-900ms {\n  -webkit-animation-delay: 900ms;\n  animation-delay: 900ms;\n}\n.delay-1000ms {\n  -webkit-animation-delay: 1000ms;\n  animation-delay: 1000ms;\n}\n.delay-1100ms {\n  -webkit-animation-delay: 1100ms;\n  animation-delay: 1100ms;\n}\n.delay-1200ms {\n  -webkit-animation-delay: 1200ms;\n  animation-delay: 1200ms;\n}\n.delay-1300ms {\n  -webkit-animation-delay: 1300ms;\n  animation-delay: 1300ms;\n}\n.delay-1400ms {\n  -webkit-animation-delay: 1400ms;\n  animation-delay: 1400ms;\n}\n.delay-1500ms {\n  -webkit-animation-delay: 1500ms;\n  animation-delay: 1500ms;\n}\n.delay-1600ms {\n  -webkit-animation-delay: 1600ms;\n  animation-delay: 1600ms;\n}\n.delay-1700ms {\n  -webkit-animation-delay: 1700ms;\n  animation-delay: 1700ms;\n}\n@media screen and (min-width: calc(768px + 1px)) {\n  .travelSiteWrapper {\n    width: 100%;\n    min-height: 100%;\n    display: -ms-grid;\n    display: grid;\n    -ms-grid-rows: auto;\n        grid-template-rows: auto;\n    -ms-grid-columns: 70% 30%;\n        grid-template-columns: 70% 30%;\n        grid-template-areas: \"content timeline\";\n    padding: 0 5%;\n  }\n  .travelSiteWrapper .content-area {\n    -ms-grid-row: 1;\n    -ms-grid-column: 1;\n    grid-area: content;\n  }\n  .travelSiteWrapper .content-area .content-area-header {\n    width: 90%;\n    max-width: 850px;\n    margin-top: 50px;\n    padding-bottom: 8px;\n    border-bottom: 1px solid #aaa;\n  }\n  .travelSiteWrapper .content-area .articles .article {\n    height: 250px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    width: 90%;\n    max-width: 850px;\n    border: 1px solid #DDD;\n    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);\n            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);\n    margin: 30px 0;\n    cursor: pointer;\n    position: relative;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo {\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1;\n    padding: 16px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .article-title {\n    margin-bottom: 16px;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .article-description {\n    overflow: hidden;\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail {\n    width: 250px;\n    height: 250px;\n    background-size: cover;\n    background-repeat: no-repeat;\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-1 {\n    background-image: url('1.ff7f4ce8d17b815b1ba3.jpg');\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-2 {\n    background-image: url('5.32447c1a9a87e0147c31.jpg');\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-3 {\n    background-image: url('15.274f144326b7d1f8f989.jpg');\n  }\n  .travelSiteWrapper .timelineArea {\n    -ms-grid-row: 1;\n    -ms-grid-column: 2;\n    grid-area: timeline;\n  }\n  .travelSiteWrapper .timelineArea .timelineHeader {\n    width: 80%;\n    margin: 50px 0 0 auto;\n    padding-bottom: 8px;\n    border-bottom: 1px solid #aaa;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent {\n    width: 80%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    margin: 20px 0 0 auto;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent:after {\n    content: \"\";\n    width: 11px;\n    height: 11px;\n    background: #5e5e5e;\n    border-radius: 50%;\n    position: relative;\n    left: 19px;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader {\n    padding: 8px;\n    cursor: pointer;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:hover {\n    color: #000000;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent {\n    margin-left: 24px;\n    padding-left: 24px;\n    border-left: 1px solid #aaa;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: start;\n        -ms-flex-align: start;\n            align-items: flex-start;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem {\n    margin: 8px;\n    padding: 8px;\n    cursor: pointer;\n    position: relative;\n    -webkit-transition: color 200ms ease-in-out;\n    transition: color 200ms ease-in-out;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:before {\n    opacity: 0;\n    -webkit-transition: opacity 200ms ease-in-out;\n    transition: opacity 200ms ease-in-out;\n    content: \"\";\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:after {\n    content: \"\";\n    opacity: 0;\n    -webkit-transition: opacity 200ms ease-in-out;\n    transition: opacity 200ms ease-in-out;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:hover {\n    color: #000000;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:hover:before {\n    opacity: 1;\n    content: \"- \";\n    position: absolute;\n    left: -3px;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:hover:after {\n    opacity: 1;\n    content: \" -\";\n  }\n}\n@media screen and (max-width: 768px) {\n  .travelSiteWrapper {\n    padding: 6.5%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n  .travelSiteWrapper .content-area {\n    -webkit-box-ordinal-group: 3;\n        -ms-flex-order: 2;\n            order: 2;\n    margin-top: 30px;\n  }\n  .travelSiteWrapper .content-area .content-area-header {\n    border-bottom: 1px solid #aaa;\n  }\n  .travelSiteWrapper .content-area .articles .article {\n    height: 250px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    border: 1px solid #DDD;\n    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);\n            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);\n    margin: 30px 0;\n    position: relative;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo {\n    -webkit-box-ordinal-group: 2;\n        -ms-flex-order: 1;\n            order: 1;\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1;\n    padding: 8px;\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    background: rgba(255, 255, 255, 0.7);\n    position: absolute;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .article-title {\n    z-index: 1000;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .article-description {\n    overflow: hidden;\n    display: none;\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail {\n    -webkit-box-ordinal-group: 3;\n        -ms-flex-order: 2;\n            order: 2;\n    height: 100%;\n    background-size: cover;\n    background-repeat: no-repeat;\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-1 {\n    background-image: url('1.ff7f4ce8d17b815b1ba3.jpg');\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-2 {\n    background-image: url('5.32447c1a9a87e0147c31.jpg');\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-3 {\n    background-image: url('15.274f144326b7d1f8f989.jpg');\n  }\n  .travelSiteWrapper .content-area .timelineArea {\n    -webkit-box-ordinal-group: 2;\n        -ms-flex-order: 1;\n            order: 1;\n  }\n  .travelSiteWrapper .content-area .timelineArea .timelineHeader {\n    border-bottom: 1px solid #aaa;\n  }\n}\n"
+module.exports = "@font-face {\n  font-family: ComfortaaLight;\n  src: url('Comfortaa-Light.866333be226453f3a24c.ttf');\n}\n.defaultTextTransition {\n  -webkit-transition: color 200ms ease-in-out;\n  transition: color 200ms ease-in-out;\n}\n.quickAnimation {\n  -webkit-animation-duration: 300ms;\n  animation-duration: 300ms;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.animated-300ms {\n  -webkit-animation-duration: 300ms;\n  animation-duration: 300ms;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.animationFix {\n  -webkit-backface-visibility: hidden;\n  -webkit-transform: translateZ(0) scale(1, 1);\n  transform: translateZ(0);\n}\n.delay-100ms {\n  -webkit-animation-delay: 100ms;\n  animation-delay: 100ms;\n}\n.delay-200ms {\n  -webkit-animation-delay: 200ms;\n  animation-delay: 200ms;\n}\n.delay-300ms {\n  -webkit-animation-delay: 300ms;\n  animation-delay: 300ms;\n}\n.delay-400ms {\n  -webkit-animation-delay: 400ms;\n  animation-delay: 400ms;\n}\n.delay-500ms {\n  -webkit-animation-delay: 500ms;\n  animation-delay: 500ms;\n}\n.delay-600ms {\n  -webkit-animation-delay: 600ms;\n  animation-delay: 600ms;\n}\n.delay-700ms {\n  -webkit-animation-delay: 700ms;\n  animation-delay: 700ms;\n}\n.delay-800ms {\n  -webkit-animation-delay: 800ms;\n  animation-delay: 800ms;\n}\n.delay-900ms {\n  -webkit-animation-delay: 900ms;\n  animation-delay: 900ms;\n}\n.delay-1000ms {\n  -webkit-animation-delay: 1000ms;\n  animation-delay: 1000ms;\n}\n.delay-1100ms {\n  -webkit-animation-delay: 1100ms;\n  animation-delay: 1100ms;\n}\n.delay-1200ms {\n  -webkit-animation-delay: 1200ms;\n  animation-delay: 1200ms;\n}\n.delay-1300ms {\n  -webkit-animation-delay: 1300ms;\n  animation-delay: 1300ms;\n}\n.delay-1400ms {\n  -webkit-animation-delay: 1400ms;\n  animation-delay: 1400ms;\n}\n.delay-1500ms {\n  -webkit-animation-delay: 1500ms;\n  animation-delay: 1500ms;\n}\n.delay-1600ms {\n  -webkit-animation-delay: 1600ms;\n  animation-delay: 1600ms;\n}\n.delay-1700ms {\n  -webkit-animation-delay: 1700ms;\n  animation-delay: 1700ms;\n}\n.active {\n  font-weight: bold;\n  color: black;\n}\n@media screen and (min-width: calc(768px + 1px)) {\n  .travelSiteWrapper {\n    width: 100%;\n    min-height: 100%;\n    display: -ms-grid;\n    display: grid;\n    -ms-grid-rows: auto;\n        grid-template-rows: auto;\n    -ms-grid-columns: 70% 30%;\n        grid-template-columns: 70% 30%;\n        grid-template-areas: \"content timeline\";\n    padding: 0 5%;\n  }\n  .travelSiteWrapper .content-area {\n    -ms-grid-row: 1;\n    -ms-grid-column: 1;\n    grid-area: content;\n  }\n  .travelSiteWrapper .content-area .content-area-header {\n    width: 90%;\n    max-width: 850px;\n    margin-top: 50px;\n    padding-bottom: 8px;\n    border-bottom: 1px solid #aaa;\n  }\n  .travelSiteWrapper .content-area .articles .article {\n    height: 250px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    width: 90%;\n    max-width: 850px;\n    border: 1px solid #DDD;\n    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);\n            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);\n    margin: 30px 0;\n    cursor: pointer;\n    position: relative;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo {\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1;\n    padding: 16px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .article-title {\n    margin-bottom: 16px;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .article-description {\n    overflow: hidden;\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail {\n    width: 250px;\n    height: 250px;\n    background-size: cover;\n    background-repeat: no-repeat;\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-1 {\n    background-image: url('1.ff7f4ce8d17b815b1ba3.jpg');\n  }\n  .travelSiteWrapper .timelineArea {\n    -ms-grid-row: 1;\n    -ms-grid-column: 2;\n    grid-area: timeline;\n  }\n  .travelSiteWrapper .timelineArea .timelineHeader {\n    width: 80%;\n    margin: 50px 0 0 auto;\n    padding-bottom: 8px;\n    border-bottom: 1px solid #aaa;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent {\n    width: 80%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    margin: 20px 0 0 auto;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent:after {\n    content: \"\";\n    width: 11px;\n    height: 11px;\n    background: #5e5e5e;\n    border-radius: 50%;\n    position: relative;\n    left: 19px;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader {\n    padding: 8px;\n    position: relative;\n    cursor: pointer;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:before {\n    opacity: 0;\n    -webkit-transition: opacity 200ms ease-in-out;\n    transition: opacity 200ms ease-in-out;\n    content: \"\";\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:after {\n    content: \"\";\n    opacity: 0;\n    -webkit-transition: opacity 200ms ease-in-out;\n    transition: opacity 200ms ease-in-out;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:hover {\n    color: #000000;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:hover:before {\n    opacity: 1;\n    content: \"- \";\n    position: absolute;\n    left: -3px;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:hover:after {\n    opacity: 1;\n    content: \" -\";\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent {\n    margin-left: 24px;\n    padding-left: 24px;\n    border-left: 1px solid #aaa;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: start;\n        -ms-flex-align: start;\n            align-items: flex-start;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem {\n    margin: 8px;\n    padding: 8px;\n    cursor: pointer;\n    position: relative;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    -webkit-transition: color 200ms ease-in-out;\n    transition: color 200ms ease-in-out;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:before {\n    opacity: 0;\n    -webkit-transition: opacity 200ms ease-in-out;\n    transition: opacity 200ms ease-in-out;\n    content: \"\";\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:after {\n    content: \"\";\n    opacity: 0;\n    -webkit-transition: opacity 200ms ease-in-out, text-shadow 200ms ease-in-out;\n    transition: opacity 200ms ease-in-out, text-shadow 200ms ease-in-out;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:hover {\n    color: #000000;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:hover:before {\n    opacity: 1;\n    content: \"- \";\n    position: absolute;\n    left: -3px;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:hover:after {\n    opacity: 1;\n    content: \" -\";\n  }\n}\n@media screen and (max-width: 768px) {\n  .travelSiteWrapper {\n    padding: 6.5%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n  .travelSiteWrapper .content-area {\n    -webkit-box-ordinal-group: 3;\n        -ms-flex-order: 2;\n            order: 2;\n    margin-top: 30px;\n  }\n  .travelSiteWrapper .content-area .content-area-header {\n    border-bottom: 1px solid #aaa;\n  }\n  .travelSiteWrapper .content-area .articles .article {\n    height: 250px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    border: 1px solid #DDD;\n    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);\n            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);\n    margin: 30px 0;\n    position: relative;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo {\n    -webkit-box-ordinal-group: 2;\n        -ms-flex-order: 1;\n            order: 1;\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1;\n    padding: 8px;\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    background: rgba(255, 255, 255, 0.7);\n    position: absolute;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .article-title {\n    z-index: 1000;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .article-description {\n    overflow: hidden;\n    display: none;\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail {\n    -webkit-box-ordinal-group: 3;\n        -ms-flex-order: 2;\n            order: 2;\n    height: 100%;\n    background-size: cover;\n    background-repeat: no-repeat;\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-1 {\n    background-image: url('1.ff7f4ce8d17b815b1ba3.jpg');\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-2 {\n    background-image: url('5.32447c1a9a87e0147c31.jpg');\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-3 {\n    background-image: url('15.274f144326b7d1f8f989.jpg');\n  }\n  .travelSiteWrapper .content-area .timelineArea {\n    -webkit-box-ordinal-group: 2;\n        -ms-flex-order: 1;\n            order: 1;\n  }\n  .travelSiteWrapper .content-area .timelineArea .timelineHeader {\n    border-bottom: 1px solid #aaa;\n  }\n}\n"
 
 /***/ }),
 
@@ -926,131 +926,128 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var TravelComponent = (function () {
     function TravelComponent() {
+        this.timelineActiveStateArray = [];
     }
     TravelComponent.prototype.ngOnInit = function () {
         this.articles = [];
         this.articleGroups = [];
         this.timelineList = [];
+        this.renderedArticles = [];
         this.initArticles();
         this.initArticleGroups();
         this.sortArticleGroups();
-        this.showArticles(true);
+        console.log(this.timelineActiveStateArray);
     };
     TravelComponent.prototype.timelineYearSelected = function (section) {
-        console.log(section);
-    };
-    TravelComponent.prototype.sortArticleGroups = function () {
-        this.timelineList.push({
-            year: 2018,
-            articleGroups: [this.articleGroups[0], this.articleGroups[1], this.articleGroups[2]]
-        }, {
-            year: 2017,
-            articleGroups: [this.articleGroups[3], this.articleGroups[4]]
-        }, {
-            year: 2016,
-            articleGroups: [this.articleGroups[5]]
-        });
-    };
-    /**
-     *
-     * @param ids ids of the articles that should be shown. Set to true to show all, false to hide all
-     */
-    TravelComponent.prototype.showArticles = function (ids) {
-        if (typeof ids == 'boolean') {
-            if (ids == true) {
-                this.articles.forEach(function (article) {
-                    article.isShown = true;
-                });
-            }
-            else {
-                this.articles.forEach(function (article) {
-                    article.isShown = false;
-                });
-            }
+        var _this = this;
+        this.renderedArticles = [];
+        if (section.year == "Now") {
+            this.renderedArticles = this.articles;
         }
         else {
-            //Hides all articles
-            this.articles.forEach(function (article) {
-                article.isShown = false;
-            });
-            //shows wanted articles
-            this.articles.forEach(function (article) {
-                ids.forEach(function (id) {
-                    if (article.id == id) {
-                        article.isShown = true;
-                    }
-                });
+            section.articleGroups.forEach(function (articleGroup) {
+                _this.renderedArticles = _this.renderedArticles.concat(articleGroup.groupArticles);
             });
         }
+        this.activateNode(section.id);
+    };
+    TravelComponent.prototype.articleGroupSelected = function (articleGroup) {
+        this.renderedArticles = [];
+        this.renderedArticles = this.renderedArticles.concat(articleGroup.groupArticles);
+        this.activateNode(articleGroup.id);
+    };
+    TravelComponent.prototype.activateNode = function (id) {
+        var key;
+        for (key in this.timelineActiveStateArray) {
+            this.timelineActiveStateArray[key] = false;
+            if (key == id) {
+                this.timelineActiveStateArray[key] = true;
+            }
+        }
+    };
+    TravelComponent.prototype.sortArticleGroups = function () {
+        var _this = this;
+        this.timelineList.push({
+            year: 2018,
+            articleGroups: [this.articleGroups[0], this.articleGroups[1], this.articleGroups[2]],
+            id: "0"
+        }, {
+            year: 2017,
+            articleGroups: [this.articleGroups[3], this.articleGroups[4]],
+            id: "1"
+        }, {
+            year: 2016,
+            articleGroups: [this.articleGroups[5]],
+            id: "2"
+        });
+        this.timelineList[0].year = "Now";
+        this.timelineList.forEach(function (section) {
+            _this.timelineActiveStateArray[section.id] = false;
+        });
     };
     TravelComponent.prototype.initArticles = function () {
         this.articles.push({
             articleTitle: "Trip to CDT 1",
-            article: "",
-            isShown: true,
-            id: 0
+            article: ""
         }, {
             articleTitle: "Now on CDT 2",
-            article: "",
-            isShown: true,
-            id: 0
+            article: ""
         }, {
             articleTitle: "Almost done",
-            article: "",
-            isShown: true,
-            id: 0
+            article: ""
         }, {
             articleTitle: "Trip to South Africa",
-            article: "",
-            isShown: true,
-            id: 0
+            article: ""
         }, {
             articleTitle: "Trip to Scotland",
-            article: "",
-            isShown: true,
-            id: 0
+            article: ""
         }, {
             articleTitle: "Trip to Poland",
-            article: "",
-            isShown: true,
-            id: 0
+            article: ""
         }, {
             articleTitle: "Trip to Pyrenees",
-            article: "",
-            isShown: true,
-            id: 0
+            article: ""
         }, {
             articleTitle: "Trip to Norway",
-            article: "",
-            isShown: true,
-            id: 0
+            article: ""
         });
+        this.renderedArticles = this.articles;
     };
     TravelComponent.prototype.initArticleGroups = function () {
+        var _this = this;
         this.articleGroups.push({
             groupName: "CDT",
             groupYear: 2018,
-            groupArticles: [this.articles[0], this.articles[1], this.articles[2]]
+            groupArticles: [this.articles[0], this.articles[1], this.articles[2]],
+            id: "10"
         }, {
             groupName: "South Africa",
             groupYear: 2018,
-            groupArticles: [this.articles[3]]
+            groupArticles: [this.articles[3]],
+            id: "11"
         }, {
             groupName: "Scotland",
             groupYear: 2018,
-            groupArticles: [this.articles[4]]
+            groupArticles: [this.articles[4]],
+            id: "12"
         }, {
             groupName: "Poland",
             groupYear: 2017,
-            groupArticles: [this.articles[5]]
+            groupArticles: [this.articles[5]],
+            id: "13"
         }, {
             groupName: "Pyrenees",
             groupYear: 2017,
-            groupArticles: [this.articles[6]]
+            groupArticles: [this.articles[6]],
+            id: "14"
         }, {
             groupName: "Norway",
             groupYear: 2016,
-            groupArticles: [this.articles[7]]
+            groupArticles: [this.articles[7]],
+            id: "15"
+        });
+        this.articleGroups.forEach(function (articleGroup) {
+            _this.timelineActiveStateArray[articleGroup.id] = false;
         });
     };
     TravelComponent = __decorate([

@@ -5,30 +5,29 @@
         <h2 class="content-area-header  ">Articles</h2>
 
         <div class="articles">
-            <ng-container *ngFor="let article of articles">
-                    <div class="article animated fadeIn" *ngIf="article.isShown">
-                            <div class="article-thumbnail test-article-1"></div>
-                            <div class="articleInfo">
-                                <h3 class="article-title">{{article.articleTitle}}</h3>
-                                <div class="article-description">{{article.article}}</div>
-                            </div>
-                        </div>
-            </ng-container>
-            
+            <div class="article animated fadeIn" *ngFor="let article of renderedArticles">
+                <div class="article-thumbnail test-article-1"></div>
+                <div class="articleInfo">
+                    <h3 class="article-title">{{article.articleTitle}}</h3>
+                    <div class="article-description">{{article.article}}</div>
+                </div>
+            </div>
+
         </div>
-        
+
 
     </div>
     <div class="timelineArea animated slideInRight">
         <h2 class="timelineHeader">Timeline</h2>
         <div class="timelineContent">
             <div class="timelineSection" *ngFor="let timelineSection of timelineList">
-                <div class="timelineSectionHeader" (click)="timelineYearSelected(timelineSection)">{{timelineSection.year}}</div>
+                <div [class.active]="timelineActiveStateArray[timelineSection.id]" class="timelineSectionHeader" (click)="timelineYearSelected(timelineSection)">{{timelineSection.year}}</div>
                 <div class="timelineSectionContent">
-                    <span class="timelineSectionItem" *ngFor="let articleGroupItem of timelineSection.articleGroups">{{articleGroupItem.groupName}}</span>
+                    <span [class.active]="timelineActiveStateArray[articleGroupItem.id]" class="timelineSectionItem" *ngFor="let articleGroupItem of timelineSection.articleGroups"
+                        (click)="articleGroupSelected(articleGroupItem)">{{articleGroupItem.groupName}}</span>
                 </div>
             </div>
         </div>
     </div>
-    
+
 </div>
