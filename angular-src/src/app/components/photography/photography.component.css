@@ -2,6 +2,9 @@
   font-family: ComfortaaLight;
   src: url('assets/fonts/Comfortaa-Light.ttf');
 }
+.defaultTextTransition {
+  transition: color 200ms ease-in-out;
+}
 .quickAnimation {
   -webkit-animation-duration: 300ms;
   animation-duration: 300ms;
@@ -88,7 +91,7 @@
   animation-delay: 1700ms;
 }
 .galleryWrapper {
-  margin: 5% 10% 0;
+  margin: 5% 10%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -139,6 +142,8 @@
 }
 .galleryWrapper .pseudoElement {
   cursor: initial;
+  height: 0px;
+  min-height: 0px;
 }
 @media screen and (max-width: 768px) {
   .galleryWrapper .imagePreviewWrapper {

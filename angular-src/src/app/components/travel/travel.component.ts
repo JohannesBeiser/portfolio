@@ -30,30 +30,30 @@ export class TravelComponent implements OnInit {
 
   articleGroups: iArticleGroup[];
   articles: iArticle[];
-
-  renderedArticles: iArticle[];
-
   timelineList: iTimelineList[];
+  renderedArticles: iArticle[];
   timelineActiveStateArray: any[] = [];
 
   constructor() { }
 
   ngOnInit() {
-    this.articles= [];
-    this.articleGroups= [];
+    this.articles= []; //TODO: remove me when GET from backend
+    this.articleGroups= []; //TODO: remove me when GET from backend
     this.timelineList = [];
     this.renderedArticles= [];
-    this.initArticles();
-    this.initArticleGroups();
-    this.sortArticleGroups();
-    console.log(this.timelineActiveStateArray);
+    this.initArticles(); //TODO: remove me when GET from backend
+    this.initArticleGroups(); // TODO: Remove me when GET remove me when GET from backend
+    this.getArticleGroups();
   }
 
-
+  /**
+   * Applies the filter when a year is chosen in the Timeline
+   * @param section selected section
+   */
   public timelineYearSelected(section : iTimelineList){
     this.renderedArticles = [];
 
-    if(section.year == "Now"){
+    if(section.year == "Now"){// shows all articles if on top Navigation Node  "Now"
       this.renderedArticles = this.articles;
     }else{
       section.articleGroups.forEach(articleGroup => {
@@ -63,13 +63,21 @@ export class TravelComponent implements OnInit {
     this.activateNode(section.id);
    }
 
-  articleGroupSelected(articleGroup: iArticleGroup){
+   /**
+    * Applies the filter for a specific articleGroup
+    * @param articleGroup selected ArticleGroup
+    */
+  private articleGroupSelected(articleGroup: iArticleGroup){
     this.renderedArticles= [];
     this.renderedArticles= this.renderedArticles.concat(articleGroup.groupArticles);
     this.activateNode(articleGroup.id);
   }
 
-  activateNode(id: string){
+  /**
+   * Activates an entry of the Timeline. Section or Node
+   * @param id id of the selected Node
+   */
+  private activateNode(id: string){
     let key;
     for(key in this.timelineActiveStateArray){
       this.timelineActiveStateArray[key]=false;
@@ -79,8 +87,10 @@ export class TravelComponent implements OnInit {
     }
   }
 
-  sortArticleGroups(){
-
+  /**
+   * Will be replaced ba a call GET '/getArticleGroups'
+   */
+  private getArticleGroups(){
       this.timelineList.push(
         {
         year: 2018,
@@ -98,7 +108,9 @@ export class TravelComponent implements OnInit {
           id: "2"
         }  
       )
-      this.timelineList[0].year= "Now"
+      if(this.timelineList.length!= 0){
+        this.timelineList[0].year= "Now"
+      }
 
       this.timelineList.forEach((section)=>{
         this.timelineActiveStateArray[section.id]=false
@@ -106,6 +118,8 @@ export class TravelComponent implements OnInit {
   }
 
 
+
+  //TODO: Gets Remove when GETting from backend
   initArticles(){
     this.articles.push( 
     {
@@ -145,6 +159,7 @@ export class TravelComponent implements OnInit {
     this.renderedArticles= this.articles;
   }
 
+  //TODO: Gets removed when GETting from backend
   initArticleGroups(){
     this.articleGroups.push({
       groupName: "CDT",
