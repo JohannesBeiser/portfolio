@@ -2,6 +2,9 @@
   font-family: ComfortaaLight;
   src: url('assets/fonts/Comfortaa-Light.ttf');
 }
+.defaultTextTransition {
+  transition: color 200ms ease-in-out;
+}
 .quickAnimation {
   -webkit-animation-duration: 300ms;
   animation-duration: 300ms;

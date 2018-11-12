@@ -3,7 +3,7 @@ webpackJsonp(["styles"],{
 /***/ "./node_modules/raw-loader/index.js!./node_modules/postcss-loader/lib/index.js??embedded!./src/styles.css":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n@font-face { font-family: ComfortaaLight; src: url('Comfortaa-Light.866333be226453f3a24c.ttf'); }\r\n\r\nhtml{\r\n  height: 100%;\r\n}\r\n\r\napp-root{\r\n  height: 100%;\r\n  width: 100%;\r\n  min-width: 320px;\r\n}\r\n\r\nbody{\r\n  min-height: 100%;\r\n  width: 100%;\r\n  min-width: 320px;\r\n}\r\n\r\nhtml,body,div,a,li,span{\r\n  font-family: ComfortaaLight;\r\n}\r\n"
+module.exports = "@font-face {\n  font-family: ComfortaaLight;\n  src: url('Comfortaa-Light.866333be226453f3a24c.ttf');\n}\nhtml {\n  height: 100%;\n  width: 100vw;\n  overflow-x: hidden;\n}\napp-root {\n  height: 100%;\n  width: 100%;\n  min-width: 320px;\n}\nbody {\n  min-height: 100%;\n  width: 100%;\n  min-width: 320px;\n}\nhtml,\nbody,\ndiv,\na,\nli,\nspan,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-family: ComfortaaLight;\n  margin: 0;\n  padding: 0;\n}\n"
 
 /***/ }),
 

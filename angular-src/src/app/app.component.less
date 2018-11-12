@@ -14,13 +14,14 @@
         grid-area: navbar;
         position: sticky;
         top: 0;
-        background-color: @backgroundWhite;
+     //   background-color: @backgroundWhite; // why was this here? -->Obsolete
         z-index: 1000;
         transition: top 200ms;
+      //  box-shadow: 0 13px 59px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0,0.01); //More minimalistic without
     }
 
-    .bodyContainerr{
+    .bodyContainer{
         grid-area: body;
-
+        overflow: hidden;
     }
 }

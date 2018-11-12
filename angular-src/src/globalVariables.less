@@ -2,10 +2,29 @@
 
 @defaultFont: ComfortaaLight;
 @textColor: #2b2a29;
+@textColorHover: darken(@textColor, 20%);
+
 @backgroundWhite: white;//#f1ede5;
 @dropdownMenuColor: #d4d2cf; // Mobile menu
 @menuActiveColor: #c3a368;
 @menuActiveColor2: #bfbeba; //used for mobile menu
+
+@defaultBorder: 1px solid #aaa;
+@defaultBorderColor: #aaa;
+@mobileBreakpoint: 768px;
+
+//Padding & Margins
+@paddingSmall: 8px;
+@paddingMedium: 16px;
+@paddingBig: 24px;
+
+.defaultTextTransition{
+    transition: color @defaultHoverDuration ease-in-out;
+}
+
+//Animations
+@defaultHoverDuration: 200ms;
+
 
 .quickAnimation{
     -webkit-animation-duration: 300ms;

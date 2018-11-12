@@ -1,4 +1,4 @@
-<nav class="navBar">
+<nav class="navBar" [class.onHomeSite]="!_compCoService.backgroundVisible">
       <div class="navbar-logo-wrapper fadeIn animated">
         <div class="navbar-logo"  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"  [routerLink]="['/']">
           <div class="logoJ animated fadeIn"></div>
@@ -29,7 +29,7 @@
           <div (click)="toggleDropdownMenu()" class="menuEntry" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"  [routerLink]="['/work']">Work</div>
       </div>
 
-
+<div class="homeImageFadeHeader" *ngIf="!_compCoService.backgroundVisible"></div>
 
       <!-- <a class="navbar-brand" href="#">Johannes Beiser</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">

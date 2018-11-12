@@ -67,12 +67,12 @@ export class PhotographyComponent implements OnInit {
     this.pictures.push({
       'path' : "../../../assets/pictures/"+ (3) + ".jpg",
       'description': "Norway - Jotunheimen",
-      'animationDelay' : "delay-300ms"
+      'animationDelay' : "delay-200ms"
     });
     this.pictures.push({
       'path' : "../../../assets/pictures/"+ (2) + ".jpg",
       'description': "Japan - Tokyo",
-      'animationDelay' : "delay-200ms"
+      'animationDelay' : "delay-300ms"
     });
     this.pictures.push({
       'path' : "../../../assets/pictures/"+ (10) + ".jpg",
@@ -97,12 +97,12 @@ export class PhotographyComponent implements OnInit {
     this.pictures.push({
       'path' : "../../../assets/pictures/"+ (6) + ".jpg",
       'description': "New Zealand - Canterbury",
-      'animationDelay' : "delay-900ms"
+      'animationDelay' : "delay-800ms"
     });
     this.pictures.push({
       'path' : "../../../assets/pictures/"+ (5) + ".jpg",
       'description': "Norway - Jotunheimen",
-      'animationDelay' : "delay-800ms"
+      'animationDelay' : "delay-900ms"
     });
     this.pictures.push({
       'path' : "../../../assets/pictures/"+ (7) + ".jpg",
@@ -115,8 +115,8 @@ export class PhotographyComponent implements OnInit {
       'animationDelay' : "delay-1s"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (9) + ".jpg",
-      'description': "Philippines - Panglao Island",
+      'path' : "../../../assets/pictures/"+ (20) + ".jpg",
+      'description': "South Africa",
       'animationDelay' : "delay-1s"
     });
     this.pictures.push({
@@ -155,8 +155,8 @@ export class PhotographyComponent implements OnInit {
       'animationDelay' : "delay-1s"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (20) + ".jpg",
-      'description': "Philippines",
+      'path' : "../../../assets/pictures/"+ (9) + ".jpg",
+      'description': "Philippines - Panglao Island",
       'animationDelay' : "delay-1s"
     });
     this.pictures.push({

@@ -2,6 +2,9 @@
   font-family: ComfortaaLight;
   src: url('assets/fonts/Comfortaa-Light.ttf');
 }
+.defaultTextTransition {
+  transition: color 200ms ease-in-out;
+}
 .quickAnimation {
   -webkit-animation-duration: 300ms;
   animation-duration: 300ms;
@@ -100,10 +103,10 @@
   grid-area: navbar;
   position: sticky;
   top: 0;
-  background-color: white;
   z-index: 1000;
   transition: top 200ms;
 }
-.layoutWrapper .bodyContainerr {
+.layoutWrapper .bodyContainer {
   grid-area: body;
+  overflow: hidden;
 }

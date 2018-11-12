@@ -1,20 +1,35 @@
-
-@font-face { font-family: ComfortaaLight; src: url('assets/fonts/Comfortaa-Light.ttf'); }
-
-html{
-  height: 100%;
+@font-face {
+  font-family: ComfortaaLight;
+  src: url('assets/fonts/Comfortaa-Light.ttf');
 }
-app-root{
+html {
+  height: 100%;
+  width: 100vw;
+  overflow-x: hidden;
+}
+app-root {
   height: 100%;
   width: 100%;
   min-width: 320px;
 }
-body{
+body {
   min-height: 100%;
   width: 100%;
   min-width: 320px;
 }
-
-html,body,div,a,li,span{
+html,
+body,
+div,
+a,
+li,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: ComfortaaLight;
+  margin: 0;
+  padding: 0;
 }

@@ -3,7 +3,7 @@
 
 
 .galleryWrapper{
-        margin: 5% 10% 0;
+        margin: 5% 10%;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -58,10 +58,12 @@
         }
         .pseudoElement{
             cursor: initial;
+            height: 0px;
+            min-height: 0px;
         }
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: @mobileBreakpoint){
     .galleryWrapper{
         .imagePreviewWrapper{
             width: unset; 

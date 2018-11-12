@@ -1,8 +1,20 @@
 @import '../../../globalVariables.less';
 
-.home-wrapper{
-    height: 100%;
+.navbarContainer{
+    opacity: 0.1 !important;
+}
 
+.home-wrapper{
+    height: ~'calc(100vh - 100px)';
+    background-image: ~'url("../../../assets/images/frontPageImage.jpg")';
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position-x: center;
+    background-position-y: top;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
 
     .interactiveMenu{
         width: 600px;
