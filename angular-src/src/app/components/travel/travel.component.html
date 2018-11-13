@@ -12,22 +12,31 @@
                     <div class="article-description">{{article.article}}</div>
                 </div>
             </div>
-
         </div>
-
-
     </div>
     <div class="timelineArea animated slideInRight">
         <h2 class="timelineHeader">Timeline</h2>
         <div class="timelineContent">
             <div class="timelineSection" *ngFor="let timelineSection of timelineList">
-                <div [class.active]="timelineActiveStateArray[timelineSection.id]" class="timelineSectionHeader" (click)="timelineYearSelected(timelineSection)">{{timelineSection.year}}</div>
+                <div  class="timelineSectionHeader" [class.active]="timelineActiveStateArray[timelineSection._id]" (click)="timelineYearSelected(timelineSection)">{{timelineSection._id}}</div>
                 <div class="timelineSectionContent">
-                    <span [class.active]="timelineActiveStateArray[articleGroupItem.id]" class="timelineSectionItem" *ngFor="let articleGroupItem of timelineSection.articleGroups"
-                        (click)="articleGroupSelected(articleGroupItem)">{{articleGroupItem.groupName}}</span>
+                    <span class="timelineSectionItem" [class.active]="timelineActiveStateArray[articleGroupItem.articleGroup]" (click)="articleGroupSelected(articleGroupItem)" *ngFor="let articleGroupItem of timelineSection.articleGroups">
+                        {{articleGroupItem.articleGroup}}
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 
 </div>
+
+
+<!-- 
+
+ UND  FÜR .timelineSectionHeader
+
+
+  UND FÜR .timelineSectionItem
+
+
+-->

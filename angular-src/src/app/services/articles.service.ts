@@ -28,4 +28,9 @@ export class ArticlesService {
     return this.http.post('articles/addArticle', article, {headers: headers})
       .map(res => res.json());
   }
+
+  public getGroupedArticles(){
+    return this.http.get('articles/loadGroupedArticles').map(res => res.json());
+  }
+
 }

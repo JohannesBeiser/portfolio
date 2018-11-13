@@ -5,28 +5,32 @@ const Article = require('../models/article');
 
 
 
-router.post('/addArticle', (req,res,next)=>{
-    console.log("willAddArticle");
-    
+router.post('/addArticle', (req,res,next)=>{    
     let newArticle = new Article({
         articleTitle: req.body.articleTitle,
         articleContent: req.body.articleContent,
         articleDate: req.body.articleDate,
         group: req.body.group
     });
-    console.log("article created");
     
     Article.addArticle(newArticle, (err, article) =>{
         if(err){
-            console.log("article NOT ADDDED !!");
-
             res.json({success: false, msg: "Failed to add the Article"});
-        }else{
-            console.log("articleAdded Success!!");
-            
+        }else{            
             res.json({success: true, msg: "Article added"});
         }
     });
 });
 
+router.get('/loadGroupedArticles', (req,res,next)=>{
+    Article.getGroupedArticles((err, result)=>{
+        if(err){
+            res.json({success: false, msg: "Couldn't load Articles"})
+        }else{
+            res.json({success:true, msg:"Articles loaded", articles: result})
+        }
+    })
+})
+
+router
 module.exports = router;

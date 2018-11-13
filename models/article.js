@@ -31,12 +31,37 @@ module.exports.addArticle = function(newArticle, callback) {
 
 module.exports.getGroupedArticles = function(callback){
     // return with the right query
-    let query
     Article.aggregate(
-      [ { $group : { _id : "$item" } } ]
-    )
-    
-
+      [
+        {
+         "$group":{
+           "_id": {
+             "year": "$articleDate.year",
+             "articleGroup": "$group",
+            },
+            "articles": {
+              "$push": {
+                "articleTitle": "$articleTitle",
+                "articleContent": "$articleContent",
+                "articleDate": "$articleDate",
+                "articleGroup": "$group"
+              }
+            }
+          }
+        },
+        { 
+          "$group": {
+          "_id": "$_id.year",
+          "articleGroups": {
+            "$push": {
+              "articleGroup": "$_id.articleGroup",
+              "articles": "$articles"
+            }
+          }
+        }
+      }
+    ],callback)
+  }
    //db.articles.aggregate([{$group:{_id:"$articleDate.year",articleGroups:{$push: "$$ROOT"}}}],callback).pretty()
 
 
@@ -44,7 +69,7 @@ module.exports.getGroupedArticles = function(callback){
   // db.articles.aggregate([{$group : {_id: "$group", articles: {$push: "$$ROOT"}}}]).pretty()
 
   //db.articles.aggregate([{$group: {_id:{articleGroups: "$group",yearGroup: "$articleDate.year"},articles: {$push: "$$ROOT"}},$group: {_id: {yearGroup: "$_id.yearGroup"},articleGroups: {$push: {articleGroups: "$_id.articleGroups",articles: "$articles"}}}}])
-    }
+    
 
 /*
     //position in age     age= yearGroup position = articleGroup
