@@ -28,11 +28,12 @@ export interface iTimelineList{
 })
 export class TravelComponent implements OnInit {
 
-  articleGroups: iArticleGroup[];
-  articles: iArticle[];
-  timelineList: iTimelineList[];
-  renderedArticles: iArticle[];
-  timelineActiveStateArray: any[] = [];
+  private articleGroups: iArticleGroup[];
+  private articles: iArticle[];
+  private timelineList: iTimelineList[];
+  private renderedArticles: iArticle[];
+  private timelineActiveStateArray: any[] = [];
+  private selectedArticleGroup: String = "";
 
   constructor() { }
 
@@ -55,10 +56,12 @@ export class TravelComponent implements OnInit {
 
     if(section.year == "Now"){// shows all articles if on top Navigation Node  "Now"
       this.renderedArticles = this.articles;
+      this.selectedArticleGroup="";
     }else{
       section.articleGroups.forEach(articleGroup => {
         this.renderedArticles = this.renderedArticles.concat(articleGroup.groupArticles)
       });
+      this.selectedArticleGroup=" - "+ section.year;    
     }
     this.activateNode(section.id);
    }
@@ -71,6 +74,8 @@ export class TravelComponent implements OnInit {
     this.renderedArticles= [];
     this.renderedArticles= this.renderedArticles.concat(articleGroup.groupArticles);
     this.activateNode(articleGroup.id);
+    this.selectedArticleGroup = " - " + articleGroup.groupName;
+    
   }
 
   /**
