@@ -20,8 +20,6 @@ const multer = require('multer');
 
 //Setting up storage engine
 
-
-
 // Connect To Database (OLD CODE)
 mongoose.connect(config.database, { useMongoClient: true});
 // On Connection
@@ -37,7 +35,6 @@ const app = express();
 
 const users = require('./routes/users');
 const articles = require('./routes/articles');
-
 
 // Port Number
 const port = process.env.PORT || 8080;

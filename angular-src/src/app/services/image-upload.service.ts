@@ -11,10 +11,7 @@ export class ImageUploadService {
 
     const fd = new FormData();
     fd.append('imageData', image, image.name)
-    console.log("Formdata is: ");
+    return this.http.post('/uploadFile',fd);
 
-    this.http.post('/uploadFile',fd).subscribe(res=>{
-      console.log(res);      
-    })   
   }
 }

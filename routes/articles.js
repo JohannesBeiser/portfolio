@@ -10,8 +10,10 @@ router.post('/addArticle', (req,res,next)=>{
         articleTitle: req.body.articleTitle,
         articleContent: req.body.articleContent,
         articleDate: req.body.articleDate,
-        group: req.body.group
+        group: req.body.group,
+        thumbnailURL: req.body.thumbnailURL
     });
+    console.log(newArticle);
     
     Article.addArticle(newArticle, (err, article) =>{
         if(err){

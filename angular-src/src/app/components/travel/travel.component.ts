@@ -71,6 +71,8 @@ export class TravelComponent implements OnInit {
     this._articleService.getGroupedArticles().subscribe((articleResponseObject) => {
       this.timelineList = articleResponseObject.articles; 
       this.articlesLoaded();
+      console.log(this.timelineList);
+      
     }, (err) => {
       console.log(err);
       return false;

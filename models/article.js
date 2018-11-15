@@ -20,6 +20,10 @@ const ArticleSchema = mongoose.Schema ({
   group: { // Refers to the ArticleGroup Name/ID
     type: String,
     required: true
+  },
+  thumbnailURL: {
+    type: String,
+    required: true
   }
 });
 
@@ -44,7 +48,8 @@ module.exports.getGroupedArticles = function(callback){
                 "articleTitle": "$articleTitle",
                 "articleContent": "$articleContent",
                 "articleDate": "$articleDate",
-                "articleGroup": "$group"
+                "articleGroup": "$group",
+                "thumbnailURL": "$thumbnailURL"
               }
             }
           }
