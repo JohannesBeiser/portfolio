@@ -22,6 +22,7 @@ import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
+import { ImageUploadService } from "./services/image-upload.service";
 import { ArticlesService } from "./services/articles.service";
 import { CompCommunicationService  } from './services/comp-communication.service';
 import { ValidateService } from './services/validate.service';
@@ -65,7 +66,7 @@ const appRoutes: Routes =  [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule.forRoot()
   ],
-  providers: [ValidateService, AuthService, AuthGuard, ModalService, CompCommunicationService, ArticlesService],
+  providers: [ValidateService, AuthService, AuthGuard, ModalService, CompCommunicationService, ArticlesService,ImageUploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
