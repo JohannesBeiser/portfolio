@@ -5,6 +5,7 @@ const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./config/database');
+const multer = require('multer');
 
 // Connect To Database (NEW) But not working!!!!!!!!!! (because of secret in db.js!!!!!)
 //const db = require('./config/database');
@@ -17,6 +18,7 @@ const config = require('./config/database');
 //.then(() => console.log('MongoDB Connected...'))
 //.catch(err => console.log(err));
 
+//Setting up storage engine
 
 // Connect To Database (OLD CODE)
 mongoose.connect(config.database, { useMongoClient: true});
@@ -33,7 +35,6 @@ const app = express();
 
 const users = require('./routes/users');
 const articles = require('./routes/articles');
-
 
 // Port Number
 const port = process.env.PORT || 8080;
@@ -63,6 +64,57 @@ app.get('/', (req, res) => {
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
+});
+
+//File Upload
+
+const storage = multer.diskStorage({
+  destination: './public/assets/uploads/',
+  filename: function(req, file, cb){
+    cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({
+  storage: storage,
+  limits:{fileSize: 100000000},
+  fileFilter: function(req, file, cb){
+    checkFileType(file, cb);
+  }
+}).single('imageData');
+
+// Check File Type
+function checkFileType(file, cb){
+  // Allowed ext
+  const filetypes = /jpeg|jpg|png|gif/;
+  // Check ext
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  // Check mime
+  const mimetype = filetypes.test(file.mimetype);
+
+  if(mimetype && extname){
+    return cb(null,true);
+  } else {
+    cb('Error: Images Only!');
+  }
+}
+
+app.post('/uploadFile', (req, res) => {
+  console.log("Endpoint reached");
+  
+  upload(req, res, (err) => {
+    if(err){
+      res.json({success: false, msg: "An Error occured", error: err})
+    } else {
+      if(req.file == undefined){
+        res.json({success: false, msg: "An Error occured - req.file is undefined"})
+      } else {
+        //now post the images path and name to mongodb
+
+        res.json({success: true, msg: "Upload successful", file: req.file})        
+      }
+    }
+  });
 });
 
 // Start Server

@@ -90,77 +90,33 @@
   -webkit-animation-delay: 1700ms;
   animation-delay: 1700ms;
 }
-.galleryWrapper {
-  margin: 5% 2%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.galleryWrapper .imagePreviewWrapper {
-  width: 30%;
-  min-width: 290px;
-  height: 15vw;
-  min-height: 200px;
-  margin: 5px;
-  overflow: hidden;
-  cursor: pointer;
-  position: relative;
-}
-.galleryWrapper .imagePreviewWrapper:hover .picture {
-  opacity: 0.85;
-}
-.galleryWrapper .imagePreviewWrapper:hover .hoverOverlay {
-  display: flex;
-}
-.galleryWrapper .imagePreviewWrapper .picture {
-  opacity: 1;
-  transition: opacity 200ms ease-in-out;
-  width: 100%;
-  min-height: 100%;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.galleryWrapper .imagePreviewWrapper .hoverOverlay {
-  position: absolute;
-  bottom: 0;
+.modal-view-content {
+  position: fixed;
+  top: 0;
   left: 0;
   width: 100%;
-  height: 50px;
-  background: rgba(0, 0, 0, 0.75);
-  display: none;
-  -webkit-animation-duration: 300ms;
-  animation-duration: 300ms;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
   align-items: center;
+  justify-content: center;
+  z-index: 4000;
 }
-.galleryWrapper .imagePreviewWrapper .hoverOverlay .description {
-  text-align: center;
-  margin: 0 auto;
-  color: #eee;
+.modal-view-content .modal-view-body {
+  width: 80%;
+  height: 90%;
+  background: white;
+  position: relative;
+  padding: 16px;
 }
-.galleryWrapper .pseudoElement {
-  cursor: initial;
-  height: 0px;
-  min-height: 0px;
+.modal-view-content .modal-view-body .closeIcon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 8px;
+  cursor: pointer;
+  transition: transform 200ms ease-in-out;
 }
-@media screen and (max-width: 768px) {
-  .galleryWrapper .imagePreviewWrapper {
-    width: unset;
-    height: unset;
-    min-height: unset;
-    cursor: initial;
-  }
-  .galleryWrapper .imagePreviewWrapper .picture {
-    min-height: unset;
-    top: unset;
-    transform: unset;
-  }
-  .galleryWrapper .imagePreviewWrapper:hover .picture {
-    opacity: 1;
-  }
-  .galleryWrapper .imagePreviewWrapper:hover .hoverOverlay {
-    display: none;
-  }
+.modal-view-content .modal-view-body .closeIcon:hover {
+  transform: rotate(90deg);
 }

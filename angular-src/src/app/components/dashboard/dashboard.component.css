@@ -1,0 +1,7 @@
+.submitButton {
+  cursor: pointer;
+  background: green;
+  padding: 8px;
+  width: 300px;
+  color: black;
+}

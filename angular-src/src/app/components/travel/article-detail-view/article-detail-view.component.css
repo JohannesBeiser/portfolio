@@ -90,77 +90,20 @@
   -webkit-animation-delay: 1700ms;
   animation-delay: 1700ms;
 }
-.galleryWrapper {
-  margin: 5% 2%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.detail-view-wrapper .articleHeader {
+  width: 90%;
+  border-bottom: 1px solid #aaa;
+  margin: 50px 0 30px;
 }
-.galleryWrapper .imagePreviewWrapper {
-  width: 30%;
-  min-width: 290px;
-  height: 15vw;
-  min-height: 200px;
-  margin: 5px;
-  overflow: hidden;
+.detail-view-wrapper .articleHeader .close-detailView-button {
   cursor: pointer;
-  position: relative;
 }
-.galleryWrapper .imagePreviewWrapper:hover .picture {
-  opacity: 0.85;
+.detail-view-wrapper .articleHeader .headerText {
+  margin-left: 20px;
+  color: #2b2a29;
+  font-size: 1.75rem;
 }
-.galleryWrapper .imagePreviewWrapper:hover .hoverOverlay {
-  display: flex;
-}
-.galleryWrapper .imagePreviewWrapper .picture {
-  opacity: 1;
-  transition: opacity 200ms ease-in-out;
-  width: 100%;
-  min-height: 100%;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.galleryWrapper .imagePreviewWrapper .hoverOverlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  background: rgba(0, 0, 0, 0.75);
-  display: none;
-  -webkit-animation-duration: 300ms;
-  animation-duration: 300ms;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  align-items: center;
-}
-.galleryWrapper .imagePreviewWrapper .hoverOverlay .description {
-  text-align: center;
-  margin: 0 auto;
-  color: #eee;
-}
-.galleryWrapper .pseudoElement {
-  cursor: initial;
-  height: 0px;
-  min-height: 0px;
-}
-@media screen and (max-width: 768px) {
-  .galleryWrapper .imagePreviewWrapper {
-    width: unset;
-    height: unset;
-    min-height: unset;
-    cursor: initial;
-  }
-  .galleryWrapper .imagePreviewWrapper .picture {
-    min-height: unset;
-    top: unset;
-    transform: unset;
-  }
-  .galleryWrapper .imagePreviewWrapper:hover .picture {
-    opacity: 1;
-  }
-  .galleryWrapper .imagePreviewWrapper:hover .hoverOverlay {
-    display: none;
-  }
+.detail-view-wrapper .articleContent {
+  width: 90%;
+  padding: 8px;
 }

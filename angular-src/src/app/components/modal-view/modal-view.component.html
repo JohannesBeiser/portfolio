@@ -1,0 +1,6 @@
+<div class="modal-view-content" (click)="closeModal()">
+    <div class="modal-view-body animated zoomIn quickAnimation" (click)="innerAreaClicked($event)">
+        <ng-content></ng-content>
+        <i class="material-icons closeIcon" (click)="closeModal()">close</i>
+    </div>
+</div>

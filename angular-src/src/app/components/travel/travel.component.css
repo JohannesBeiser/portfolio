@@ -125,26 +125,82 @@
     cursor: pointer;
     position: relative;
   }
+  .travelSiteWrapper .content-area .articles .article .wrapper {
+    background: grey;
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .travelSiteWrapper .content-area .articles .article .wrapper .header {
+    background: steelblue;
+    width: 100%;
+    display: flex;
+    padding: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+  .travelSiteWrapper .content-area .articles .article .wrapper .header .title {
+    background: orange;
+    font-size: 1.6rem;
+  }
+  .travelSiteWrapper .content-area .articles .article .wrapper .header .date {
+    background: limegreen;
+    margin: 16px;
+    margin-left: auto;
+  }
+  .travelSiteWrapper .content-area .articles .article .wrapper .content {
+    background: #444;
+    width: 100%;
+  }
   .travelSiteWrapper .content-area .articles .article .articleInfo {
     flex: 1;
-    padding: 16px;
+    margin: 16px;
+    overflow: hidden;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
   }
-  .travelSiteWrapper .content-area .articles .article .articleInfo .article-title {
+  .travelSiteWrapper .content-area .articles .article .articleInfo .articleHeader {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
     margin-bottom: 16px;
+  }
+  .travelSiteWrapper .content-area .articles .article .articleInfo .articleHeader .article-title {
+    width: 100%;
+    font-size: 1.4rem;
+  }
+  .travelSiteWrapper .content-area .articles .article .articleInfo .articleHeader .article-title .editButton {
+    margin-left: 20px;
+    transition: transform 100ms ease-in-out;
+  }
+  .travelSiteWrapper .content-area .articles .article .articleInfo .articleHeader .article-title .editButton:hover {
+    transform: scale(1.2);
+  }
+  .travelSiteWrapper .content-area .articles .article .articleInfo .articleHeader .article-date {
+    width: 100%;
+    margin-top: 8px;
+    margin-left: auto;
   }
   .travelSiteWrapper .content-area .articles .article .articleInfo .article-description {
     overflow: hidden;
+    width: 100%;
+    max-height: 9em;
+    position: relative;
+  }
+  .travelSiteWrapper .content-area .articles .article .articleInfo .article-description:after {
+    content: "...";
+    position: absolute;
+    right: 8px;
+    bottom: 0;
   }
   .travelSiteWrapper .content-area .articles .article .article-thumbnail {
     width: 250px;
-    height: 250px;
+    height: 100%;
     background-size: cover;
     background-repeat: no-repeat;
-  }
-  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-1 {
-    background-image: url("../../../assets/pictures/1.jpg");
   }
   .travelSiteWrapper .timelineArea {
     grid-area: timeline;
@@ -242,6 +298,20 @@
     opacity: 1;
     content: " -";
   }
+  .travelSiteWrapper .editViewContentWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .travelSiteWrapper .editViewContentWrapper .inputItem,
+  .travelSiteWrapper .editViewContentWrapper .submitEditButton {
+    margin: 16px;
+  }
+  .travelSiteWrapper .editViewContentWrapper .submitEditButton {
+    width: 100px;
+    background: #6FAC01;
+    padding: 8px;
+    cursor: pointer;
+  }
 }
 @media screen and (max-width: 768px) {
   .travelSiteWrapper {
@@ -287,15 +357,6 @@
     height: 100%;
     background-size: cover;
     background-repeat: no-repeat;
-  }
-  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-1 {
-    background-image: url("../../../assets/pictures/1.jpg");
-  }
-  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-2 {
-    background-image: url("../../../assets/pictures/5.jpg");
-  }
-  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-3 {
-    background-image: url("../../../assets/pictures/15.jpg");
   }
   .travelSiteWrapper .content-area .timelineArea {
     order: 1;

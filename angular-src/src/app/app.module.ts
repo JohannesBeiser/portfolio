@@ -14,7 +14,7 @@ import { TravelComponent } from './components/travel/travel.component';
 import { WorkComponent } from './components/work/work.component';
 import { ModalComponent } from './components/modal/modal.component';
 
-
+// Page Components
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -22,6 +22,14 @@ import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
+//Sub-Components
+import { ArticleDetailViewComponent } from './components/travel/article-detail-view/article-detail-view.component';
+
+//Web Components
+import { ModalViewComponent } from './components/modal-view/modal-view.component';
+
+// Services
+import { ImageUploadService } from "./services/image-upload.service";
 import { ArticlesService } from "./services/articles.service";
 import { CompCommunicationService  } from './services/comp-communication.service';
 import { ValidateService } from './services/validate.service';
@@ -55,7 +63,9 @@ const appRoutes: Routes =  [
     RegisterComponent,
     HomeComponent,
     DashboardComponent,
-    ProfileComponent
+    ProfileComponent,
+    ArticleDetailViewComponent,
+    ModalViewComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +75,7 @@ const appRoutes: Routes =  [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule.forRoot()
   ],
-  providers: [ValidateService, AuthService, AuthGuard, ModalService, CompCommunicationService, ArticlesService],
+  providers: [ValidateService, AuthService, AuthGuard, ModalService, CompCommunicationService, ArticlesService,ImageUploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

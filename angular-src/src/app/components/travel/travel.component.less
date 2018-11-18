@@ -34,25 +34,95 @@
                     margin: 30px 0;
                     cursor: pointer;
                     position: relative;
+
+
+                    .wrapper{
+                        background: grey;
+                        width: 100%;
+                        max-width: 800px;
+                        display: flex;
+                        flex-wrap: wrap;
+                        
+                        .header{
+                          background: steelblue;
+                          width: 100%;
+                          display: flex;
+                          padding: 8px;
+                          align-items: center;
+                          flex-wrap: wrap;
+                          margin-bottom: 30px;
+                          
+                          .title{
+                            background:orange;
+                            font-size: 1.6rem;
+                          }
+                          .date{
+                            background: limegreen;
+                            margin: 16px;
+                            margin-left: auto;
+                          }
+                        }
+                        .content{
+                          background: #444;
+                          width: 100%;
+                        }
+                      }
+
+
                     .articleInfo {
                         flex: 1;
-                        padding: 16px;
+                        margin: 16px;
+                        overflow: hidden;
                         display: flex;
-                        flex-direction: column;
-                        .article-title {
+                        flex-wrap: wrap;
+
+
+                        .articleHeader{
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            flex-wrap: wrap;
                             margin-bottom: 16px;
+
+                            .article-title {
+                                width: 100%;
+                                font-size: 1.4rem;
+
+                                .editButton{
+                                    margin-left: 20px;
+                                    transition: transform 100ms ease-in-out;
+                                    &:hover{
+                                        transform: scale(1.2);
+                                    }
+                                }
+                            }
+                            .article-date{
+                                width: 100%;
+                                margin-top: 8px;
+                                margin-left: auto;
+                            }
                         }
+
                         .article-description {
                             overflow: hidden;
+                            width: 100%;
+                            max-height: 9em;
+                            position: relative;
+                            &:after{
+                                content: "...";
+                                position: absolute;
+                                right: 8px;
+                                bottom: 0;
+                            }
                         }
                     }
                     .article-thumbnail {
                         width: 250px;
-                        height: 250px;
+                        height: 100%;
                         background-size: cover;
                         background-repeat: no-repeat;
                         &.test-article-1 {
-                            background-image: ~'url("../../../assets/pictures/1.jpg")';
+                           // background-image: ~'url("../../../assets/pictures/1.jpg")';
                         }
                     }
                 }
@@ -159,6 +229,21 @@
                 }
             }
         }
+
+
+        .editViewContentWrapper{
+            display: flex;
+            flex-direction: column;
+            .inputItem, .submitEditButton{
+                margin: 16px;
+            }
+            .submitEditButton{
+                width: 100px;
+                background: #6FAC01;
+                padding: 8px;
+                cursor: pointer;
+            }
+        }
     }
 }
 
@@ -191,6 +276,7 @@
                         flex-direction: column;
                         background: rgba(255, 255, 255, 0.7);
                         position: absolute;
+                        
                         .article-title {
                             z-index: 1000;
                         }
@@ -205,14 +291,9 @@
                         background-size: cover;
                         background-repeat: no-repeat;
                         &.test-article-1 {
-                            background-image: ~'url("../../../assets/pictures/1.jpg")';
+                            //background-image: ~'url("../../../assets/pictures/1.jpg")';
                         }
-                        &.test-article-2 {
-                            background-image: ~'url("../../../assets/pictures/5.jpg")';
-                        }
-                        &.test-article-3 {
-                            background-image: ~'url("../../../assets/pictures/15.jpg")';
-                        }
+                       
                     }
                 }
             }

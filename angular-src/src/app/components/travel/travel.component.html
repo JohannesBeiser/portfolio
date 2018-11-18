@@ -1,33 +1,54 @@
 <div class="travelSiteWrapper">
+    <!-- Dynamic Content Area -->
+    <modal-view class="editView" (closing)="closeModal()" *ngIf="editModalActive && articleToEdit">
+        <div class="editViewContentWrapper">
+            <input class="inputItem" type="text" [(ngModel)]="articleToEdit.articleTitle">
+            <textarea class="inputItem" type="text" [(ngModel)]="articleToEdit.articleContent"></textarea>
+            <input class="inputItem" type="date" [(ngModel)]="articleToEdit.articleDate.fullDate">
+            <input class="inputItem" type="text" [(ngModel)]="articleToEdit.articleGroup">
 
-    <div class="content-area animated slideInLeft ">
-
-        <h2 class="content-area-header  ">Articles</h2>
-
-        <div class="articles">
-            <div class="article animated fadeIn" *ngFor="let article of renderedArticles">
-                <div class="article-thumbnail test-article-1"></div>
-                <div class="articleInfo">
-                    <h3 class="article-title">{{article.articleTitle}}</h3>
-                    <div class="article-description">{{article.article}}</div>
-                </div>
-            </div>
-
+            <div class="submitEditButton" (click)="submitEdit()">Submit</div>
         </div>
 
+    </modal-view>
 
+    <article-detail-view class="animated fadeIn" *ngIf="chosenArticle && detailViewShown" [article]="chosenArticle"
+        (detailViewClosing)="closeDetailView($event)"></article-detail-view>
+
+    <!-- Static Content Area -->
+
+    <div class="content-area animated slideInLeft" *ngIf="!detailViewShown">
+
+        <h2 class="content-area-header">Articles <span class="articleGroupSoecification">{{selectedArticleGroup}}</span></h2>
+
+        <div class="articles">
+            <div (click)="showDetailView(article)" class="article animated fadeIn" *ngFor="let article of renderedArticles">
+                <div class="article-thumbnail" [ngStyle]="{ 'background-image': 'url(' + article.thumbnailURL + ')'}"></div>
+                <div class="articleInfo">
+                    <div class="articleHeader">
+                        <div class="article-title">{{article.articleTitle}} <i (click)="editArticle($event, article)"
+                                *ngIf="_authService.loggedIn()" class="material-icons editButton">edit</i></div>
+                        <span class="article-date">{{article.articleDate.fullDate}}</span>
+                    </div>
+
+                    <div class="article-description" [innerHTML]="article.articleContent"></div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="timelineArea animated slideInRight">
         <h2 class="timelineHeader">Timeline</h2>
         <div class="timelineContent">
             <div class="timelineSection" *ngFor="let timelineSection of timelineList">
-                <div [class.active]="timelineActiveStateArray[timelineSection.id]" class="timelineSectionHeader" (click)="timelineYearSelected(timelineSection)">{{timelineSection.year}}</div>
+                <div class="timelineSectionHeader" [class.active]="timelineActiveStateArray[timelineSection._id]"
+                    (click)="timelineYearSelected(timelineSection)">{{timelineSection._id}}</div>
                 <div class="timelineSectionContent">
-                    <span [class.active]="timelineActiveStateArray[articleGroupItem.id]" class="timelineSectionItem" *ngFor="let articleGroupItem of timelineSection.articleGroups"
-                        (click)="articleGroupSelected(articleGroupItem)">{{articleGroupItem.groupName}}</span>
+                    <span class="timelineSectionItem" [class.active]="timelineActiveStateArray[articleGroupItem.articleGroup]"
+                        (click)="articleGroupSelected(articleGroupItem)" *ngFor="let articleGroupItem of timelineSection.articleGroups">
+                        {{articleGroupItem.articleGroup}}
+                    </span>
                 </div>
             </div>
         </div>
     </div>
-
 </div>

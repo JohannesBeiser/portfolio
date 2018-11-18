@@ -20,10 +20,32 @@ const ArticleSchema = mongoose.Schema ({
   group: { // Refers to the ArticleGroup Name/ID
     type: String,
     required: true
+  },
+  thumbnailURL: {
+    type: String,
+    required: true
   }
 });
 
 const Article = module.exports = mongoose.model('Article', ArticleSchema);
+
+module.exports.getArticleById = function(id, callback) {
+  Article.findById(id, callback);
+}
+
+module.exports.editArticle=function(id, updatedArticle, callback){
+  Article.update(
+    { _id: id},
+    {$set: {
+      'articleTitle' : updatedArticle.title,
+      'articleContent' : updatedArticle.content,
+     /* 'articleDate.fullDate' : updatedArticle.date.fullDate,
+      'articleDate.year': updatedArticle.date.year,*/
+      'group' : updatedArticle.group }
+    },callback
+  )
+}
+
 
 module.exports.addArticle = function(newArticle, callback) {
     newArticle.save(callback);
@@ -31,12 +53,42 @@ module.exports.addArticle = function(newArticle, callback) {
 
 module.exports.getGroupedArticles = function(callback){
     // return with the right query
-    let query
     Article.aggregate(
-      [ { $group : { _id : "$item" } } ]
-    )
-    
-
+      [
+        {
+         "$group":{
+           "_id": {
+             "year": "$articleDate.year",
+             "articleGroup": "$group",
+            },
+            "articles": {
+              "$push": {
+                "id": "$_id",
+                "articleTitle": "$articleTitle",
+                "articleContent": "$articleContent",
+                "articleDate": "$articleDate",
+                "articleGroup": "$group",
+                "thumbnailURL": "$thumbnailURL"
+              }
+            }
+          }
+        },
+        { 
+          "$group": {
+          "_id": "$_id.year",
+          "articleGroups": {
+            "$push": {
+              "articleGroup": "$_id.articleGroup",
+              "articles": "$articles"
+            }
+          }
+        }
+      },
+      {
+        $sort: {_id: -1}
+      }
+    ],callback)
+  }
    //db.articles.aggregate([{$group:{_id:"$articleDate.year",articleGroups:{$push: "$$ROOT"}}}],callback).pretty()
 
 
@@ -44,7 +96,7 @@ module.exports.getGroupedArticles = function(callback){
   // db.articles.aggregate([{$group : {_id: "$group", articles: {$push: "$$ROOT"}}}]).pretty()
 
   //db.articles.aggregate([{$group: {_id:{articleGroups: "$group",yearGroup: "$articleDate.year"},articles: {$push: "$$ROOT"}},$group: {_id: {yearGroup: "$_id.yearGroup"},articleGroups: {$push: {articleGroups: "$_id.articleGroups",articles: "$articles"}}}}])
-    }
+    
 
 /*
     //position in age     age= yearGroup position = articleGroup
