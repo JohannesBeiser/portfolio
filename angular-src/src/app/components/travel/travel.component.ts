@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { ArticlesService , iArticle} from "../../services/articles.service";
+import { ArticlesService , iArticle , iDate} from "../../services/articles.service";
 import { AuthService } from "../../services/auth.service";
+import { DateHelper } from "../../helperClasses/validation";
 
 // export interface iArticle {
 //   articleTitle: String,
@@ -35,12 +36,14 @@ export class TravelComponent implements OnInit {
   private allArticles: iArticle[]= [];
   detailViewShown: boolean = false;
   private chosenArticle: iArticle;
+
   private articleToEdit: iArticle;
-  
+  private articleEditDateRaw: any;
 
   constructor(
     private _articleService: ArticlesService,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private DateHelper: DateHelper
     ) { }
 
   ngOnInit() {
@@ -62,13 +65,20 @@ export class TravelComponent implements OnInit {
 
   private editArticle(e: Event, article: iArticle){
     e.stopPropagation();
-    this.editModalActive= true;
     this.articleToEdit = article;
-    console.log(this.articleToEdit);
+
+    this.articleEditDateRaw = this.DateHelper.formatDate(article.articleDate.fullDate);//new Date(Date.parse(article.articleDate.fullDate.toString()));    
+    this.editModalActive= true;
   }
 
   private submitEdit(){
+
+    console.log(this.articleEditDateRaw);
+    let parsedDate = new Date(Date.parse(this.articleEditDateRaw));
+    this.articleToEdit.articleDate= this.DateHelper.getIDateFromDate(parsedDate);
+    console.log("date changed now: ");
     console.log(this.articleToEdit);
+
     this._articleService.editArticle(this.articleToEdit)
   }
 

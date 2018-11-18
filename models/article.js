@@ -34,14 +34,18 @@ module.exports.getArticleById = function(id, callback) {
 }
 
 module.exports.editArticle=function(id, updatedArticle, callback){
+  console.log(id);
+  console.log(updatedArticle);
+  
+  
   Article.update(
     { _id: id},
     {$set: {
-      'articleTitle' : updatedArticle.title,
-      'articleContent' : updatedArticle.content,
-     /* 'articleDate.fullDate' : updatedArticle.date.fullDate,
-      'articleDate.year': updatedArticle.date.year,*/
-      'group' : updatedArticle.group }
+      'articleTitle' : updatedArticle.articleTitle,
+      'articleContent' : updatedArticle.articleContent,
+      'articleDate.fullDate' : updatedArticle.articleDate.fullDate,
+      'articleDate.year': updatedArticle.articleDate.year,
+      'group' : updatedArticle.articleGroup }
     },callback
   )
 }

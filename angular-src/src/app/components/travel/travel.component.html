@@ -4,7 +4,7 @@
         <div class="editViewContentWrapper">
             <input class="inputItem" type="text" [(ngModel)]="articleToEdit.articleTitle">
             <textarea class="inputItem" type="text" [(ngModel)]="articleToEdit.articleContent"></textarea>
-            <input class="inputItem" type="date" [(ngModel)]="articleToEdit.articleDate.fullDate">
+            <input class="inputItem" type="date" [(ngModel)]="articleEditDateRaw">
             <input class="inputItem" type="text" [(ngModel)]="articleToEdit.articleGroup">
 
             <div class="submitEditButton" (click)="submitEdit()">Submit</div>

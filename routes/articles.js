@@ -32,11 +32,11 @@ router.post('/addArticle', (req,res,next)=>{
  * 
  */
 router.post('/editArticle', (req, res, next)=>{
-    Article.editArticle(req.body.id, req.body.updatedArticle, (err, res)=>{
+    Article.editArticle(req.body.id, req.body.updatedArticle, (err, result)=>{
         if(err){
             res.json({success: false, err: err})
         }else{
-            res.json({success: true, msg: "successfully edited article"})
+            res.json({success: true, msg: "successfully edited article"});
         }
     })
 })

@@ -123,6 +123,7 @@ var auth_service_1 = __webpack_require__("./src/app/services/auth.service.ts");
 var modal_service_1 = __webpack_require__("./src/app/services/modal.service.ts");
 var angular2_flash_messages_1 = __webpack_require__("./node_modules/angular2-flash-messages/module/index.js");
 var auth_guard_1 = __webpack_require__("./src/app/guards/auth.guard.ts");
+var validation_1 = __webpack_require__("./src/app/helperClasses/validation.ts");
 var appRoutes = [
     { path: '', component: home_component_1.HomeComponent },
     { path: 'photography', component: photography_component_1.PhotographyComponent },
@@ -163,7 +164,7 @@ var AppModule = (function () {
                 router_1.RouterModule.forRoot(appRoutes),
                 angular2_flash_messages_1.FlashMessagesModule.forRoot()
             ],
-            providers: [validate_service_1.ValidateService, auth_service_1.AuthService, auth_guard_1.AuthGuard, modal_service_1.ModalService, comp_communication_service_1.CompCommunicationService, articles_service_1.ArticlesService, image_upload_service_1.ImageUploadService],
+            providers: [validate_service_1.ValidateService, auth_service_1.AuthService, auth_guard_1.AuthGuard, modal_service_1.ModalService, comp_communication_service_1.CompCommunicationService, articles_service_1.ArticlesService, image_upload_service_1.ImageUploadService, validation_1.DateHelper],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);
@@ -452,7 +453,7 @@ exports.LoginComponent = LoginComponent;
 /***/ "./src/app/components/modal-view/modal-view.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal-view-content\" (click)=\"closeModal()\">\n    <div class=\"modal-view-body animated zoomIn quickAnimation\" (click)=\"innerAreaClicked($event)\">\n        <ng-content></ng-content>\n        <i class=\"material-icons closeIcon\" (click)=\"closeModal()\">close</i>\n    </div>\n</div>"
+module.exports = "<div class=\"modal-view-content\" (click)=\"closeModal()\">\r\n    <div class=\"modal-view-body animated zoomIn quickAnimation\" (click)=\"innerAreaClicked($event)\">\r\n        <ng-content></ng-content>\r\n        <i class=\"material-icons closeIcon\" (click)=\"closeModal()\">close</i>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -1017,7 +1018,7 @@ exports.RegisterComponent = RegisterComponent;
 /***/ "./src/app/components/travel/article-detail-view/article-detail-view.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"detail-view-wrapper\">\n\n  <div class=\"articleHeader\">\n    <i class=\"material-icons close-detailView-button\" (click)=\"closeDetailView()\">arrow_back</i>\n    <span class=\"headerText\">{{article.articleTitle}}</span>\n  </div>\n\n<div class=\"articleContent\">\n  {{article.articleContent}}\n</div>\n\n\n</div>\n\n"
+module.exports = "<div class=\"detail-view-wrapper\">\r\n\r\n  <div class=\"articleHeader\">\r\n    <i class=\"material-icons close-detailView-button\" (click)=\"closeDetailView()\">arrow_back</i>\r\n    <span class=\"headerText\">{{article.articleTitle}}</span>\r\n  </div>\r\n\r\n<div class=\"articleContent\">\r\n  {{article.articleContent}}\r\n</div>\r\n\r\n\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -1079,7 +1080,7 @@ exports.ArticleDetailViewComponent = ArticleDetailViewComponent;
 /***/ "./src/app/components/travel/travel.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"travelSiteWrapper\">\r\n    <!-- Dynamic Content Area -->\r\n    <modal-view class=\"editView\" (closing)=\"closeModal()\" *ngIf=\"editModalActive && articleToEdit\">\r\n        <div class=\"editViewContentWrapper\">\r\n            <input class=\"inputItem\" type=\"text\" [(ngModel)]=\"articleToEdit.articleTitle\">\r\n            <textarea class=\"inputItem\" type=\"text\" [(ngModel)]=\"articleToEdit.articleContent\"></textarea>\r\n            <input class=\"inputItem\" type=\"date\" [(ngModel)]=\"articleToEdit.articleDate.fullDate\">\r\n            <input class=\"inputItem\" type=\"text\" [(ngModel)]=\"articleToEdit.articleGroup\">\r\n\r\n            <div class=\"submitEditButton\" (click)=\"submitEdit()\">Submit</div>\r\n        </div>\r\n\r\n    </modal-view>\r\n\r\n    <article-detail-view class=\"animated fadeIn\" *ngIf=\"chosenArticle && detailViewShown\" [article]=\"chosenArticle\"\r\n        (detailViewClosing)=\"closeDetailView($event)\"></article-detail-view>\r\n\r\n    <!-- Static Content Area -->\r\n\r\n    <div class=\"content-area animated slideInLeft\" *ngIf=\"!detailViewShown\">\r\n\r\n        <h2 class=\"content-area-header\">Articles <span class=\"articleGroupSoecification\">{{selectedArticleGroup}}</span></h2>\r\n\r\n        <div class=\"articles\">\r\n            <div (click)=\"showDetailView(article)\" class=\"article animated fadeIn\" *ngFor=\"let article of renderedArticles\">\r\n                <div class=\"article-thumbnail\" [ngStyle]=\"{ 'background-image': 'url(' + article.thumbnailURL + ')'}\"></div>\r\n                <div class=\"articleInfo\">\r\n                    <div class=\"articleHeader\">\r\n                        <div class=\"article-title\">{{article.articleTitle}} <i (click)=\"editArticle($event, article)\"\r\n                                *ngIf=\"_authService.loggedIn()\" class=\"material-icons editButton\">edit</i></div>\r\n                        <span class=\"article-date\">{{article.articleDate.fullDate}}</span>\r\n                    </div>\r\n\r\n                    <div class=\"article-description\" [innerHTML]=\"article.articleContent\"></div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"timelineArea animated slideInRight\">\r\n        <h2 class=\"timelineHeader\">Timeline</h2>\r\n        <div class=\"timelineContent\">\r\n            <div class=\"timelineSection\" *ngFor=\"let timelineSection of timelineList\">\r\n                <div class=\"timelineSectionHeader\" [class.active]=\"timelineActiveStateArray[timelineSection._id]\"\r\n                    (click)=\"timelineYearSelected(timelineSection)\">{{timelineSection._id}}</div>\r\n                <div class=\"timelineSectionContent\">\r\n                    <span class=\"timelineSectionItem\" [class.active]=\"timelineActiveStateArray[articleGroupItem.articleGroup]\"\r\n                        (click)=\"articleGroupSelected(articleGroupItem)\" *ngFor=\"let articleGroupItem of timelineSection.articleGroups\">\r\n                        {{articleGroupItem.articleGroup}}\r\n                    </span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"travelSiteWrapper\">\r\n    <!-- Dynamic Content Area -->\r\n    <modal-view class=\"editView\" (closing)=\"closeModal()\" *ngIf=\"editModalActive && articleToEdit\">\r\n        <div class=\"editViewContentWrapper\">\r\n            <input class=\"inputItem\" type=\"text\" [(ngModel)]=\"articleToEdit.articleTitle\">\r\n            <textarea class=\"inputItem\" type=\"text\" [(ngModel)]=\"articleToEdit.articleContent\"></textarea>\r\n            <input class=\"inputItem\" type=\"date\" [(ngModel)]=\"articleEditDateRaw\">\r\n            <input class=\"inputItem\" type=\"text\" [(ngModel)]=\"articleToEdit.articleGroup\">\r\n\r\n            <div class=\"submitEditButton\" (click)=\"submitEdit()\">Submit</div>\r\n        </div>\r\n\r\n    </modal-view>\r\n\r\n    <article-detail-view class=\"animated fadeIn\" *ngIf=\"chosenArticle && detailViewShown\" [article]=\"chosenArticle\"\r\n        (detailViewClosing)=\"closeDetailView($event)\"></article-detail-view>\r\n\r\n    <!-- Static Content Area -->\r\n\r\n    <div class=\"content-area animated slideInLeft\" *ngIf=\"!detailViewShown\">\r\n\r\n        <h2 class=\"content-area-header\">Articles <span class=\"articleGroupSoecification\">{{selectedArticleGroup}}</span></h2>\r\n\r\n        <div class=\"articles\">\r\n            <div (click)=\"showDetailView(article)\" class=\"article animated fadeIn\" *ngFor=\"let article of renderedArticles\">\r\n                <div class=\"article-thumbnail\" [ngStyle]=\"{ 'background-image': 'url(' + article.thumbnailURL + ')'}\"></div>\r\n                <div class=\"articleInfo\">\r\n                    <div class=\"articleHeader\">\r\n                        <div class=\"article-title\">{{article.articleTitle}} <i (click)=\"editArticle($event, article)\"\r\n                                *ngIf=\"_authService.loggedIn()\" class=\"material-icons editButton\">edit</i></div>\r\n                        <span class=\"article-date\">{{article.articleDate.fullDate}}</span>\r\n                    </div>\r\n\r\n                    <div class=\"article-description\" [innerHTML]=\"article.articleContent\"></div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"timelineArea animated slideInRight\">\r\n        <h2 class=\"timelineHeader\">Timeline</h2>\r\n        <div class=\"timelineContent\">\r\n            <div class=\"timelineSection\" *ngFor=\"let timelineSection of timelineList\">\r\n                <div class=\"timelineSectionHeader\" [class.active]=\"timelineActiveStateArray[timelineSection._id]\"\r\n                    (click)=\"timelineYearSelected(timelineSection)\">{{timelineSection._id}}</div>\r\n                <div class=\"timelineSectionContent\">\r\n                    <span class=\"timelineSectionItem\" [class.active]=\"timelineActiveStateArray[articleGroupItem.articleGroup]\"\r\n                        (click)=\"articleGroupSelected(articleGroupItem)\" *ngFor=\"let articleGroupItem of timelineSection.articleGroups\">\r\n                        {{articleGroupItem.articleGroup}}\r\n                    </span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -1108,10 +1109,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var articles_service_1 = __webpack_require__("./src/app/services/articles.service.ts");
 var auth_service_1 = __webpack_require__("./src/app/services/auth.service.ts");
+var validation_1 = __webpack_require__("./src/app/helperClasses/validation.ts");
 var TravelComponent = (function () {
-    function TravelComponent(_articleService, _authService) {
+    function TravelComponent(_articleService, _authService, DateHelper) {
         this._articleService = _articleService;
         this._authService = _authService;
+        this.DateHelper = DateHelper;
         this.timelineActiveStateArray = [];
         this.selectedArticleGroup = "";
         this.allArticles = [];
@@ -1133,11 +1136,15 @@ var TravelComponent = (function () {
     };
     TravelComponent.prototype.editArticle = function (e, article) {
         e.stopPropagation();
-        this.editModalActive = true;
         this.articleToEdit = article;
-        console.log(this.articleToEdit);
+        this.articleEditDateRaw = this.DateHelper.formatDate(article.articleDate.fullDate); //new Date(Date.parse(article.articleDate.fullDate.toString()));    
+        this.editModalActive = true;
     };
     TravelComponent.prototype.submitEdit = function () {
+        console.log(this.articleEditDateRaw);
+        var parsedDate = new Date(Date.parse(this.articleEditDateRaw));
+        this.articleToEdit.articleDate = this.DateHelper.getIDateFromDate(parsedDate);
+        console.log("date changed now: ");
         console.log(this.articleToEdit);
         this._articleService.editArticle(this.articleToEdit);
     };
@@ -1252,7 +1259,8 @@ var TravelComponent = (function () {
             styles: [__webpack_require__("./src/app/components/travel/travel.component.less")]
         }),
         __metadata("design:paramtypes", [articles_service_1.ArticlesService,
-            auth_service_1.AuthService])
+            auth_service_1.AuthService,
+            validation_1.DateHelper])
     ], TravelComponent);
     return TravelComponent;
 }());
@@ -1487,6 +1495,55 @@ exports.AuthGuard = AuthGuard;
 
 /***/ }),
 
+/***/ "./src/app/helperClasses/validation.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var DateHelper = (function () {
+    function DateHelper() {
+    }
+    /**
+     * returns "2018-11-15" from a date.toString() value
+     * getFormattedDate
+     */
+    DateHelper.prototype.formatDate = function (date) {
+        var d = new Date(date), month = '' + (d.getMonth() + 1), day = '' + d.getDate(), year = d.getFullYear();
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+        return [year, month, day].join('-');
+    };
+    DateHelper.prototype.getIDateFromDate = function (date) {
+        var dateObject = {
+            year: date.getFullYear().toString(),
+            fullDate: date.toDateString()
+        };
+        return dateObject;
+    };
+    DateHelper = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [])
+    ], DateHelper);
+    return DateHelper;
+}());
+exports.DateHelper = DateHelper;
+
+
+/***/ }),
+
 /***/ "./src/app/services/articles.service.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1534,7 +1591,8 @@ var ArticlesService = (function () {
         var headers = new http_1.Headers();
         headers.append('Content-Type', 'application/json');
         var id = updatedArticle.id;
-        this.http.post('/editArticle', { id: id, updatedArticle: updatedArticle }, { headers: headers }).subscribe(function (answer) {
+        this.http.post('/articles/editArticle', { id: id, updatedArticle: updatedArticle }, { headers: headers }).subscribe(function (answer) {
+            console.log("article added? : ");
             console.log(answer);
         });
     };

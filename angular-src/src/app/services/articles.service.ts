@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { HttpModule } from '@angular/http';
 import { ImageUploadService } from "./image-upload.service";
+
 export interface iDate{
   fullDate: String,
   year: String
@@ -53,10 +54,11 @@ export class ArticlesService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let id= updatedArticle.id;
-    this.http.post('/editArticle', {id:id, updatedArticle:updatedArticle}, {headers:headers}).subscribe(answer=>{
-      console.log(answer);
+    this.http.post('/articles/editArticle', {id:id, updatedArticle:updatedArticle}, {headers:headers}).subscribe(answer=>{
+      console.log("article added? : ");
       
-    })
+      console.log(answer);
+    });
 
   }
 
