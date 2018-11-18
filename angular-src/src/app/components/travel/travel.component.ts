@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { ArticlesService } from "../../services/articles.service";
+import { ArticlesService , iArticle} from "../../services/articles.service";
+import { AuthService } from "../../services/auth.service";
 
-
-export interface iArticle {
-  articleTitle: String,
-  //articleTumbnail: String,
-  article: String
-}
+// export interface iArticle {
+//   articleTitle: String,
+//   //articleTumbnail: String,
+//   article: String
+// }
 
 
 export interface iArticleGroup {
@@ -33,7 +33,15 @@ export class TravelComponent implements OnInit {
   private timelineActiveStateArray: any[] = [];
   private selectedArticleGroup: String = "";
   private allArticles: iArticle[]= [];
-  constructor(private _articleService: ArticlesService) { }
+  detailViewShown: boolean = false;
+  private chosenArticle: iArticle;
+  private articleToEdit: iArticle;
+  
+
+  constructor(
+    private _articleService: ArticlesService,
+    private _authService: AuthService
+    ) { }
 
   ngOnInit() {
     //    this.articleGroups= []; //TODO: remove me when GET from backend
@@ -46,11 +54,50 @@ export class TravelComponent implements OnInit {
     this.timelineActiveStateArray["initialKey"]=false;
   }
 
+  editModalActive: boolean= false;
+
+  private closeModal(){
+    this.editModalActive = false;
+  }
+
+  private editArticle(e: Event, article: iArticle){
+    e.stopPropagation();
+    this.editModalActive= true;
+    this.articleToEdit = article;
+    console.log(this.articleToEdit);
+  }
+
+  private submitEdit(){
+    console.log(this.articleToEdit);
+    this._articleService.editArticle(this.articleToEdit)
+  }
+
+  /**
+   * Gets called when choosing an article
+   * @param article Chosen article the user selected
+   */
+  public showDetailView(article: iArticle){
+    this.detailViewShown= true;
+    this.chosenArticle = article;
+  }
+
+  /**
+   * Gets called when the detail-view component triggers the 'closingDetailView' event
+   */
+  public closeDetailView(){
+    this.detailViewShown= false;   
+  }
+
+
   /**
    * Gets called when the request finished getting all articles and set the property value
    */
   public articlesLoaded() {
-   this.setAllArticles();
+    if(this.timelineList != null && this.timelineList.length>0){      
+      this.setAllArticles();
+      console.log(this.timelineList);
+      
+    }
   }
 
   /**
@@ -71,8 +118,6 @@ export class TravelComponent implements OnInit {
     this._articleService.getGroupedArticles().subscribe((articleResponseObject) => {
       this.timelineList = articleResponseObject.articles; 
       this.articlesLoaded();
-      console.log(this.timelineList);
-      
     }, (err) => {
       console.log(err);
       return false;
@@ -85,6 +130,7 @@ export class TravelComponent implements OnInit {
    */
   public timelineYearSelected(section: iTimelineList) {
     this.renderedArticles = [];
+    this.detailViewShown=false;
     let currentYear = (new Date()).getFullYear();
     
     if (section._id == currentYear.toString()) { //TODO: check for current year  // shows all articles if on top Navigation Node  "Now"
@@ -99,20 +145,18 @@ export class TravelComponent implements OnInit {
     this.activateTimelineNode(section._id);
    // this.activateNode(section._id);
   }
-
   
     /**
    * Applies the filter for a specific articleGroup
    * @param articleGroup selected ArticleGroup
    */
   private articleGroupSelected(articleGroup: iArticleGroup) {
+    this.detailViewShown=false;
     this.renderedArticles = [];
     this.renderedArticles = this.renderedArticles.concat(articleGroup.articles);
     this.activateTimelineNode(articleGroup.articleGroup);//articleGroup is actually the name for the group
     //this.activateNode(articleGroup.id);
-    this.setActiveFilterHeader(articleGroup.articleGroup);
-    console.log(this.timelineActiveStateArray);
-    
+    this.setActiveFilterHeader(articleGroup.articleGroup);   
   }
 
   private setActiveFilterHeader(header: String){

@@ -103,12 +103,19 @@ var about_component_1 = __webpack_require__("./src/app/components/about/about.co
 var travel_component_1 = __webpack_require__("./src/app/components/travel/travel.component.ts");
 var work_component_1 = __webpack_require__("./src/app/components/work/work.component.ts");
 var modal_component_1 = __webpack_require__("./src/app/components/modal/modal.component.ts");
+// Page Components
 var navbar_component_1 = __webpack_require__("./src/app/components/navbar/navbar.component.ts");
 var login_component_1 = __webpack_require__("./src/app/components/login/login.component.ts");
 var register_component_1 = __webpack_require__("./src/app/components/register/register.component.ts");
 var home_component_1 = __webpack_require__("./src/app/components/home/home.component.ts");
 var dashboard_component_1 = __webpack_require__("./src/app/components/dashboard/dashboard.component.ts");
 var profile_component_1 = __webpack_require__("./src/app/components/profile/profile.component.ts");
+//Sub-Components
+var article_detail_view_component_1 = __webpack_require__("./src/app/components/travel/article-detail-view/article-detail-view.component.ts");
+//Web Components
+var modal_view_component_1 = __webpack_require__("./src/app/components/modal-view/modal-view.component.ts");
+// Services
+var image_upload_service_1 = __webpack_require__("./src/app/services/image-upload.service.ts");
 var articles_service_1 = __webpack_require__("./src/app/services/articles.service.ts");
 var comp_communication_service_1 = __webpack_require__("./src/app/services/comp-communication.service.ts");
 var validate_service_1 = __webpack_require__("./src/app/services/validate.service.ts");
@@ -144,7 +151,9 @@ var AppModule = (function () {
                 register_component_1.RegisterComponent,
                 home_component_1.HomeComponent,
                 dashboard_component_1.DashboardComponent,
-                profile_component_1.ProfileComponent
+                profile_component_1.ProfileComponent,
+                article_detail_view_component_1.ArticleDetailViewComponent,
+                modal_view_component_1.ModalViewComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,
@@ -154,7 +163,7 @@ var AppModule = (function () {
                 router_1.RouterModule.forRoot(appRoutes),
                 angular2_flash_messages_1.FlashMessagesModule.forRoot()
             ],
-            providers: [validate_service_1.ValidateService, auth_service_1.AuthService, auth_guard_1.AuthGuard, modal_service_1.ModalService, comp_communication_service_1.CompCommunicationService, articles_service_1.ArticlesService],
+            providers: [validate_service_1.ValidateService, auth_service_1.AuthService, auth_guard_1.AuthGuard, modal_service_1.ModalService, comp_communication_service_1.CompCommunicationService, articles_service_1.ArticlesService, image_upload_service_1.ImageUploadService],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);
@@ -218,14 +227,14 @@ exports.AboutComponent = AboutComponent;
 /***/ "./src/app/components/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 class=\"page-header\">Dashboard</h2>\r\n<p>Welcome to your Dashboard</p>\r\n"
+module.exports = "<h2 class=\"page-header\">Dashboard</h2>\r\n\r\n\r\n\r\n<label>Header: <input type=\"text\" placeholder=\"Header\" [(ngModel)]=\"chosenArticleTitle\" ></label>\r\n<label>Content: <input type=\"text\" placeholder=\"Content\" [(ngModel)]=\"chosenArticleContent\"></label>\r\n<label>File: <input type=\"file\" (change)=\"fileChanged($event)\"></label>\r\n<label>Date: <input type=\"date\" placeholder=\"Date\" [(ngModel)]=\"chosenArticleDate\"></label>\r\n<label>Group: <input type=\"text\" placeholder=\"Group\" [(ngModel)]=\"chosenArticleGroup\"></label>\r\n\r\n<div class=\"submitButton\" (click)=\"submitPressed()\">submit</div>\r\n\r\n\r\n"
 
 /***/ }),
 
 /***/ "./src/app/components/dashboard/dashboard.component.less":
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".submitButton {\n  cursor: pointer;\n  background: green;\n  padding: 8px;\n  width: 300px;\n  color: black;\n}\n"
 
 /***/ }),
 
@@ -245,10 +254,52 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var image_upload_service_1 = __webpack_require__("./src/app/services/image-upload.service.ts");
+var articles_service_1 = __webpack_require__("./src/app/services/articles.service.ts");
 var DashboardComponent = (function () {
-    function DashboardComponent() {
+    function DashboardComponent(_imgUpload, _articleService) {
+        this._imgUpload = _imgUpload;
+        this._articleService = _articleService;
+        this.chosenArticleTitle = "";
+        this.chosenArticleContent = "";
+        this.chosenArticleGroup = "";
     }
     DashboardComponent.prototype.ngOnInit = function () {
+    };
+    DashboardComponent.prototype.submitPressed = function () {
+        // this._imgUpload.uploadImage(this.chosenThumbnail);
+        var parsedDate = new Date(this.chosenArticleDate);
+        var dateObject = {
+            year: parsedDate.getFullYear().toString(),
+            fullDate: parsedDate.toDateString()
+        };
+        var newArticle = {
+            articleTitle: this.chosenArticleTitle,
+            articleContent: this.chosenArticleContent,
+            articleDate: dateObject,
+            group: this.chosenArticleGroup
+        };
+        this._articleService.addArticle(newArticle, this.chosenThumbnail);
+    };
+    DashboardComponent.prototype.fileChanged = function (event) {
+        this.chosenThumbnail = event.target.files[0];
+        // var target: HTMLInputElement = event.target as HTMLInputElement;
+        // for(var i=0;i < target.files.length; i++) {
+        //     this._imgUpload.uploadImage(target.files[i]).subscribe((resObj)=>{
+        //       console.log(resObj);        
+        //     })
+        // }  
+    };
+    //TODO: Deprecated?
+    DashboardComponent.prototype.upload = function (img) {
+        var formData = new FormData();
+        formData.append("image", img, img.name);
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function (ev) {
+            //You can handle progress events here if you want to track upload progress (I used an observable<number> to fire back updates to whomever called this upload)
+        });
+        xhr.open("PUT", "this/is/the/upload/address", true);
+        xhr.send(formData);
     };
     DashboardComponent = __decorate([
         core_1.Component({
@@ -256,7 +307,8 @@ var DashboardComponent = (function () {
             template: __webpack_require__("./src/app/components/dashboard/dashboard.component.html"),
             styles: [__webpack_require__("./src/app/components/dashboard/dashboard.component.less")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [image_upload_service_1.ImageUploadService,
+            articles_service_1.ArticlesService])
     ], DashboardComponent);
     return DashboardComponent;
 }());
@@ -393,6 +445,73 @@ var LoginComponent = (function () {
     return LoginComponent;
 }());
 exports.LoginComponent = LoginComponent;
+
+
+/***/ }),
+
+/***/ "./src/app/components/modal-view/modal-view.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"modal-view-content\" (click)=\"closeModal()\">\n    <div class=\"modal-view-body animated zoomIn quickAnimation\" (click)=\"innerAreaClicked($event)\">\n        <ng-content></ng-content>\n        <i class=\"material-icons closeIcon\" (click)=\"closeModal()\">close</i>\n    </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/components/modal-view/modal-view.component.less":
+/***/ (function(module, exports) {
+
+module.exports = "@font-face {\n  font-family: ComfortaaLight;\n  src: url('Comfortaa-Light.866333be226453f3a24c.ttf');\n}\n.defaultTextTransition {\n  -webkit-transition: color 200ms ease-in-out;\n  transition: color 200ms ease-in-out;\n}\n.quickAnimation {\n  -webkit-animation-duration: 300ms;\n  animation-duration: 300ms;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.animated-300ms {\n  -webkit-animation-duration: 300ms;\n  animation-duration: 300ms;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.animationFix {\n  -webkit-backface-visibility: hidden;\n  -webkit-transform: translateZ(0) scale(1, 1);\n  transform: translateZ(0);\n}\n.delay-100ms {\n  -webkit-animation-delay: 100ms;\n  animation-delay: 100ms;\n}\n.delay-200ms {\n  -webkit-animation-delay: 200ms;\n  animation-delay: 200ms;\n}\n.delay-300ms {\n  -webkit-animation-delay: 300ms;\n  animation-delay: 300ms;\n}\n.delay-400ms {\n  -webkit-animation-delay: 400ms;\n  animation-delay: 400ms;\n}\n.delay-500ms {\n  -webkit-animation-delay: 500ms;\n  animation-delay: 500ms;\n}\n.delay-600ms {\n  -webkit-animation-delay: 600ms;\n  animation-delay: 600ms;\n}\n.delay-700ms {\n  -webkit-animation-delay: 700ms;\n  animation-delay: 700ms;\n}\n.delay-800ms {\n  -webkit-animation-delay: 800ms;\n  animation-delay: 800ms;\n}\n.delay-900ms {\n  -webkit-animation-delay: 900ms;\n  animation-delay: 900ms;\n}\n.delay-1000ms {\n  -webkit-animation-delay: 1000ms;\n  animation-delay: 1000ms;\n}\n.delay-1100ms {\n  -webkit-animation-delay: 1100ms;\n  animation-delay: 1100ms;\n}\n.delay-1200ms {\n  -webkit-animation-delay: 1200ms;\n  animation-delay: 1200ms;\n}\n.delay-1300ms {\n  -webkit-animation-delay: 1300ms;\n  animation-delay: 1300ms;\n}\n.delay-1400ms {\n  -webkit-animation-delay: 1400ms;\n  animation-delay: 1400ms;\n}\n.delay-1500ms {\n  -webkit-animation-delay: 1500ms;\n  animation-delay: 1500ms;\n}\n.delay-1600ms {\n  -webkit-animation-delay: 1600ms;\n  animation-delay: 1600ms;\n}\n.delay-1700ms {\n  -webkit-animation-delay: 1700ms;\n  animation-delay: 1700ms;\n}\n.modal-view-content {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.8);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  z-index: 4000;\n}\n.modal-view-content .modal-view-body {\n  width: 80%;\n  height: 90%;\n  background: white;\n  position: relative;\n  padding: 16px;\n}\n.modal-view-content .modal-view-body .closeIcon {\n  position: absolute;\n  right: 0;\n  top: 0;\n  padding: 8px;\n  cursor: pointer;\n  -webkit-transition: -webkit-transform 200ms ease-in-out;\n  transition: -webkit-transform 200ms ease-in-out;\n  transition: transform 200ms ease-in-out;\n  transition: transform 200ms ease-in-out, -webkit-transform 200ms ease-in-out;\n}\n.modal-view-content .modal-view-body .closeIcon:hover {\n  -webkit-transform: rotate(90deg);\n          transform: rotate(90deg);\n}\n"
+
+/***/ }),
+
+/***/ "./src/app/components/modal-view/modal-view.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var ModalViewComponent = (function () {
+    function ModalViewComponent() {
+        this.closing = new core_1.EventEmitter();
+    }
+    ModalViewComponent.prototype.ngOnInit = function () {
+    };
+    ModalViewComponent.prototype.closeModal = function () {
+        this.closing.emit();
+    };
+    ModalViewComponent.prototype.outerAreaClicked = function () {
+        this.closeModal();
+    };
+    ModalViewComponent.prototype.innerAreaClicked = function (e) {
+        e.stopPropagation();
+    };
+    // remove self from modal service when directive is destroyed
+    ModalViewComponent.prototype.ngOnDestroy = function () {
+    };
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], ModalViewComponent.prototype, "closing", void 0);
+    ModalViewComponent = __decorate([
+        core_1.Component({
+            selector: 'modal-view',
+            template: __webpack_require__("./src/app/components/modal-view/modal-view.component.html"),
+            styles: [__webpack_require__("./src/app/components/modal-view/modal-view.component.less")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ModalViewComponent);
+    return ModalViewComponent;
+}());
+exports.ModalViewComponent = ModalViewComponent;
 
 
 /***/ }),
@@ -572,7 +691,7 @@ module.exports = "\r\n<div class=\"galleryWrapper animated fadeIn\">\r\n    <div
 /***/ "./src/app/components/photography/photography.component.less":
 /***/ (function(module, exports) {
 
-module.exports = "@font-face {\n  font-family: ComfortaaLight;\n  src: url('Comfortaa-Light.866333be226453f3a24c.ttf');\n}\n.defaultTextTransition {\n  -webkit-transition: color 200ms ease-in-out;\n  transition: color 200ms ease-in-out;\n}\n.quickAnimation {\n  -webkit-animation-duration: 300ms;\n  animation-duration: 300ms;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.animated-300ms {\n  -webkit-animation-duration: 300ms;\n  animation-duration: 300ms;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.animationFix {\n  -webkit-backface-visibility: hidden;\n  -webkit-transform: translateZ(0) scale(1, 1);\n  transform: translateZ(0);\n}\n.delay-100ms {\n  -webkit-animation-delay: 100ms;\n  animation-delay: 100ms;\n}\n.delay-200ms {\n  -webkit-animation-delay: 200ms;\n  animation-delay: 200ms;\n}\n.delay-300ms {\n  -webkit-animation-delay: 300ms;\n  animation-delay: 300ms;\n}\n.delay-400ms {\n  -webkit-animation-delay: 400ms;\n  animation-delay: 400ms;\n}\n.delay-500ms {\n  -webkit-animation-delay: 500ms;\n  animation-delay: 500ms;\n}\n.delay-600ms {\n  -webkit-animation-delay: 600ms;\n  animation-delay: 600ms;\n}\n.delay-700ms {\n  -webkit-animation-delay: 700ms;\n  animation-delay: 700ms;\n}\n.delay-800ms {\n  -webkit-animation-delay: 800ms;\n  animation-delay: 800ms;\n}\n.delay-900ms {\n  -webkit-animation-delay: 900ms;\n  animation-delay: 900ms;\n}\n.delay-1000ms {\n  -webkit-animation-delay: 1000ms;\n  animation-delay: 1000ms;\n}\n.delay-1100ms {\n  -webkit-animation-delay: 1100ms;\n  animation-delay: 1100ms;\n}\n.delay-1200ms {\n  -webkit-animation-delay: 1200ms;\n  animation-delay: 1200ms;\n}\n.delay-1300ms {\n  -webkit-animation-delay: 1300ms;\n  animation-delay: 1300ms;\n}\n.delay-1400ms {\n  -webkit-animation-delay: 1400ms;\n  animation-delay: 1400ms;\n}\n.delay-1500ms {\n  -webkit-animation-delay: 1500ms;\n  animation-delay: 1500ms;\n}\n.delay-1600ms {\n  -webkit-animation-delay: 1600ms;\n  animation-delay: 1600ms;\n}\n.delay-1700ms {\n  -webkit-animation-delay: 1700ms;\n  animation-delay: 1700ms;\n}\n.galleryWrapper {\n  margin: 5% 10%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.galleryWrapper .imagePreviewWrapper {\n  width: 30%;\n  min-width: 290px;\n  height: 15vw;\n  min-height: 200px;\n  margin: 5px;\n  overflow: hidden;\n  cursor: pointer;\n  position: relative;\n}\n.galleryWrapper .imagePreviewWrapper:hover .picture {\n  opacity: 0.85;\n}\n.galleryWrapper .imagePreviewWrapper:hover .hoverOverlay {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.galleryWrapper .imagePreviewWrapper .picture {\n  opacity: 1;\n  -webkit-transition: opacity 200ms ease-in-out;\n  transition: opacity 200ms ease-in-out;\n  width: 100%;\n  min-height: 100%;\n  position: relative;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%);\n}\n.galleryWrapper .imagePreviewWrapper .hoverOverlay {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 50px;\n  background: rgba(0, 0, 0, 0.75);\n  display: none;\n  -webkit-animation-duration: 300ms;\n  animation-duration: 300ms;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.galleryWrapper .imagePreviewWrapper .hoverOverlay .description {\n  text-align: center;\n  margin: 0 auto;\n  color: #eee;\n}\n.galleryWrapper .pseudoElement {\n  cursor: initial;\n  height: 0px;\n  min-height: 0px;\n}\n@media screen and (max-width: 768px) {\n  .galleryWrapper .imagePreviewWrapper {\n    width: unset;\n    height: unset;\n    min-height: unset;\n    cursor: initial;\n  }\n  .galleryWrapper .imagePreviewWrapper .picture {\n    min-height: unset;\n    top: unset;\n    -webkit-transform: unset;\n            transform: unset;\n  }\n  .galleryWrapper .imagePreviewWrapper:hover .picture {\n    opacity: 1;\n  }\n  .galleryWrapper .imagePreviewWrapper:hover .hoverOverlay {\n    display: none;\n  }\n}\n"
+module.exports = "@font-face {\n  font-family: ComfortaaLight;\n  src: url('Comfortaa-Light.866333be226453f3a24c.ttf');\n}\n.defaultTextTransition {\n  -webkit-transition: color 200ms ease-in-out;\n  transition: color 200ms ease-in-out;\n}\n.quickAnimation {\n  -webkit-animation-duration: 300ms;\n  animation-duration: 300ms;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.animated-300ms {\n  -webkit-animation-duration: 300ms;\n  animation-duration: 300ms;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.animationFix {\n  -webkit-backface-visibility: hidden;\n  -webkit-transform: translateZ(0) scale(1, 1);\n  transform: translateZ(0);\n}\n.delay-100ms {\n  -webkit-animation-delay: 100ms;\n  animation-delay: 100ms;\n}\n.delay-200ms {\n  -webkit-animation-delay: 200ms;\n  animation-delay: 200ms;\n}\n.delay-300ms {\n  -webkit-animation-delay: 300ms;\n  animation-delay: 300ms;\n}\n.delay-400ms {\n  -webkit-animation-delay: 400ms;\n  animation-delay: 400ms;\n}\n.delay-500ms {\n  -webkit-animation-delay: 500ms;\n  animation-delay: 500ms;\n}\n.delay-600ms {\n  -webkit-animation-delay: 600ms;\n  animation-delay: 600ms;\n}\n.delay-700ms {\n  -webkit-animation-delay: 700ms;\n  animation-delay: 700ms;\n}\n.delay-800ms {\n  -webkit-animation-delay: 800ms;\n  animation-delay: 800ms;\n}\n.delay-900ms {\n  -webkit-animation-delay: 900ms;\n  animation-delay: 900ms;\n}\n.delay-1000ms {\n  -webkit-animation-delay: 1000ms;\n  animation-delay: 1000ms;\n}\n.delay-1100ms {\n  -webkit-animation-delay: 1100ms;\n  animation-delay: 1100ms;\n}\n.delay-1200ms {\n  -webkit-animation-delay: 1200ms;\n  animation-delay: 1200ms;\n}\n.delay-1300ms {\n  -webkit-animation-delay: 1300ms;\n  animation-delay: 1300ms;\n}\n.delay-1400ms {\n  -webkit-animation-delay: 1400ms;\n  animation-delay: 1400ms;\n}\n.delay-1500ms {\n  -webkit-animation-delay: 1500ms;\n  animation-delay: 1500ms;\n}\n.delay-1600ms {\n  -webkit-animation-delay: 1600ms;\n  animation-delay: 1600ms;\n}\n.delay-1700ms {\n  -webkit-animation-delay: 1700ms;\n  animation-delay: 1700ms;\n}\n.galleryWrapper {\n  margin: 5% 2%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.galleryWrapper .imagePreviewWrapper {\n  width: 30%;\n  min-width: 290px;\n  height: 15vw;\n  min-height: 200px;\n  margin: 5px;\n  overflow: hidden;\n  cursor: pointer;\n  position: relative;\n}\n.galleryWrapper .imagePreviewWrapper:hover .picture {\n  opacity: 0.85;\n}\n.galleryWrapper .imagePreviewWrapper:hover .hoverOverlay {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.galleryWrapper .imagePreviewWrapper .picture {\n  opacity: 1;\n  -webkit-transition: opacity 200ms ease-in-out;\n  transition: opacity 200ms ease-in-out;\n  width: 100%;\n  min-height: 100%;\n  position: relative;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%);\n}\n.galleryWrapper .imagePreviewWrapper .hoverOverlay {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 50px;\n  background: rgba(0, 0, 0, 0.75);\n  display: none;\n  -webkit-animation-duration: 300ms;\n  animation-duration: 300ms;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.galleryWrapper .imagePreviewWrapper .hoverOverlay .description {\n  text-align: center;\n  margin: 0 auto;\n  color: #eee;\n}\n.galleryWrapper .pseudoElement {\n  cursor: initial;\n  height: 0px;\n  min-height: 0px;\n}\n@media screen and (max-width: 768px) {\n  .galleryWrapper .imagePreviewWrapper {\n    width: unset;\n    height: unset;\n    min-height: unset;\n    cursor: initial;\n  }\n  .galleryWrapper .imagePreviewWrapper .picture {\n    min-height: unset;\n    top: unset;\n    -webkit-transform: unset;\n            transform: unset;\n  }\n  .galleryWrapper .imagePreviewWrapper:hover .picture {\n    opacity: 1;\n  }\n  .galleryWrapper .imagePreviewWrapper:hover .hoverOverlay {\n    display: none;\n  }\n}\n"
 
 /***/ }),
 
@@ -895,17 +1014,79 @@ exports.RegisterComponent = RegisterComponent;
 
 /***/ }),
 
+/***/ "./src/app/components/travel/article-detail-view/article-detail-view.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"detail-view-wrapper\">\n\n  <div class=\"articleHeader\">\n    <i class=\"material-icons close-detailView-button\" (click)=\"closeDetailView()\">arrow_back</i>\n    <span class=\"headerText\">{{article.articleTitle}}</span>\n  </div>\n\n<div class=\"articleContent\">\n  {{article.articleContent}}\n</div>\n\n\n</div>\n\n"
+
+/***/ }),
+
+/***/ "./src/app/components/travel/article-detail-view/article-detail-view.component.less":
+/***/ (function(module, exports) {
+
+module.exports = "@font-face {\n  font-family: ComfortaaLight;\n  src: url('Comfortaa-Light.866333be226453f3a24c.ttf');\n}\n.defaultTextTransition {\n  -webkit-transition: color 200ms ease-in-out;\n  transition: color 200ms ease-in-out;\n}\n.quickAnimation {\n  -webkit-animation-duration: 300ms;\n  animation-duration: 300ms;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.animated-300ms {\n  -webkit-animation-duration: 300ms;\n  animation-duration: 300ms;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.animationFix {\n  -webkit-backface-visibility: hidden;\n  -webkit-transform: translateZ(0) scale(1, 1);\n  transform: translateZ(0);\n}\n.delay-100ms {\n  -webkit-animation-delay: 100ms;\n  animation-delay: 100ms;\n}\n.delay-200ms {\n  -webkit-animation-delay: 200ms;\n  animation-delay: 200ms;\n}\n.delay-300ms {\n  -webkit-animation-delay: 300ms;\n  animation-delay: 300ms;\n}\n.delay-400ms {\n  -webkit-animation-delay: 400ms;\n  animation-delay: 400ms;\n}\n.delay-500ms {\n  -webkit-animation-delay: 500ms;\n  animation-delay: 500ms;\n}\n.delay-600ms {\n  -webkit-animation-delay: 600ms;\n  animation-delay: 600ms;\n}\n.delay-700ms {\n  -webkit-animation-delay: 700ms;\n  animation-delay: 700ms;\n}\n.delay-800ms {\n  -webkit-animation-delay: 800ms;\n  animation-delay: 800ms;\n}\n.delay-900ms {\n  -webkit-animation-delay: 900ms;\n  animation-delay: 900ms;\n}\n.delay-1000ms {\n  -webkit-animation-delay: 1000ms;\n  animation-delay: 1000ms;\n}\n.delay-1100ms {\n  -webkit-animation-delay: 1100ms;\n  animation-delay: 1100ms;\n}\n.delay-1200ms {\n  -webkit-animation-delay: 1200ms;\n  animation-delay: 1200ms;\n}\n.delay-1300ms {\n  -webkit-animation-delay: 1300ms;\n  animation-delay: 1300ms;\n}\n.delay-1400ms {\n  -webkit-animation-delay: 1400ms;\n  animation-delay: 1400ms;\n}\n.delay-1500ms {\n  -webkit-animation-delay: 1500ms;\n  animation-delay: 1500ms;\n}\n.delay-1600ms {\n  -webkit-animation-delay: 1600ms;\n  animation-delay: 1600ms;\n}\n.delay-1700ms {\n  -webkit-animation-delay: 1700ms;\n  animation-delay: 1700ms;\n}\n.detail-view-wrapper .articleHeader {\n  width: 90%;\n  border-bottom: 1px solid #aaa;\n  margin: 50px 0 30px;\n}\n.detail-view-wrapper .articleHeader .close-detailView-button {\n  cursor: pointer;\n}\n.detail-view-wrapper .articleHeader .headerText {\n  margin-left: 20px;\n  color: #2b2a29;\n  font-size: 1.75rem;\n}\n.detail-view-wrapper .articleContent {\n  width: 90%;\n  padding: 8px;\n}\n"
+
+/***/ }),
+
+/***/ "./src/app/components/travel/article-detail-view/article-detail-view.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var ArticleDetailViewComponent = (function () {
+    function ArticleDetailViewComponent() {
+        this.detailViewClosing = new core_1.EventEmitter();
+    }
+    ArticleDetailViewComponent.prototype.ngOnInit = function () {
+    };
+    ArticleDetailViewComponent.prototype.closeDetailView = function () {
+        this.detailViewClosing.next();
+    };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], ArticleDetailViewComponent.prototype, "article", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], ArticleDetailViewComponent.prototype, "detailViewClosing", void 0);
+    ArticleDetailViewComponent = __decorate([
+        core_1.Component({
+            selector: 'article-detail-view',
+            template: __webpack_require__("./src/app/components/travel/article-detail-view/article-detail-view.component.html"),
+            styles: [__webpack_require__("./src/app/components/travel/article-detail-view/article-detail-view.component.less")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ArticleDetailViewComponent);
+    return ArticleDetailViewComponent;
+}());
+exports.ArticleDetailViewComponent = ArticleDetailViewComponent;
+
+
+/***/ }),
+
 /***/ "./src/app/components/travel/travel.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"travelSiteWrapper\">\r\n\r\n    <div class=\"content-area animated slideInLeft \">\r\n\r\n        <h2 class=\"content-area-header  \">Articles</h2>\r\n\r\n        <div class=\"articles\">\r\n            <div class=\"article animated fadeIn\" *ngFor=\"let article of renderedArticles\">\r\n                <div class=\"article-thumbnail test-article-1\"></div>\r\n                <div class=\"articleInfo\">\r\n                    <h3 class=\"article-title\">{{article.articleTitle}}</h3>\r\n                    <div class=\"article-description\">{{article.article}}</div>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n\r\n\r\n    </div>\r\n    <div class=\"timelineArea animated slideInRight\">\r\n        <h2 class=\"timelineHeader\">Timeline</h2>\r\n        <div class=\"timelineContent\">\r\n            <div class=\"timelineSection\" *ngFor=\"let timelineSection of timelineList\">\r\n                <div [class.active]=\"timelineActiveStateArray[timelineSection.id]\" class=\"timelineSectionHeader\" (click)=\"timelineYearSelected(timelineSection)\">{{timelineSection.year}}</div>\r\n                <div class=\"timelineSectionContent\">\r\n                    <span [class.active]=\"timelineActiveStateArray[articleGroupItem.id]\" class=\"timelineSectionItem\" *ngFor=\"let articleGroupItem of timelineSection.articleGroups\"\r\n                        (click)=\"articleGroupSelected(articleGroupItem)\">{{articleGroupItem.groupName}}</span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</div>"
+module.exports = "<div class=\"travelSiteWrapper\">\r\n    <!-- Dynamic Content Area -->\r\n    <modal-view class=\"editView\" (closing)=\"closeModal()\" *ngIf=\"editModalActive && articleToEdit\">\r\n        <div class=\"editViewContentWrapper\">\r\n            <input class=\"inputItem\" type=\"text\" [(ngModel)]=\"articleToEdit.articleTitle\">\r\n            <textarea class=\"inputItem\" type=\"text\" [(ngModel)]=\"articleToEdit.articleContent\"></textarea>\r\n            <input class=\"inputItem\" type=\"date\" [(ngModel)]=\"articleToEdit.articleDate.fullDate\">\r\n            <input class=\"inputItem\" type=\"text\" [(ngModel)]=\"articleToEdit.articleGroup\">\r\n\r\n            <div class=\"submitEditButton\" (click)=\"submitEdit()\">Submit</div>\r\n        </div>\r\n\r\n    </modal-view>\r\n\r\n    <article-detail-view class=\"animated fadeIn\" *ngIf=\"chosenArticle && detailViewShown\" [article]=\"chosenArticle\"\r\n        (detailViewClosing)=\"closeDetailView($event)\"></article-detail-view>\r\n\r\n    <!-- Static Content Area -->\r\n\r\n    <div class=\"content-area animated slideInLeft\" *ngIf=\"!detailViewShown\">\r\n\r\n        <h2 class=\"content-area-header\">Articles <span class=\"articleGroupSoecification\">{{selectedArticleGroup}}</span></h2>\r\n\r\n        <div class=\"articles\">\r\n            <div (click)=\"showDetailView(article)\" class=\"article animated fadeIn\" *ngFor=\"let article of renderedArticles\">\r\n                <div class=\"article-thumbnail\" [ngStyle]=\"{ 'background-image': 'url(' + article.thumbnailURL + ')'}\"></div>\r\n                <div class=\"articleInfo\">\r\n                    <div class=\"articleHeader\">\r\n                        <div class=\"article-title\">{{article.articleTitle}} <i (click)=\"editArticle($event, article)\"\r\n                                *ngIf=\"_authService.loggedIn()\" class=\"material-icons editButton\">edit</i></div>\r\n                        <span class=\"article-date\">{{article.articleDate.fullDate}}</span>\r\n                    </div>\r\n\r\n                    <div class=\"article-description\" [innerHTML]=\"article.articleContent\"></div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"timelineArea animated slideInRight\">\r\n        <h2 class=\"timelineHeader\">Timeline</h2>\r\n        <div class=\"timelineContent\">\r\n            <div class=\"timelineSection\" *ngFor=\"let timelineSection of timelineList\">\r\n                <div class=\"timelineSectionHeader\" [class.active]=\"timelineActiveStateArray[timelineSection._id]\"\r\n                    (click)=\"timelineYearSelected(timelineSection)\">{{timelineSection._id}}</div>\r\n                <div class=\"timelineSectionContent\">\r\n                    <span class=\"timelineSectionItem\" [class.active]=\"timelineActiveStateArray[articleGroupItem.articleGroup]\"\r\n                        (click)=\"articleGroupSelected(articleGroupItem)\" *ngFor=\"let articleGroupItem of timelineSection.articleGroups\">\r\n                        {{articleGroupItem.articleGroup}}\r\n                    </span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ "./src/app/components/travel/travel.component.less":
 /***/ (function(module, exports) {
 
-module.exports = "@font-face {\n  font-family: ComfortaaLight;\n  src: url('Comfortaa-Light.866333be226453f3a24c.ttf');\n}\n.defaultTextTransition {\n  -webkit-transition: color 200ms ease-in-out;\n  transition: color 200ms ease-in-out;\n}\n.quickAnimation {\n  -webkit-animation-duration: 300ms;\n  animation-duration: 300ms;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.animated-300ms {\n  -webkit-animation-duration: 300ms;\n  animation-duration: 300ms;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.animationFix {\n  -webkit-backface-visibility: hidden;\n  -webkit-transform: translateZ(0) scale(1, 1);\n  transform: translateZ(0);\n}\n.delay-100ms {\n  -webkit-animation-delay: 100ms;\n  animation-delay: 100ms;\n}\n.delay-200ms {\n  -webkit-animation-delay: 200ms;\n  animation-delay: 200ms;\n}\n.delay-300ms {\n  -webkit-animation-delay: 300ms;\n  animation-delay: 300ms;\n}\n.delay-400ms {\n  -webkit-animation-delay: 400ms;\n  animation-delay: 400ms;\n}\n.delay-500ms {\n  -webkit-animation-delay: 500ms;\n  animation-delay: 500ms;\n}\n.delay-600ms {\n  -webkit-animation-delay: 600ms;\n  animation-delay: 600ms;\n}\n.delay-700ms {\n  -webkit-animation-delay: 700ms;\n  animation-delay: 700ms;\n}\n.delay-800ms {\n  -webkit-animation-delay: 800ms;\n  animation-delay: 800ms;\n}\n.delay-900ms {\n  -webkit-animation-delay: 900ms;\n  animation-delay: 900ms;\n}\n.delay-1000ms {\n  -webkit-animation-delay: 1000ms;\n  animation-delay: 1000ms;\n}\n.delay-1100ms {\n  -webkit-animation-delay: 1100ms;\n  animation-delay: 1100ms;\n}\n.delay-1200ms {\n  -webkit-animation-delay: 1200ms;\n  animation-delay: 1200ms;\n}\n.delay-1300ms {\n  -webkit-animation-delay: 1300ms;\n  animation-delay: 1300ms;\n}\n.delay-1400ms {\n  -webkit-animation-delay: 1400ms;\n  animation-delay: 1400ms;\n}\n.delay-1500ms {\n  -webkit-animation-delay: 1500ms;\n  animation-delay: 1500ms;\n}\n.delay-1600ms {\n  -webkit-animation-delay: 1600ms;\n  animation-delay: 1600ms;\n}\n.delay-1700ms {\n  -webkit-animation-delay: 1700ms;\n  animation-delay: 1700ms;\n}\n.active {\n  font-weight: bold;\n  color: black;\n}\n@media screen and (min-width: calc(768px + 1px)) {\n  .travelSiteWrapper {\n    width: 100%;\n    min-height: 100%;\n    display: -ms-grid;\n    display: grid;\n    -ms-grid-rows: auto;\n        grid-template-rows: auto;\n    -ms-grid-columns: 70% 30%;\n        grid-template-columns: 70% 30%;\n        grid-template-areas: \"content timeline\";\n    padding: 0 5%;\n  }\n  .travelSiteWrapper .content-area {\n    -ms-grid-row: 1;\n    -ms-grid-column: 1;\n    grid-area: content;\n  }\n  .travelSiteWrapper .content-area .content-area-header {\n    width: 90%;\n    max-width: 850px;\n    margin-top: 50px;\n    padding-bottom: 8px;\n    border-bottom: 1px solid #aaa;\n  }\n  .travelSiteWrapper .content-area .articles .article {\n    height: 250px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    width: 90%;\n    max-width: 850px;\n    border: 1px solid #DDD;\n    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);\n            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);\n    margin: 30px 0;\n    cursor: pointer;\n    position: relative;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo {\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1;\n    padding: 16px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .article-title {\n    margin-bottom: 16px;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .article-description {\n    overflow: hidden;\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail {\n    width: 250px;\n    height: 250px;\n    background-size: cover;\n    background-repeat: no-repeat;\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-1 {\n    background-image: url('1.ff7f4ce8d17b815b1ba3.jpg');\n  }\n  .travelSiteWrapper .timelineArea {\n    -ms-grid-row: 1;\n    -ms-grid-column: 2;\n    grid-area: timeline;\n  }\n  .travelSiteWrapper .timelineArea .timelineHeader {\n    width: 80%;\n    margin: 50px 0 0 auto;\n    padding-bottom: 8px;\n    border-bottom: 1px solid #aaa;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent {\n    width: 80%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    margin: 20px 0 0 auto;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent:after {\n    content: \"\";\n    width: 11px;\n    height: 11px;\n    background: #5e5e5e;\n    border-radius: 50%;\n    position: relative;\n    left: 19px;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader {\n    padding: 8px;\n    position: relative;\n    cursor: pointer;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:before {\n    opacity: 0;\n    -webkit-transition: opacity 200ms ease-in-out;\n    transition: opacity 200ms ease-in-out;\n    content: \"\";\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:after {\n    content: \"\";\n    opacity: 0;\n    -webkit-transition: opacity 200ms ease-in-out;\n    transition: opacity 200ms ease-in-out;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:hover {\n    color: #000000;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:hover:before {\n    opacity: 1;\n    content: \"- \";\n    position: absolute;\n    left: -3px;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:hover:after {\n    opacity: 1;\n    content: \" -\";\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent {\n    margin-left: 24px;\n    padding-left: 24px;\n    border-left: 1px solid #aaa;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: start;\n        -ms-flex-align: start;\n            align-items: flex-start;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem {\n    margin: 8px;\n    padding: 8px;\n    cursor: pointer;\n    position: relative;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    -webkit-transition: color 200ms ease-in-out;\n    transition: color 200ms ease-in-out;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:before {\n    opacity: 0;\n    -webkit-transition: opacity 200ms ease-in-out;\n    transition: opacity 200ms ease-in-out;\n    content: \"\";\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:after {\n    content: \"\";\n    opacity: 0;\n    -webkit-transition: opacity 200ms ease-in-out, text-shadow 200ms ease-in-out;\n    transition: opacity 200ms ease-in-out, text-shadow 200ms ease-in-out;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:hover {\n    color: #000000;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:hover:before {\n    opacity: 1;\n    content: \"- \";\n    position: absolute;\n    left: -3px;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:hover:after {\n    opacity: 1;\n    content: \" -\";\n  }\n}\n@media screen and (max-width: 768px) {\n  .travelSiteWrapper {\n    padding: 6.5%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n  .travelSiteWrapper .content-area {\n    -webkit-box-ordinal-group: 3;\n        -ms-flex-order: 2;\n            order: 2;\n    margin-top: 30px;\n  }\n  .travelSiteWrapper .content-area .content-area-header {\n    border-bottom: 1px solid #aaa;\n  }\n  .travelSiteWrapper .content-area .articles .article {\n    height: 250px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    border: 1px solid #DDD;\n    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);\n            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);\n    margin: 30px 0;\n    position: relative;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo {\n    -webkit-box-ordinal-group: 2;\n        -ms-flex-order: 1;\n            order: 1;\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1;\n    padding: 8px;\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    background: rgba(255, 255, 255, 0.7);\n    position: absolute;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .article-title {\n    z-index: 1000;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .article-description {\n    overflow: hidden;\n    display: none;\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail {\n    -webkit-box-ordinal-group: 3;\n        -ms-flex-order: 2;\n            order: 2;\n    height: 100%;\n    background-size: cover;\n    background-repeat: no-repeat;\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-1 {\n    background-image: url('1.ff7f4ce8d17b815b1ba3.jpg');\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-2 {\n    background-image: url('5.32447c1a9a87e0147c31.jpg');\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail.test-article-3 {\n    background-image: url('15.274f144326b7d1f8f989.jpg');\n  }\n  .travelSiteWrapper .content-area .timelineArea {\n    -webkit-box-ordinal-group: 2;\n        -ms-flex-order: 1;\n            order: 1;\n  }\n  .travelSiteWrapper .content-area .timelineArea .timelineHeader {\n    border-bottom: 1px solid #aaa;\n  }\n}\n"
+module.exports = "@font-face {\n  font-family: ComfortaaLight;\n  src: url('Comfortaa-Light.866333be226453f3a24c.ttf');\n}\n.defaultTextTransition {\n  -webkit-transition: color 200ms ease-in-out;\n  transition: color 200ms ease-in-out;\n}\n.quickAnimation {\n  -webkit-animation-duration: 300ms;\n  animation-duration: 300ms;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.animated-300ms {\n  -webkit-animation-duration: 300ms;\n  animation-duration: 300ms;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.animationFix {\n  -webkit-backface-visibility: hidden;\n  -webkit-transform: translateZ(0) scale(1, 1);\n  transform: translateZ(0);\n}\n.delay-100ms {\n  -webkit-animation-delay: 100ms;\n  animation-delay: 100ms;\n}\n.delay-200ms {\n  -webkit-animation-delay: 200ms;\n  animation-delay: 200ms;\n}\n.delay-300ms {\n  -webkit-animation-delay: 300ms;\n  animation-delay: 300ms;\n}\n.delay-400ms {\n  -webkit-animation-delay: 400ms;\n  animation-delay: 400ms;\n}\n.delay-500ms {\n  -webkit-animation-delay: 500ms;\n  animation-delay: 500ms;\n}\n.delay-600ms {\n  -webkit-animation-delay: 600ms;\n  animation-delay: 600ms;\n}\n.delay-700ms {\n  -webkit-animation-delay: 700ms;\n  animation-delay: 700ms;\n}\n.delay-800ms {\n  -webkit-animation-delay: 800ms;\n  animation-delay: 800ms;\n}\n.delay-900ms {\n  -webkit-animation-delay: 900ms;\n  animation-delay: 900ms;\n}\n.delay-1000ms {\n  -webkit-animation-delay: 1000ms;\n  animation-delay: 1000ms;\n}\n.delay-1100ms {\n  -webkit-animation-delay: 1100ms;\n  animation-delay: 1100ms;\n}\n.delay-1200ms {\n  -webkit-animation-delay: 1200ms;\n  animation-delay: 1200ms;\n}\n.delay-1300ms {\n  -webkit-animation-delay: 1300ms;\n  animation-delay: 1300ms;\n}\n.delay-1400ms {\n  -webkit-animation-delay: 1400ms;\n  animation-delay: 1400ms;\n}\n.delay-1500ms {\n  -webkit-animation-delay: 1500ms;\n  animation-delay: 1500ms;\n}\n.delay-1600ms {\n  -webkit-animation-delay: 1600ms;\n  animation-delay: 1600ms;\n}\n.delay-1700ms {\n  -webkit-animation-delay: 1700ms;\n  animation-delay: 1700ms;\n}\n.active {\n  font-weight: bold;\n  color: black;\n}\n@media screen and (min-width: calc(768px + 1px)) {\n  .travelSiteWrapper {\n    width: 100%;\n    min-height: 100%;\n    display: -ms-grid;\n    display: grid;\n    -ms-grid-rows: auto;\n        grid-template-rows: auto;\n    -ms-grid-columns: 70% 30%;\n        grid-template-columns: 70% 30%;\n        grid-template-areas: \"content timeline\";\n    padding: 0 5%;\n  }\n  .travelSiteWrapper .content-area {\n    -ms-grid-row: 1;\n    -ms-grid-column: 1;\n    grid-area: content;\n  }\n  .travelSiteWrapper .content-area .content-area-header {\n    width: 90%;\n    max-width: 850px;\n    margin-top: 50px;\n    padding-bottom: 8px;\n    border-bottom: 1px solid #aaa;\n  }\n  .travelSiteWrapper .content-area .articles .article {\n    height: 250px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    width: 90%;\n    max-width: 850px;\n    border: 1px solid #DDD;\n    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);\n            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);\n    margin: 30px 0;\n    cursor: pointer;\n    position: relative;\n  }\n  .travelSiteWrapper .content-area .articles .article .wrapper {\n    background: grey;\n    width: 100%;\n    max-width: 800px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n  }\n  .travelSiteWrapper .content-area .articles .article .wrapper .header {\n    background: steelblue;\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    padding: 8px;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    margin-bottom: 30px;\n  }\n  .travelSiteWrapper .content-area .articles .article .wrapper .header .title {\n    background: orange;\n    font-size: 1.6rem;\n  }\n  .travelSiteWrapper .content-area .articles .article .wrapper .header .date {\n    background: limegreen;\n    margin: 16px;\n    margin-left: auto;\n  }\n  .travelSiteWrapper .content-area .articles .article .wrapper .content {\n    background: #444;\n    width: 100%;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo {\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1;\n    margin: 16px;\n    overflow: hidden;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .articleHeader {\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    margin-bottom: 16px;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .articleHeader .article-title {\n    width: 100%;\n    font-size: 1.4rem;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .articleHeader .article-title .editButton {\n    margin-left: 20px;\n    -webkit-transition: -webkit-transform 100ms ease-in-out;\n    transition: -webkit-transform 100ms ease-in-out;\n    transition: transform 100ms ease-in-out;\n    transition: transform 100ms ease-in-out, -webkit-transform 100ms ease-in-out;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .articleHeader .article-title .editButton:hover {\n    -webkit-transform: scale(1.2);\n            transform: scale(1.2);\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .articleHeader .article-date {\n    width: 100%;\n    margin-top: 8px;\n    margin-left: auto;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .article-description {\n    overflow: hidden;\n    width: 100%;\n    max-height: 9em;\n    position: relative;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .article-description:after {\n    content: \"...\";\n    position: absolute;\n    right: 8px;\n    bottom: 0;\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail {\n    width: 250px;\n    height: 100%;\n    background-size: cover;\n    background-repeat: no-repeat;\n  }\n  .travelSiteWrapper .timelineArea {\n    -ms-grid-row: 1;\n    -ms-grid-column: 2;\n    grid-area: timeline;\n  }\n  .travelSiteWrapper .timelineArea .timelineHeader {\n    width: 80%;\n    margin: 50px 0 0 auto;\n    padding-bottom: 8px;\n    border-bottom: 1px solid #aaa;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent {\n    width: 80%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    margin: 20px 0 0 auto;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent:after {\n    content: \"\";\n    width: 11px;\n    height: 11px;\n    background: #5e5e5e;\n    border-radius: 50%;\n    position: relative;\n    left: 19px;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader {\n    padding: 8px;\n    position: relative;\n    cursor: pointer;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:before {\n    opacity: 0;\n    -webkit-transition: opacity 200ms ease-in-out;\n    transition: opacity 200ms ease-in-out;\n    content: \"\";\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:after {\n    content: \"\";\n    opacity: 0;\n    -webkit-transition: opacity 200ms ease-in-out;\n    transition: opacity 200ms ease-in-out;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:hover {\n    color: #000000;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:hover:before {\n    opacity: 1;\n    content: \"- \";\n    position: absolute;\n    left: -3px;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionHeader:hover:after {\n    opacity: 1;\n    content: \" -\";\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent {\n    margin-left: 24px;\n    padding-left: 24px;\n    border-left: 1px solid #aaa;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: start;\n        -ms-flex-align: start;\n            align-items: flex-start;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem {\n    margin: 8px;\n    padding: 8px;\n    cursor: pointer;\n    position: relative;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    -webkit-transition: color 200ms ease-in-out;\n    transition: color 200ms ease-in-out;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:before {\n    opacity: 0;\n    -webkit-transition: opacity 200ms ease-in-out;\n    transition: opacity 200ms ease-in-out;\n    content: \"\";\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:after {\n    content: \"\";\n    opacity: 0;\n    -webkit-transition: opacity 200ms ease-in-out, text-shadow 200ms ease-in-out;\n    transition: opacity 200ms ease-in-out, text-shadow 200ms ease-in-out;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:hover {\n    color: #000000;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:hover:before {\n    opacity: 1;\n    content: \"- \";\n    position: absolute;\n    left: -3px;\n  }\n  .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem:hover:after {\n    opacity: 1;\n    content: \" -\";\n  }\n  .travelSiteWrapper .editViewContentWrapper {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n  .travelSiteWrapper .editViewContentWrapper .inputItem,\n  .travelSiteWrapper .editViewContentWrapper .submitEditButton {\n    margin: 16px;\n  }\n  .travelSiteWrapper .editViewContentWrapper .submitEditButton {\n    width: 100px;\n    background: #6FAC01;\n    padding: 8px;\n    cursor: pointer;\n  }\n}\n@media screen and (max-width: 768px) {\n  .travelSiteWrapper {\n    padding: 6.5%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n  .travelSiteWrapper .content-area {\n    -webkit-box-ordinal-group: 3;\n        -ms-flex-order: 2;\n            order: 2;\n    margin-top: 30px;\n  }\n  .travelSiteWrapper .content-area .content-area-header {\n    border-bottom: 1px solid #aaa;\n  }\n  .travelSiteWrapper .content-area .articles .article {\n    height: 250px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    border: 1px solid #DDD;\n    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);\n            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);\n    margin: 30px 0;\n    position: relative;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo {\n    -webkit-box-ordinal-group: 2;\n        -ms-flex-order: 1;\n            order: 1;\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1;\n    padding: 8px;\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    background: rgba(255, 255, 255, 0.7);\n    position: absolute;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .article-title {\n    z-index: 1000;\n  }\n  .travelSiteWrapper .content-area .articles .article .articleInfo .article-description {\n    overflow: hidden;\n    display: none;\n  }\n  .travelSiteWrapper .content-area .articles .article .article-thumbnail {\n    -webkit-box-ordinal-group: 3;\n        -ms-flex-order: 2;\n            order: 2;\n    height: 100%;\n    background-size: cover;\n    background-repeat: no-repeat;\n  }\n  .travelSiteWrapper .content-area .timelineArea {\n    -webkit-box-ordinal-group: 2;\n        -ms-flex-order: 1;\n            order: 1;\n  }\n  .travelSiteWrapper .content-area .timelineArea .timelineHeader {\n    border-bottom: 1px solid #aaa;\n  }\n}\n"
 
 /***/ }),
 
@@ -925,18 +1106,86 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var articles_service_1 = __webpack_require__("./src/app/services/articles.service.ts");
+var auth_service_1 = __webpack_require__("./src/app/services/auth.service.ts");
 var TravelComponent = (function () {
-    function TravelComponent() {
+    function TravelComponent(_articleService, _authService) {
+        this._articleService = _articleService;
+        this._authService = _authService;
         this.timelineActiveStateArray = [];
+        this.selectedArticleGroup = "";
+        this.allArticles = [];
+        this.detailViewShown = false;
+        this.editModalActive = false;
     }
     TravelComponent.prototype.ngOnInit = function () {
-        this.articles = []; //TODO: remove me when GET from backend
-        this.articleGroups = []; //TODO: remove me when GET from backend
+        //    this.articleGroups= []; //TODO: remove me when GET from backend
         this.timelineList = [];
         this.renderedArticles = [];
-        this.initArticles(); //TODO: remove me when GET from backend
-        this.initArticleGroups(); // TODO: Remove me when GET remove me when GET from backend
-        this.getArticleGroups();
+        // this.initArticles(); //TODO: remove me when GET from backend
+        // this.initArticleGroups(); // TODO: Remove me when GET remove me when GET from backend
+        // this.getArticleGroups();
+        this.loadArticles();
+        this.timelineActiveStateArray["initialKey"] = false;
+    };
+    TravelComponent.prototype.closeModal = function () {
+        this.editModalActive = false;
+    };
+    TravelComponent.prototype.editArticle = function (e, article) {
+        e.stopPropagation();
+        this.editModalActive = true;
+        this.articleToEdit = article;
+        console.log(this.articleToEdit);
+    };
+    TravelComponent.prototype.submitEdit = function () {
+        console.log(this.articleToEdit);
+        this._articleService.editArticle(this.articleToEdit);
+    };
+    /**
+     * Gets called when choosing an article
+     * @param article Chosen article the user selected
+     */
+    TravelComponent.prototype.showDetailView = function (article) {
+        this.detailViewShown = true;
+        this.chosenArticle = article;
+    };
+    /**
+     * Gets called when the detail-view component triggers the 'closingDetailView' event
+     */
+    TravelComponent.prototype.closeDetailView = function () {
+        this.detailViewShown = false;
+    };
+    /**
+     * Gets called when the request finished getting all articles and set the property value
+     */
+    TravelComponent.prototype.articlesLoaded = function () {
+        if (this.timelineList != null && this.timelineList.length > 0) {
+            this.setAllArticles();
+            console.log(this.timelineList);
+        }
+    };
+    /**
+     * gets all of the articles from the Group-section listed and pushes them into a single array
+     */
+    TravelComponent.prototype.setAllArticles = function () {
+        var _this = this;
+        this.timelineList.forEach(function (section) {
+            section.articleGroups.forEach(function (articleGroup) {
+                _this.allArticles = _this.allArticles.concat(articleGroup.articles);
+            });
+        });
+        this.timelineYearSelected(this.timelineList[0]);
+        //  this.allArticles.reverse();// Why exactly? doesnt array.concat push the elements in back?
+    };
+    TravelComponent.prototype.loadArticles = function () {
+        var _this = this;
+        this._articleService.getGroupedArticles().subscribe(function (articleResponseObject) {
+            _this.timelineList = articleResponseObject.articles;
+            _this.articlesLoaded();
+        }, function (err) {
+            console.log(err);
+            return false;
+        });
     };
     /**
      * Applies the filter when a year is chosen in the Timeline
@@ -945,129 +1194,56 @@ var TravelComponent = (function () {
     TravelComponent.prototype.timelineYearSelected = function (section) {
         var _this = this;
         this.renderedArticles = [];
-        if (section.year == "Now") {
-            this.renderedArticles = this.articles;
+        this.detailViewShown = false;
+        var currentYear = (new Date()).getFullYear();
+        if (section._id == currentYear.toString()) {
+            this.renderedArticles = this.allArticles;
+            this.setActiveFilterHeader(null);
         }
         else {
             section.articleGroups.forEach(function (articleGroup) {
-                _this.renderedArticles = _this.renderedArticles.concat(articleGroup.groupArticles);
+                _this.renderedArticles = _this.renderedArticles.concat(articleGroup.articles);
             });
+            this.setActiveFilterHeader(section._id);
         }
-        this.activateNode(section.id);
+        this.activateTimelineNode(section._id);
+        // this.activateNode(section._id);
     };
     /**
-     * Applies the filter for a specific articleGroup
-     * @param articleGroup selected ArticleGroup
-     */
+   * Applies the filter for a specific articleGroup
+   * @param articleGroup selected ArticleGroup
+   */
     TravelComponent.prototype.articleGroupSelected = function (articleGroup) {
+        this.detailViewShown = false;
         this.renderedArticles = [];
-        this.renderedArticles = this.renderedArticles.concat(articleGroup.groupArticles);
-        this.activateNode(articleGroup.id);
+        this.renderedArticles = this.renderedArticles.concat(articleGroup.articles);
+        this.activateTimelineNode(articleGroup.articleGroup); //articleGroup is actually the name for the group
+        //this.activateNode(articleGroup.id);
+        this.setActiveFilterHeader(articleGroup.articleGroup);
+    };
+    TravelComponent.prototype.setActiveFilterHeader = function (header) {
+        if (header != null) {
+            this.selectedArticleGroup = " - " + header;
+        }
+        else {
+            this.selectedArticleGroup = "";
+        }
     };
     /**
-     * Activates an entry of the Timeline. Section or Node
-     * @param id id of the selected Node
+     * Highlights the currently active Timeline Filter Node
+     * @param id Not actual any ID but what is given here will be stored as a key in an a associative array. Put _id (as sectionYear) or articleGroup (e.g "CDT") in here
      */
-    TravelComponent.prototype.activateNode = function (id) {
+    TravelComponent.prototype.activateTimelineNode = function (id) {
         var key;
         for (key in this.timelineActiveStateArray) {
             this.timelineActiveStateArray[key] = false;
             if (key == id) {
                 this.timelineActiveStateArray[key] = true;
             }
+            else {
+                this.timelineActiveStateArray["" + id] = true;
+            }
         }
-    };
-    /**
-     * Will be replaced ba a call GET '/getArticleGroups'
-     */
-    TravelComponent.prototype.getArticleGroups = function () {
-        var _this = this;
-        this.timelineList.push({
-            year: 2018,
-            articleGroups: [this.articleGroups[0], this.articleGroups[1], this.articleGroups[2]],
-            id: "0"
-        }, {
-            year: 2017,
-            articleGroups: [this.articleGroups[3], this.articleGroups[4]],
-            id: "1"
-        }, {
-            year: 2016,
-            articleGroups: [this.articleGroups[5]],
-            id: "2"
-        });
-        if (this.timelineList.length != 0) {
-            this.timelineList[0].year = "Now";
-        }
-        this.timelineList.forEach(function (section) {
-            _this.timelineActiveStateArray[section.id] = false;
-        });
-    };
-    //TODO: Gets Remove when GETting from backend
-    TravelComponent.prototype.initArticles = function () {
-        this.articles.push({
-            articleTitle: "Trip to CDT 1",
-            article: ""
-        }, {
-            articleTitle: "Now on CDT 2",
-            article: ""
-        }, {
-            articleTitle: "Almost done",
-            article: ""
-        }, {
-            articleTitle: "Trip to South Africa",
-            article: ""
-        }, {
-            articleTitle: "Trip to Scotland",
-            article: ""
-        }, {
-            articleTitle: "Trip to Poland",
-            article: ""
-        }, {
-            articleTitle: "Trip to Pyrenees",
-            article: ""
-        }, {
-            articleTitle: "Trip to Norway",
-            article: ""
-        });
-        this.renderedArticles = this.articles;
-    };
-    //TODO: Gets removed when GETting from backend
-    TravelComponent.prototype.initArticleGroups = function () {
-        var _this = this;
-        this.articleGroups.push({
-            groupName: "CDT",
-            groupYear: 2018,
-            groupArticles: [this.articles[0], this.articles[1], this.articles[2]],
-            id: "10"
-        }, {
-            groupName: "South Africa",
-            groupYear: 2018,
-            groupArticles: [this.articles[3]],
-            id: "11"
-        }, {
-            groupName: "Scotland",
-            groupYear: 2018,
-            groupArticles: [this.articles[4]],
-            id: "12"
-        }, {
-            groupName: "Poland",
-            groupYear: 2017,
-            groupArticles: [this.articles[5]],
-            id: "13"
-        }, {
-            groupName: "Pyrenees",
-            groupYear: 2017,
-            groupArticles: [this.articles[6]],
-            id: "14"
-        }, {
-            groupName: "Norway",
-            groupYear: 2016,
-            groupArticles: [this.articles[7]],
-            id: "15"
-        });
-        this.articleGroups.forEach(function (articleGroup) {
-            _this.timelineActiveStateArray[articleGroup.id] = false;
-        });
     };
     TravelComponent = __decorate([
         core_1.Component({
@@ -1075,11 +1251,145 @@ var TravelComponent = (function () {
             template: __webpack_require__("./src/app/components/travel/travel.component.html"),
             styles: [__webpack_require__("./src/app/components/travel/travel.component.less")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [articles_service_1.ArticlesService,
+            auth_service_1.AuthService])
     ], TravelComponent);
     return TravelComponent;
 }());
 exports.TravelComponent = TravelComponent;
+/**
+ * Will be replaced ba a call GET '/getArticleGroups'
+ */
+// private getArticleGroups(){
+//     this.timelineList.push(
+//       {
+//       year: 2018,
+//       articleGroups: [this.articleGroups[0],this.articleGroups[1],this.articleGroups[2]],
+//       id: "0"
+//       },
+//       {
+//         year: 2017,
+//         articleGroups: [this.articleGroups[3],this.articleGroups[4]],
+//         id: "1"
+//       },
+//       {
+//         year: 2016,
+//         articleGroups: [this.articleGroups[5]],
+//         id: "2"
+//       }  
+//     )
+//     if(this.timelineList.length!= 0){
+//       this.timelineList[0].year= "Now"
+//     }
+//     this.timelineList.forEach((section)=>{
+//       this.timelineActiveStateArray[section.id]=false
+//     })
+// }
+// //TODO: Gets Remove when GETting from backend
+// initArticles(){
+//   this.articles.push( 
+//   {
+//     articleTitle: "Trip to CDT 1",
+//     article: ""
+//   },
+//   {
+//     articleTitle: "Now on CDT 2",
+//     article: ""
+//   },
+//   {
+//     articleTitle: "Almost done",
+//     article: ""
+//   },
+//   {
+//     articleTitle: "Trip to South Africa",
+//     article: ""
+//   },
+//   {
+//     articleTitle: "Trip to Scotland",
+//     article: ""
+//   },
+//   {
+//     articleTitle: "Trip to Poland",
+//     article: ""
+//   },
+//   {
+//     articleTitle: "Trip to Pyrenees",
+//     article: ""
+//   },
+//   {
+//     articleTitle: "Trip to Norway",
+//     article: ""
+//   })
+//   this.renderedArticles= this.articles;
+// }
+// //TODO: Gets removed when GETting from backend
+// initArticleGroups(){
+//   this.articleGroups.push({
+//     groupName: "CDT",
+//     groupYear: 2018,
+//     groupArticles:[this.articles[0],this.articles[1],this.articles[2]],
+//     id: "10"
+//   },
+//   {
+//     groupName: "South Africa",
+//     groupYear: 2018,
+//     groupArticles:[this.articles[3]],
+//     id: "11"
+//   },
+//   {
+//     groupName: "Scotland",
+//     groupYear: 2018,
+//     groupArticles:[this.articles[4]],
+//     id: "12"
+//   },
+//   {
+//     groupName: "Poland",
+//     groupYear: 2017,
+//     groupArticles:[this.articles[5]],
+//     id: "13"
+//   },
+//   {
+//     groupName: "Pyrenees",
+//     groupYear: 2017,
+//     groupArticles:[this.articles[6]],
+//     id: "14"
+//   },
+//   {
+//     groupName: "Norway",
+//     groupYear: 2016,
+//     groupArticles:[this.articles[7]],
+//     id: "15"
+//   }
+//   )
+//   this.articleGroups.forEach((articleGroup)=>{
+//     this.timelineActiveStateArray[articleGroup.id]=false;
+//   });
+// }
+// {"_id" : "asd","articleTitle":"PostTrail","articleContent":"I am its contente","articleDate" : {"year" : "2018","fullDate" : "15-12-2018"},"group" : "CDTT"}
+// {_id:"sad547er4w2v5x85b8", name:"Jhon", jobTime:600, floor:2, dept:5, age:25},
+// {age:22, floors:[{floor:2,persons:[{name:"Anne",jobTime:280,dept:8}]}]},
+// {year:2017, articleGroups:[{name:"cdt",articles:[{name:"Anne",jobTime:280,dept:8}]}]}
+// db.articles.aggregate([  { "$group": {    "_id": {      "year": "$articleDate.year",      "articleGroup": "$group",    },    "articles": { "$push": {      "articleTitle": "$articleTitle",      "articleContent": "$articleContent",      "articleDate": "$articleDate",      "articleGroup": "$group"    }}  }},  { "$group": {    "_id": "$_id.year","articleGroups": { "$push": {"articleGroup": "$_id.articleGroup","articles": "$articles",}}}}]).pretty()
+// [
+//   { "$group": {
+//     "_id": {
+//       "age": "$age",
+//       "floor": "$floor",
+//     },
+//     "persons": { "$push": {
+//       "name": "$name",
+//       "jobTime": "$jobTime",
+//       "dept": "$dept"
+//     }}
+//   }},
+//   { "$group": {
+//     "_id": "$_id.age",
+//     "floors": { "$push": {
+//       "floor": "$_id.floor",
+//       "persons": "$persons"
+//     }}
+//   }}
+// ]
 
 
 /***/ }),
@@ -1087,7 +1397,7 @@ exports.TravelComponent = TravelComponent;
 /***/ "./src/app/components/work/work.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 class=\"page-header\">Work</h2>\r\n<p>Welcome to my Work</p>\r\n"
+module.exports = "<p>Im the work component</p>\r\n\r\n\r\n<modal-view title=\"dynamicTitle\">\r\n    This content comes from the parent component.\r\n    I want to add some <b>HTML content</b>\r\n    into it with dynamic expressions to display the {{name}}\r\n    of the current user.\r\n</modal-view>"
 
 /***/ }),
 
@@ -1194,19 +1504,47 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var http_1 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
+var image_upload_service_1 = __webpack_require__("./src/app/services/image-upload.service.ts");
 var ArticlesService = (function () {
-    function ArticlesService(http) {
+    function ArticlesService(http, _imgService) {
         this.http = http;
+        this._imgService = _imgService;
     }
-    ArticlesService.prototype.addArticle = function (article) {
+    ArticlesService.prototype.addArticle = function (article, thumbnail) {
+        var _this = this;
+        this._imgService.uploadImage(thumbnail).subscribe((function (res) {
+            var uploadData = JSON.parse(res._body);
+            var myThumbnailURL = "uploads/" + uploadData.file.filename; // concat instead of take finished '//' escaped string
+            //TO this after thumbnail is uploaded
+            var newArticle = {
+                articleTitle: article.articleTitle,
+                articleContent: article.articleContent,
+                articleDate: article.articleDate,
+                group: article.group,
+                thumbnailURL: myThumbnailURL
+            };
+            var headers = new http_1.Headers();
+            headers.append('Content-Type', 'application/json');
+            _this.http.post('articles/addArticle', newArticle, { headers: headers }).subscribe(function (answer) {
+                console.log(answer);
+            });
+        }));
+    };
+    ArticlesService.prototype.editArticle = function (updatedArticle) {
         var headers = new http_1.Headers();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('articles/addArticle', article, { headers: headers })
-            .map(function (res) { return res.json(); });
+        var id = updatedArticle.id;
+        this.http.post('/editArticle', { id: id, updatedArticle: updatedArticle }, { headers: headers }).subscribe(function (answer) {
+            console.log(answer);
+        });
+    };
+    ArticlesService.prototype.getGroupedArticles = function () {
+        return this.http.get('articles/loadGroupedArticles').map(function (res) { return res.json(); });
     };
     ArticlesService = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.Http])
+        __metadata("design:paramtypes", [http_1.Http,
+            image_upload_service_1.ImageUploadService])
     ], ArticlesService);
     return ArticlesService;
 }());
@@ -1319,6 +1657,43 @@ var CompCommunicationService = (function () {
     return CompCommunicationService;
 }());
 exports.CompCommunicationService = CompCommunicationService;
+
+
+/***/ }),
+
+/***/ "./src/app/services/image-upload.service.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var http_1 = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
+var ImageUploadService = (function () {
+    function ImageUploadService(http) {
+        this.http = http;
+    }
+    ImageUploadService.prototype.uploadImage = function (image) {
+        var fd = new FormData();
+        fd.append('imageData', image, image.name);
+        return this.http.post('/uploadFile', fd);
+    };
+    ImageUploadService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.Http])
+    ], ImageUploadService);
+    return ImageUploadService;
+}());
+exports.ImageUploadService = ImageUploadService;
 
 
 /***/ }),

@@ -69,7 +69,7 @@ app.get('*', (req, res) => {
 //File Upload
 
 const storage = multer.diskStorage({
-  destination: './public/uploads/',
+  destination: './public/assets/uploads/',
   filename: function(req, file, cb){
     cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
   }

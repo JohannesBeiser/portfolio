@@ -12,7 +12,8 @@ export interface iArticle{
   articleContent:String,
   articleDate: iDate,
   group: String,
-  thumbnailURL: String
+  thumbnailURL: String,
+  id?: any
 }
 
 
@@ -29,7 +30,7 @@ export class ArticlesService {
     this._imgService.uploadImage(thumbnail).subscribe(((res: any) => {
       let uploadData = JSON.parse(res._body)
       
-      let myThumbnailURL = "" + uploadData.file.destination + uploadData.file.filename; // concat instead of take finished '//' escaped string
+      let myThumbnailURL = "uploads/" + uploadData.file.filename; // concat instead of take finished '//' escaped string
       //TO this after thumbnail is uploaded
       let newArticle: iArticle = {
         articleTitle: article.articleTitle,
@@ -38,7 +39,6 @@ export class ArticlesService {
         group: article.group,
         thumbnailURL: myThumbnailURL
       }
-      console.log(newArticle);
       
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
@@ -47,6 +47,17 @@ export class ArticlesService {
       })
 
     }));
+  }
+
+  public editArticle(updatedArticle: iArticle){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let id= updatedArticle.id;
+    this.http.post('/editArticle', {id:id, updatedArticle:updatedArticle}, {headers:headers}).subscribe(answer=>{
+      console.log(answer);
+      
+    })
+
   }
 
   public getGroupedArticles(){

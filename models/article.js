@@ -29,6 +29,24 @@ const ArticleSchema = mongoose.Schema ({
 
 const Article = module.exports = mongoose.model('Article', ArticleSchema);
 
+module.exports.getArticleById = function(id, callback) {
+  Article.findById(id, callback);
+}
+
+module.exports.editArticle=function(id, updatedArticle, callback){
+  Article.update(
+    { _id: id},
+    {$set: {
+      'articleTitle' : updatedArticle.title,
+      'articleContent' : updatedArticle.content,
+     /* 'articleDate.fullDate' : updatedArticle.date.fullDate,
+      'articleDate.year': updatedArticle.date.year,*/
+      'group' : updatedArticle.group }
+    },callback
+  )
+}
+
+
 module.exports.addArticle = function(newArticle, callback) {
     newArticle.save(callback);
 }
@@ -45,6 +63,7 @@ module.exports.getGroupedArticles = function(callback){
             },
             "articles": {
               "$push": {
+                "id": "$_id",
                 "articleTitle": "$articleTitle",
                 "articleContent": "$articleContent",
                 "articleDate": "$articleDate",
@@ -64,6 +83,9 @@ module.exports.getGroupedArticles = function(callback){
             }
           }
         }
+      },
+      {
+        $sort: {_id: -1}
       }
     ],callback)
   }

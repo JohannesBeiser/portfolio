@@ -24,6 +24,23 @@ router.post('/addArticle', (req,res,next)=>{
     });
 });
 
+
+/**
+ * TODO:
+ * build request in service with upodated article structure in mind
+ * maybe change structure tzo how it actually looks like article.date.fullyear instead of flat
+ * 
+ */
+router.post('/editArticle', (req, res, next)=>{
+    Article.editArticle(req.body.id, req.body.updatedArticle, (err, res)=>{
+        if(err){
+            res.json({success: false, err: err})
+        }else{
+            res.json({success: true, msg: "successfully edited article"})
+        }
+    })
+})
+
 router.get('/loadGroupedArticles', (req,res,next)=>{
     Article.getGroupedArticles((err, result)=>{
         if(err){
