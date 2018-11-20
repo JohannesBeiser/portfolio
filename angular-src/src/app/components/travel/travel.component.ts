@@ -105,6 +105,7 @@ export class TravelComponent implements OnInit {
                 break;
               } else if (i == tempSortedArticlesArray.length - 1) {
                 tempSortedArticlesArray.push(articleToSort);//must be oldest if couldt splice in before
+                break;
               }
             }
           }
