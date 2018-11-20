@@ -1183,6 +1183,7 @@ var TravelComponent = (function () {
                             }
                             else if (i == tempSortedArticlesArray.length - 1) {
                                 tempSortedArticlesArray.push(articleToSort); //must be oldest if couldt splice in before
+                                break;
                             }
                         }
                     }
