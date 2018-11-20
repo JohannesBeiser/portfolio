@@ -9,11 +9,12 @@ import { ThrowStmt } from '@angular/compiler';//TODO: where does this come from?
 })
 export class DashboardComponent implements OnInit {
 
-  public chosenThumbnail;
+  public thumbnailAsBase64String: string;
   public chosenArticleTitle: string = "";
   public chosenArticleContent: String = "";
   public chosenArticleGroup: String = "";
   public chosenArticleDate: Date;
+  public fileReader: FileReader;
 
   constructor(
     private _imgUpload: ImageUploadService,
@@ -21,10 +22,13 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.fileReader  = new FileReader();
+    this.fileReader.addEventListener("load", ()=> {
+      this.thumbnailAsBase64String = this.fileReader.result.toString();      
+    }, false);
   }
 
   private submitPressed() {
-    // this._imgUpload.uploadImage(this.chosenThumbnail);
 
     let parsedDate = new Date(this.chosenArticleDate)
 
@@ -37,14 +41,17 @@ export class DashboardComponent implements OnInit {
       articleTitle: this.chosenArticleTitle,
       articleContent: this.chosenArticleContent,
       articleDate: dateObject,
-      group: this.chosenArticleGroup
+      group: this.chosenArticleGroup,
+      thumbnail: this.thumbnailAsBase64String
     }
-    this._articleService.addArticle(newArticle, this.chosenThumbnail);
+   this._articleService.addArticle(newArticle);
   }
 
 
   private fileChanged(event) {
-    this.chosenThumbnail = event.target.files[0]
+    let chosenThumbnail = event.target.files[0]
+    this.fileReader.readAsDataURL(chosenThumbnail);
+
     // var target: HTMLInputElement = event.target as HTMLInputElement;
     // for(var i=0;i < target.files.length; i++) {
     //     this._imgUpload.uploadImage(target.files[i]).subscribe((resObj)=>{

@@ -21,7 +21,7 @@ const ArticleSchema = mongoose.Schema ({
     type: String,
     required: true
   },
-  thumbnailURL: {
+  thumbnailUrl: {
     type: String,
     required: true
   }
@@ -37,11 +37,13 @@ module.exports.editArticle=function(id, updatedArticle, callback){
   Article.update(
     { _id: id},
     {$set: {
-      'articleTitle' : updatedArticle.title,
-      'articleContent' : updatedArticle.content,
-     /* 'articleDate.fullDate' : updatedArticle.date.fullDate,
-      'articleDate.year': updatedArticle.date.year,*/
-      'group' : updatedArticle.group }
+      'articleTitle' : updatedArticle.articleTitle,
+      'articleContent' : updatedArticle.articleContent,
+      'articleDate.fullDate' : updatedArticle.articleDate.fullDate,
+      'articleDate.year': updatedArticle.articleDate.year,
+      'group' : updatedArticle.articleGroup,
+      'thumbnailUrl': updatedArticle.thumbnailUrl
+    }
     },callback
   )
 }
@@ -50,6 +52,13 @@ module.exports.editArticle=function(id, updatedArticle, callback){
 module.exports.addArticle = function(newArticle, callback) {
     newArticle.save(callback);
 }
+
+module.exports.deleteArticle = function (id, callback) {
+    Article.remove(
+        {_id: id},
+        callback
+   );
+};
 
 module.exports.getGroupedArticles = function(callback){
     // return with the right query
@@ -68,7 +77,7 @@ module.exports.getGroupedArticles = function(callback){
                 "articleContent": "$articleContent",
                 "articleDate": "$articleDate",
                 "articleGroup": "$group",
-                "thumbnailURL": "$thumbnailURL"
+                "thumbnailUrl": "$thumbnailUrl"
               }
             }
           }

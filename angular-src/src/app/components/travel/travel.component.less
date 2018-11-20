@@ -95,6 +95,7 @@
                                         transform: scale(1.2);
                                     }
                                 }
+                               
                             }
                             .article-date{
                                 width: 100%;
@@ -234,7 +235,7 @@
         .editViewContentWrapper{
             display: flex;
             flex-direction: column;
-            .inputItem, .submitEditButton{
+            .inputItem, .submitEditButton, .deleteButton{
                 margin: 16px;
             }
             .submitEditButton{
@@ -242,6 +243,12 @@
                 background: #6FAC01;
                 padding: 8px;
                 cursor: pointer;
+            }
+            .deleteButton{
+                width: 100px;
+                background: rgb(196, 52, 42);
+                padding: 8px;
+                cursor: pointer;                  
             }
         }
     }
@@ -254,7 +261,7 @@
         flex-direction: column;
         .content-area {
             order: 2;
-            margin-top: 30px;
+           // margin-top: 30px;
             .content-area-header {
                 border-bottom: @defaultBorder;
             }
@@ -277,9 +284,16 @@
                         background: rgba(255, 255, 255, 0.7);
                         position: absolute;
                         
-                        .article-title {
-                            z-index: 1000;
+                        .articleHeader{
+                            display: flex;
+                            .article-title {
+                                z-index: 1000;
+                            }
+                            .article-date{
+                                margin-left: auto
+                            }
                         }
+                        
                         .article-description {
                             overflow: hidden;
                             display: none;
@@ -297,10 +311,34 @@
                     }
                 }
             }
-            .timelineArea {
-                order: 1;
-                .timelineHeader {
-                    border-bottom: @defaultBorder;
+           
+        }
+
+        .timelineArea {
+            display: none !important;
+
+            .timelineHeader {
+                border-bottom: @defaultBorder;
+            }
+        }
+
+        .timelineAreaMobile{
+            width: 100%;
+            height: 75px;
+            overflow: hidden;
+            .innerScrollWrapper{
+                overflow-x: scroll;
+                display: flex;
+                width: 100%;
+                height: 100%;
+                padding-bottom: 17px; /* Increase/decrease this value for cross-browser compatibility */
+                box-sizing: content-box; /* So the width will be 100% + 17px */
+                .testChild{
+                    width: 100px;
+                    background: red;
+                    margin: 0 8px;
+                    min-width: 100px;
+
                 }
             }
         }

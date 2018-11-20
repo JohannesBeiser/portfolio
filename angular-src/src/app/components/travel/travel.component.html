@@ -4,10 +4,13 @@
         <div class="editViewContentWrapper">
             <input class="inputItem" type="text" [(ngModel)]="articleToEdit.articleTitle">
             <textarea class="inputItem" type="text" [(ngModel)]="articleToEdit.articleContent"></textarea>
-            <input class="inputItem" type="date" [(ngModel)]="articleToEdit.articleDate.fullDate">
+            <input class="inputItem" type="date" [(ngModel)]="articleEditDateRaw">
             <input class="inputItem" type="text" [(ngModel)]="articleToEdit.articleGroup">
+            <input type="file" (change)="fileChanged($event)">
 
             <div class="submitEditButton" (click)="submitEdit()">Submit</div>
+            <div class="deleteButton" (click)="deleteArticle()">Delete</div>
+
         </div>
 
     </modal-view>
@@ -23,12 +26,12 @@
 
         <div class="articles">
             <div (click)="showDetailView(article)" class="article animated fadeIn" *ngFor="let article of renderedArticles">
-                <div class="article-thumbnail" [ngStyle]="{ 'background-image': 'url(' + article.thumbnailURL + ')'}"></div>
+                <div class="article-thumbnail" [ngStyle]="{ 'background-image': 'url(' + article.thumbnailUrl + ')'}"></div>
                 <div class="articleInfo">
                     <div class="articleHeader">
                         <div class="article-title">{{article.articleTitle}} <i (click)="editArticle($event, article)"
                                 *ngIf="_authService.loggedIn()" class="material-icons editButton">edit</i></div>
-                        <span class="article-date">{{article.articleDate.fullDate}}</span>
+                        <span class="article-date">{{getFormattedDate(article.articleDate.fullDate)}}</span>
                     </div>
 
                     <div class="article-description" [innerHTML]="article.articleContent"></div>
@@ -41,7 +44,10 @@
         <div class="timelineContent">
             <div class="timelineSection" *ngFor="let timelineSection of timelineList">
                 <div class="timelineSectionHeader" [class.active]="timelineActiveStateArray[timelineSection._id]"
-                    (click)="timelineYearSelected(timelineSection)">{{timelineSection._id}}</div>
+                    (click)="timelineYearSelected(timelineSection)">
+                    <span *ngIf="timelineSection._id != currentYear">{{timelineSection._id}}</span>
+                    <span *ngIf="timelineSection._id == currentYear">Now</span>
+                </div>
                 <div class="timelineSectionContent">
                     <span class="timelineSectionItem" [class.active]="timelineActiveStateArray[articleGroupItem.articleGroup]"
                         (click)="articleGroupSelected(articleGroupItem)" *ngFor="let articleGroupItem of timelineSection.articleGroups">
@@ -51,4 +57,31 @@
             </div>
         </div>
     </div>
+
+    <div class="timelineAreaMobile animated slideInRight">
+        <div class="innerScrollWrapper">
+            <div class="testChild"></div>
+            <div class="testChild"></div>
+            <div class="testChild"></div>
+            <div class="testChild"></div>
+            <div class="testChild"></div>
+            <div class="testChild"></div>
+            <div class="testChild"></div>
+            <div class="testChild"></div>
+            <div class="testChild"></div>
+            <div class="testChild"></div>
+            <div class="testChild"></div>
+            <div class="testChild"></div>
+            <div class="testChild"></div>
+            <div class="testChild"></div>
+            <div class="testChild"></div>
+            <div class="testChild"></div>
+            <div class="testChild"></div>
+            <div class="testChild"></div>
+            <div class="testChild"></div>
+            <div class="testChild"></div>
+        </div>
+
+    </div>
+
 </div>

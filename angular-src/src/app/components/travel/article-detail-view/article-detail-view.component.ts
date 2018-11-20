@@ -1,7 +1,7 @@
 import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
 // import { iArticle } from '../travel.component';
 import { iArticle } from "../../../services/articles.service";
-
+import { DateHelper } from "../../../helperClasses/validation";
 
 @Component({
   selector: 'article-detail-view',
@@ -13,7 +13,7 @@ export class ArticleDetailViewComponent implements OnInit {
   @Output() detailViewClosing = new EventEmitter();
 
   constructor(
-
+    private _dateHelper: DateHelper
   ) { }
   
 
@@ -22,5 +22,9 @@ export class ArticleDetailViewComponent implements OnInit {
 
   private closeDetailView(){
     this.detailViewClosing.next();
+  }
+
+  public getFormattedDate(date: string){
+    return this._dateHelper.getSimplifiedDate(new Date(date));
   }
 }

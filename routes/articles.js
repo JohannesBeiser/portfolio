@@ -11,10 +11,8 @@ router.post('/addArticle', (req,res,next)=>{
         articleContent: req.body.articleContent,
         articleDate: req.body.articleDate,
         group: req.body.group,
-        thumbnailURL: req.body.thumbnailURL
-    });
-    console.log(newArticle);
-    
+        thumbnailUrl: req.body.thumbnailUrl
+    });    
     Article.addArticle(newArticle, (err, article) =>{
         if(err){
             res.json({success: false, msg: "Failed to add the Article"});
@@ -32,14 +30,26 @@ router.post('/addArticle', (req,res,next)=>{
  * 
  */
 router.post('/editArticle', (req, res, next)=>{
-    Article.editArticle(req.body.id, req.body.updatedArticle, (err, res)=>{
+    Article.editArticle(req.body.id, req.body.updatedArticle, (err, result)=>{
         if(err){
             res.json({success: false, err: err})
         }else{
-            res.json({success: true, msg: "successfully edited article"})
+            res.json({success: true, msg: "successfully edited article"});
         }
     })
 })
+
+
+router.post('/deleteArticle', (req,res, next)=>{    
+    Article.deleteArticle(req.body.id, (err, result)=>{
+        if(err){
+            res.send({success: false, msg: "Couldn't delete Article", err: err});
+        }else{
+            res.send({success: true, msg: "Delete sccessful "});
+        }
+    });
+});
+
 
 router.get('/loadGroupedArticles', (req,res,next)=>{
     Article.getGroupedArticles((err, result)=>{

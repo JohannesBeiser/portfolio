@@ -37,6 +37,7 @@ import { AuthService } from './services/auth.service';
 import { ModalService } from "./services/modal.service";
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
+import { DateHelper } from "./helperClasses/validation";
 
 const appRoutes: Routes =  [
   {path:'', component: HomeComponent},
@@ -75,7 +76,7 @@ const appRoutes: Routes =  [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule.forRoot()
   ],
-  providers: [ValidateService, AuthService, AuthGuard, ModalService, CompCommunicationService, ArticlesService,ImageUploadService],
+  providers: [ValidateService, AuthService, AuthGuard, ModalService, CompCommunicationService, ArticlesService,ImageUploadService, DateHelper],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
