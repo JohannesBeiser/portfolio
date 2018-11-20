@@ -266,9 +266,13 @@ var DashboardComponent = (function () {
         this.chosenArticleGroup = "";
     }
     DashboardComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.fileReader = new FileReader();
+        this.fileReader.addEventListener("load", function () {
+            _this.thumbnailAsBase64String = _this.fileReader.result.toString();
+        }, false);
     };
     DashboardComponent.prototype.submitPressed = function () {
-        // this._imgUpload.uploadImage(this.chosenThumbnail);
         var parsedDate = new Date(this.chosenArticleDate);
         var dateObject = {
             year: parsedDate.getFullYear().toString(),
@@ -278,12 +282,14 @@ var DashboardComponent = (function () {
             articleTitle: this.chosenArticleTitle,
             articleContent: this.chosenArticleContent,
             articleDate: dateObject,
-            group: this.chosenArticleGroup
+            group: this.chosenArticleGroup,
+            thumbnail: this.thumbnailAsBase64String
         };
-        this._articleService.addArticle(newArticle, this.chosenThumbnail);
+        this._articleService.addArticle(newArticle);
     };
     DashboardComponent.prototype.fileChanged = function (event) {
-        this.chosenThumbnail = event.target.files[0];
+        var chosenThumbnail = event.target.files[0];
+        this.fileReader.readAsDataURL(chosenThumbnail);
         // var target: HTMLInputElement = event.target as HTMLInputElement;
         // for(var i=0;i < target.files.length; i++) {
         //     this._imgUpload.uploadImage(target.files[i]).subscribe((resObj)=>{
@@ -1085,7 +1091,7 @@ exports.ArticleDetailViewComponent = ArticleDetailViewComponent;
 /***/ "./src/app/components/travel/travel.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"travelSiteWrapper\">\r\n    <!-- Dynamic Content Area -->\r\n    <modal-view class=\"editView\" (closing)=\"closeModal()\" *ngIf=\"editModalActive && articleToEdit\">\r\n        <div class=\"editViewContentWrapper\">\r\n            <input class=\"inputItem\" type=\"text\" [(ngModel)]=\"articleToEdit.articleTitle\">\r\n            <textarea class=\"inputItem\" type=\"text\" [(ngModel)]=\"articleToEdit.articleContent\"></textarea>\r\n            <input class=\"inputItem\" type=\"date\" [(ngModel)]=\"articleEditDateRaw\">\r\n            <input class=\"inputItem\" type=\"text\" [(ngModel)]=\"articleToEdit.articleGroup\">\r\n\r\n            <div class=\"submitEditButton\" (click)=\"submitEdit()\">Submit</div>\r\n            <div class=\"deleteButton\" (click)=\"deleteArticle()\">Delete</div>\r\n\r\n        </div>\r\n\r\n    </modal-view>\r\n\r\n    <article-detail-view class=\"animated fadeIn\" *ngIf=\"chosenArticle && detailViewShown\" [article]=\"chosenArticle\"\r\n        (detailViewClosing)=\"closeDetailView($event)\"></article-detail-view>\r\n\r\n    <!-- Static Content Area -->\r\n\r\n    <div class=\"content-area animated slideInLeft\" *ngIf=\"!detailViewShown\">\r\n\r\n        <h2 class=\"content-area-header\">Articles <span class=\"articleGroupSoecification\">{{selectedArticleGroup}}</span></h2>\r\n\r\n        <div class=\"articles\">\r\n            <div (click)=\"showDetailView(article)\" class=\"article animated fadeIn\" *ngFor=\"let article of renderedArticles\">\r\n                <div class=\"article-thumbnail\" [ngStyle]=\"{ 'background-image': 'url(' + article.thumbnailURL + ')'}\"></div>\r\n                <div class=\"articleInfo\">\r\n                    <div class=\"articleHeader\">\r\n                        <div class=\"article-title\">{{article.articleTitle}} <i (click)=\"editArticle($event, article)\"\r\n                                *ngIf=\"_authService.loggedIn()\" class=\"material-icons editButton\">edit</i></div>\r\n                        <span class=\"article-date\">{{getFormattedDate(article.articleDate.fullDate)}}</span>\r\n                    </div>\r\n\r\n                    <div class=\"article-description\" [innerHTML]=\"article.articleContent\"></div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"timelineArea animated slideInRight\">\r\n        <h2 class=\"timelineHeader\">Timeline</h2>\r\n        <div class=\"timelineContent\">\r\n            <div class=\"timelineSection\" *ngFor=\"let timelineSection of timelineList\">\r\n                <div class=\"timelineSectionHeader\" [class.active]=\"timelineActiveStateArray[timelineSection._id]\"\r\n                    (click)=\"timelineYearSelected(timelineSection)\">\r\n                    <span *ngIf=\"timelineSection._id != currentYear\">{{timelineSection._id}}</span>\r\n                    <span *ngIf=\"timelineSection._id == currentYear\">Now</span>\r\n                </div>\r\n                <div class=\"timelineSectionContent\">\r\n                    <span class=\"timelineSectionItem\" [class.active]=\"timelineActiveStateArray[articleGroupItem.articleGroup]\"\r\n                        (click)=\"articleGroupSelected(articleGroupItem)\" *ngFor=\"let articleGroupItem of timelineSection.articleGroups\">\r\n                        {{articleGroupItem.articleGroup}}\r\n                    </span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"timelineAreaMobile animated slideInRight\">\r\n        <div class=\"innerScrollWrapper\">\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</div>"
+module.exports = "<div class=\"travelSiteWrapper\">\r\n    <!-- Dynamic Content Area -->\r\n    <modal-view class=\"editView\" (closing)=\"closeModal()\" *ngIf=\"editModalActive && articleToEdit\">\r\n        <div class=\"editViewContentWrapper\">\r\n            <input class=\"inputItem\" type=\"text\" [(ngModel)]=\"articleToEdit.articleTitle\">\r\n            <textarea class=\"inputItem\" type=\"text\" [(ngModel)]=\"articleToEdit.articleContent\"></textarea>\r\n            <input class=\"inputItem\" type=\"date\" [(ngModel)]=\"articleEditDateRaw\">\r\n            <input class=\"inputItem\" type=\"text\" [(ngModel)]=\"articleToEdit.articleGroup\">\r\n            <input type=\"file\" (change)=\"fileChanged($event)\">\r\n\r\n            <div class=\"submitEditButton\" (click)=\"submitEdit()\">Submit</div>\r\n            <div class=\"deleteButton\" (click)=\"deleteArticle()\">Delete</div>\r\n\r\n        </div>\r\n\r\n    </modal-view>\r\n\r\n    <article-detail-view class=\"animated fadeIn\" *ngIf=\"chosenArticle && detailViewShown\" [article]=\"chosenArticle\"\r\n        (detailViewClosing)=\"closeDetailView($event)\"></article-detail-view>\r\n\r\n    <!-- Static Content Area -->\r\n\r\n    <div class=\"content-area animated slideInLeft\" *ngIf=\"!detailViewShown\">\r\n\r\n        <h2 class=\"content-area-header\">Articles <span class=\"articleGroupSoecification\">{{selectedArticleGroup}}</span></h2>\r\n\r\n        <div class=\"articles\">\r\n            <div (click)=\"showDetailView(article)\" class=\"article animated fadeIn\" *ngFor=\"let article of renderedArticles\">\r\n                <div class=\"article-thumbnail\" [ngStyle]=\"{ 'background-image': 'url(' + article.thumbnailUrl + ')'}\"></div>\r\n                <div class=\"articleInfo\">\r\n                    <div class=\"articleHeader\">\r\n                        <div class=\"article-title\">{{article.articleTitle}} <i (click)=\"editArticle($event, article)\"\r\n                                *ngIf=\"_authService.loggedIn()\" class=\"material-icons editButton\">edit</i></div>\r\n                        <span class=\"article-date\">{{getFormattedDate(article.articleDate.fullDate)}}</span>\r\n                    </div>\r\n\r\n                    <div class=\"article-description\" [innerHTML]=\"article.articleContent\"></div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"timelineArea animated slideInRight\">\r\n        <h2 class=\"timelineHeader\">Timeline</h2>\r\n        <div class=\"timelineContent\">\r\n            <div class=\"timelineSection\" *ngFor=\"let timelineSection of timelineList\">\r\n                <div class=\"timelineSectionHeader\" [class.active]=\"timelineActiveStateArray[timelineSection._id]\"\r\n                    (click)=\"timelineYearSelected(timelineSection)\">\r\n                    <span *ngIf=\"timelineSection._id != currentYear\">{{timelineSection._id}}</span>\r\n                    <span *ngIf=\"timelineSection._id == currentYear\">Now</span>\r\n                </div>\r\n                <div class=\"timelineSectionContent\">\r\n                    <span class=\"timelineSectionItem\" [class.active]=\"timelineActiveStateArray[articleGroupItem.articleGroup]\"\r\n                        (click)=\"articleGroupSelected(articleGroupItem)\" *ngFor=\"let articleGroupItem of timelineSection.articleGroups\">\r\n                        {{articleGroupItem.articleGroup}}\r\n                    </span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"timelineAreaMobile animated slideInRight\">\r\n        <div class=\"innerScrollWrapper\">\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n            <div class=\"testChild\"></div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</div>"
 
 /***/ }),
 
@@ -1128,6 +1134,7 @@ var TravelComponent = (function () {
         this.editModalActive = false;
     }
     TravelComponent.prototype.ngOnInit = function () {
+        var _this = this;
         //    this.articleGroups= []; //TODO: remove me when GET from backend
         this.timelineList = [];
         this.renderedArticles = [];
@@ -1136,6 +1143,10 @@ var TravelComponent = (function () {
         // this.getArticleGroups();
         this.loadArticles();
         this.timelineActiveStateArray["initialKey"] = false;
+        this.fileReader = new FileReader();
+        this.fileReader.addEventListener("load", function () {
+            _this.articleToEdit.thumbnailUrl = _this.fileReader.result.toString();
+        }, false);
     };
     /**
      * Sorts the timeline list ranked latest first article groups and articles insite each section
@@ -1229,7 +1240,9 @@ var TravelComponent = (function () {
         this.closeModal();
     };
     TravelComponent.prototype.deleteArticle = function () {
-        this._articleService.deleteArticle(this.articleToEdit);
+        if (confirm("Do you really want to delete the article " + this.articleToEdit.articleTitle) == true) {
+            this._articleService.deleteArticle(this.articleToEdit);
+        }
         this.closeModal();
     };
     /**
@@ -1245,6 +1258,16 @@ var TravelComponent = (function () {
      */
     TravelComponent.prototype.closeDetailView = function () {
         this.detailViewShown = false;
+    };
+    TravelComponent.prototype.fileChanged = function (event) {
+        var chosenThumbnail = event.target.files[0];
+        this.fileReader.readAsDataURL(chosenThumbnail);
+        // var target: HTMLInputElement = event.target as HTMLInputElement;
+        // for(var i=0;i < target.files.length; i++) {
+        //     this._imgUpload.uploadImage(target.files[i]).subscribe((resObj)=>{
+        //       console.log(resObj);        
+        //     })
+        // }  
     };
     /**
      * Gets called when the request finished getting all articles and the property TimelineList is set.
@@ -1700,25 +1723,19 @@ var ArticlesService = (function () {
         this.http = http;
         this._imgService = _imgService;
     }
-    ArticlesService.prototype.addArticle = function (article, thumbnail) {
-        var _this = this;
-        this._imgService.uploadImage(thumbnail).subscribe((function (res) {
-            var uploadData = JSON.parse(res._body);
-            var myThumbnailURL = "uploads/" + uploadData.file.filename; // concat instead of take finished '//' escaped string
-            //TO this after thumbnail is uploaded
-            var newArticle = {
-                articleTitle: article.articleTitle,
-                articleContent: article.articleContent,
-                articleDate: article.articleDate,
-                group: article.group,
-                thumbnailURL: myThumbnailURL
-            };
-            var headers = new http_1.Headers();
-            headers.append('Content-Type', 'application/json');
-            _this.http.post('articles/addArticle', newArticle, { headers: headers }).subscribe(function (answer) {
-                console.log(answer);
-            });
-        }));
+    ArticlesService.prototype.addArticle = function (article) {
+        var newArticle = {
+            articleTitle: article.articleTitle,
+            articleContent: article.articleContent,
+            articleDate: article.articleDate,
+            group: article.group,
+            thumbnailUrl: article.thumbnail
+        };
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
+        this.http.post('articles/addArticle', newArticle, { headers: headers }).subscribe(function (answer) {
+            console.log(answer);
+        });
     };
     ArticlesService.prototype.editArticle = function (updatedArticle) {
         var headers = new http_1.Headers();

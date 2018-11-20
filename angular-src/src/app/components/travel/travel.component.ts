@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { ArticlesService , iArticle , iDate} from "../../services/articles.service";
+import { ArticlesService, iArticle, iDate } from "../../services/articles.service";
 import { AuthService } from "../../services/auth.service";
 import { DateHelper } from "../../helperClasses/validation";
 import { runInThisContext } from 'vm';
@@ -35,9 +35,11 @@ export class TravelComponent implements OnInit {
   private renderedArticles: iArticle[];
   private timelineActiveStateArray: any[] = [];
   private selectedArticleGroup: String = "";
-  private allArticles: iArticle[]= [];
+  private allArticles: iArticle[] = [];
   public detailViewShown: boolean = false;
   private chosenArticle: iArticle;
+
+  public fileReader: FileReader;
 
   private currentYear = new Date().getFullYear().toString();
 
@@ -48,7 +50,7 @@ export class TravelComponent implements OnInit {
     private _articleService: ArticlesService,
     private _authService: AuthService,
     private DateHelper: DateHelper
-    ) { }
+  ) { }
 
   ngOnInit() {
     //    this.articleGroups= []; //TODO: remove me when GET from backend
@@ -58,110 +60,118 @@ export class TravelComponent implements OnInit {
     // this.initArticleGroups(); // TODO: Remove me when GET remove me when GET from backend
     // this.getArticleGroups();
     this.loadArticles();
-    this.timelineActiveStateArray["initialKey"]=false;
+    this.timelineActiveStateArray["initialKey"] = false;
+
+    this.fileReader  = new FileReader();
+    this.fileReader.addEventListener("load", ()=> {
+      this.articleToEdit.thumbnailUrl = this.fileReader.result.toString();      
+    }, false);
   }
 
   /**
    * Sorts the timeline list ranked latest first article groups and articles insite each section
    * TODO Put this into article Service
    */
-  private sortTimelineList(){
+  private sortTimelineList() {
     console.log("sort callsed. Initial value:");
     console.log(this.timelineList);
-    for(var l=0; l<this.timelineList.length;l++){
-      let yearSection: iTimelineList = this.timelineList[l]; 
-       // _id, articleGroups[]
+    for (var l = 0; l < this.timelineList.length; l++) {
+      let yearSection: iTimelineList = this.timelineList[l];
+      // _id, articleGroups[]
 
       //Sort articles of all groups within a section
-      for(let k=0; k < yearSection.articleGroups.length;k++){
+      for (let k = 0; k < yearSection.articleGroups.length; k++) {
         let articleGroup = yearSection.articleGroups[k];
 
         let tempSortedArticlesArray: iArticle[] = [];
         //sorts the articles within a single group 
-        for(let j=0;j<articleGroup.articles.length;j++){
-        // articleGroup (name) , articles []
-          let articleToSort= articleGroup.articles[j];
+        for (let j = 0; j < articleGroup.articles.length; j++) {
+          // articleGroup (name) , articles []
+          let articleToSort = articleGroup.articles[j];
           //inititlize array for first element
-          if(tempSortedArticlesArray.length == 0){
+          if (tempSortedArticlesArray.length == 0) {
             tempSortedArticlesArray.push(articleToSort);
-          }else{
+          } else {
             //Sort the actual article into right place
-            for(let i=0; i < tempSortedArticlesArray.length; i++){
+            for (let i = 0; i < tempSortedArticlesArray.length; i++) {
               let sortedArticle = tempSortedArticlesArray[i];
 
               let articleToSortDate = new Date(articleToSort.articleDate.fullDate.toString());
               let sortedArticleDate = new Date(sortedArticle.articleDate.fullDate.toString());
 
               //Insert at index if date newer than element
-              if(articleToSortDate > sortedArticleDate){
-                tempSortedArticlesArray.splice(i, 0, articleToSort); 
-                break;     
-              }else if(i == tempSortedArticlesArray.length - 1){
+              if (articleToSortDate > sortedArticleDate) {
+                tempSortedArticlesArray.splice(i, 0, articleToSort);
+                break;
+              } else if (i == tempSortedArticlesArray.length - 1) {
                 tempSortedArticlesArray.push(articleToSort);//must be oldest if couldt splice in before
               }
-            }                        
+            }
           }
-        }  
+        }
         //Now all the articles are sorted within one group
         //--> assign sorted to origin
         articleGroup.articles = tempSortedArticlesArray;
-      }    
+      }
       //now the articles inside the articlegroups are sorted
       //each [0] element is the latest
-      let tempArticleGroupArr: iArticleGroup[] =[];
+      let tempArticleGroupArr: iArticleGroup[] = [];
       //go through the groups to re-arrange them
-      for(let i=0; i < yearSection.articleGroups.length;i++){
+      for (let i = 0; i < yearSection.articleGroups.length; i++) {
         let articleGroup = yearSection.articleGroups[i];
-        if(tempArticleGroupArr.length == 0){
+        if (tempArticleGroupArr.length == 0) {
           tempArticleGroupArr.push(articleGroup)
-        }else{
+        } else {
           //Go through the already sorted arr to sort in the new group
-          for(let j=0; j<tempArticleGroupArr.length;j++){
+          for (let j = 0; j < tempArticleGroupArr.length; j++) {
             let sortedArticleGroup = tempArticleGroupArr[j];
             let groupToSortDate = new Date(articleGroup.articles[0].articleDate.fullDate.toString());
             let sortedGroupDate = new Date(sortedArticleGroup.articles[0].articleDate.fullDate.toString());
-            if(groupToSortDate > sortedGroupDate){
-              tempArticleGroupArr.splice(j,0,articleGroup);
+            if (groupToSortDate > sortedGroupDate) {
+              tempArticleGroupArr.splice(j, 0, articleGroup);
               break;
-            }else if(j== tempArticleGroupArr.length-1){ //if searched the whole sorted array but still cant find a newer spot, it must be the oldest and gets pushed to the end
+            } else if (j == tempArticleGroupArr.length - 1) { //if searched the whole sorted array but still cant find a newer spot, it must be the oldest and gets pushed to the end
               tempArticleGroupArr.push(articleGroup);
               break;
             }
-          }        
+          }
         }
       }
-      yearSection.articleGroups = tempArticleGroupArr;   
+      yearSection.articleGroups = tempArticleGroupArr;
     }
     this.setAllArticles();
   }
 
-  private getFormattedDate(date: string):string{
+  private getFormattedDate(date: string): string {
     return this.DateHelper.getSimplifiedDate(new Date(date))
   }
 
 
-  editModalActive: boolean= false;
+  editModalActive: boolean = false;
 
-  private closeModal(){
+  private closeModal() {
     this.editModalActive = false;
   }
 
-  private editArticle(e: Event, article: iArticle){
+  private editArticle(e: Event, article: iArticle) {
     e.stopPropagation();
     this.articleToEdit = article;
     this.articleEditDateRaw = this.DateHelper.formatDate(article.articleDate.fullDate);//new Date(Date.parse(article.articleDate.fullDate.toString()));    
-    this.editModalActive= true;
+    this.editModalActive = true;
   }
 
-  private submitEdit(){
+  private submitEdit() {
     let parsedDate = new Date(Date.parse(this.articleEditDateRaw));
-    this.articleToEdit.articleDate= this.DateHelper.getIDateFromDate(parsedDate);
+    this.articleToEdit.articleDate = this.DateHelper.getIDateFromDate(parsedDate);
     this._articleService.editArticle(this.articleToEdit);
     this.closeModal()
   }
 
-  private deleteArticle(){
-    this._articleService.deleteArticle(this.articleToEdit)
+  private deleteArticle() {
+    if (confirm("Do you really want to delete the article " + this.articleToEdit.articleTitle) == true) {
+      this._articleService.deleteArticle(this.articleToEdit)
+    }
+
     this.closeModal();
   }
 
@@ -169,47 +179,57 @@ export class TravelComponent implements OnInit {
    * Gets called when choosing an article
    * @param article Chosen article the user selected
    */
-  public showDetailView(article: iArticle){
-    this.detailViewShown= true;
+  public showDetailView(article: iArticle) {
+    this.detailViewShown = true;
     this.chosenArticle = article;
   }
 
   /**
    * Gets called when the detail-view component triggers the 'closingDetailView' event
    */
-  public closeDetailView(){
-    this.detailViewShown= false;   
+  public closeDetailView() {
+    this.detailViewShown = false;
   }
 
+  private fileChanged(event) {
+    let chosenThumbnail = event.target.files[0]
+    this.fileReader.readAsDataURL(chosenThumbnail);
 
+    // var target: HTMLInputElement = event.target as HTMLInputElement;
+    // for(var i=0;i < target.files.length; i++) {
+    //     this._imgUpload.uploadImage(target.files[i]).subscribe((resObj)=>{
+    //       console.log(resObj);        
+    //     })
+    // }  
+  }
   /**
    * Gets called when the request finished getting all articles and the property TimelineList is set.
    */
   public articlesLoaded() {
-    if(this.timelineList != null && this.timelineList.length>0){      
+    if (this.timelineList != null && this.timelineList.length > 0) {
       console.log("before sort call");
       console.log(this.timelineList);
-      this.sortTimelineList();   
+      this.sortTimelineList();
     }
   }
 
   /**
    * gets all of the articles from the Group-section listed and pushes them into a single array
    */
-  public setAllArticles(){
-    this.timelineList.forEach((section)=>{
+  public setAllArticles() {
+    this.timelineList.forEach((section) => {
       section.articleGroups.forEach(articleGroup => {
         this.allArticles = this.allArticles.concat(articleGroup.articles);
       });
     });
     this.timelineYearSelected(this.timelineList[0]);
-  //  this.allArticles.reverse();// Why exactly? doesnt array.concat push the elements in back?
+    //  this.allArticles.reverse();// Why exactly? doesnt array.concat push the elements in back?
   }
 
 
   public loadArticles() {
     this._articleService.getGroupedArticles().subscribe((articleResponseObject) => {
-      this.timelineList = articleResponseObject.articles;       
+      this.timelineList = articleResponseObject.articles;
       this.articlesLoaded();
     }, (err) => {
       console.log(err);
@@ -223,9 +243,9 @@ export class TravelComponent implements OnInit {
    */
   public timelineYearSelected(section: iTimelineList) {
     this.renderedArticles = [];
-    this.detailViewShown=false;
+    this.detailViewShown = false;
     let currentYear = (new Date()).getFullYear();
-    
+
     if (section._id == currentYear.toString()) { //TODO: check for current year  // shows all articles if on top Navigation Node  "Now"
       this.renderedArticles = this.allArticles;
       this.setActiveFilterHeader(null);
@@ -236,26 +256,26 @@ export class TravelComponent implements OnInit {
       this.setActiveFilterHeader(section._id);
     }
     this.activateTimelineNode(section._id);
-   // this.activateNode(section._id);
+    // this.activateNode(section._id);
   }
-  
-    /**
-   * Applies the filter for a specific articleGroup
-   * @param articleGroup selected ArticleGroup
-   */
+
+  /**
+ * Applies the filter for a specific articleGroup
+ * @param articleGroup selected ArticleGroup
+ */
   private articleGroupSelected(articleGroup: iArticleGroup) {
-    this.detailViewShown=false;
+    this.detailViewShown = false;
     this.renderedArticles = [];
     this.renderedArticles = this.renderedArticles.concat(articleGroup.articles);
     this.activateTimelineNode(articleGroup.articleGroup);//articleGroup is actually the name for the group
     //this.activateNode(articleGroup.id);
-    this.setActiveFilterHeader(articleGroup.articleGroup);   
+    this.setActiveFilterHeader(articleGroup.articleGroup);
   }
 
-  private setActiveFilterHeader(header: String){
-    if(header != null){
-      this.selectedArticleGroup =" - " + header;
-    }else{
+  private setActiveFilterHeader(header: String) {
+    if (header != null) {
+      this.selectedArticleGroup = " - " + header;
+    } else {
       this.selectedArticleGroup = ""
     }
   }
@@ -265,14 +285,14 @@ export class TravelComponent implements OnInit {
    * Highlights the currently active Timeline Filter Node
    * @param id Not actual any ID but what is given here will be stored as a key in an a associative array. Put _id (as sectionYear) or articleGroup (e.g "CDT") in here
    */
-  private activateTimelineNode(id: String){
+  private activateTimelineNode(id: String) {
     let key;
     for (key in this.timelineActiveStateArray) {
       this.timelineActiveStateArray[key] = false;
       if (key == id) {//key already exists
         this.timelineActiveStateArray[key] = true;
-      }else{//key does not yet exist and has to be created
-        this.timelineActiveStateArray[""+id] = true;
+      } else {//key does not yet exist and has to be created
+        this.timelineActiveStateArray["" + id] = true;
       }
     }
   }
@@ -295,47 +315,47 @@ export class TravelComponent implements OnInit {
 
 
 
-/** alles im [] --> nur ein item das beispiel Ist eine Section
- * { SECTION starts here
-        "_id" : "2016",
-        "articleGroups" : [
-                                {
-                                "articleGroup" : "Asia",
-                                "articles" : [
-                                {
-                                        "articleTitle" : "1st month",
-                                        "articleContent" : "I am its contente",
-                                        "articleDate" : {
-                                                "year" : "2016",
-                                                "fullDate" : "05-05-2016"
-                                        },
-                                        "articleGroup" : "Asia"
-                                },
-                                {
-                                        "articleTitle" : "2st month",
-                                        "articleContent" : "I am its contente",
-                                        "articleDate" : {
-                                                "year" : "2016",
-                                                "fullDate" : "05-06-2016"
-                                        },
-                                        "articleGroup" : "Asia"
-                                },
-                                {
-                                        "articleTitle" : "3rd month",
-                                        "articleContent" : "I am its contente",
-                                        "articleDate" : {
-                                                "year" : "2016",
-                                                "fullDate" : "15-07-2016"
-                                        },
-                                        "articleGroup" : "Asia"
-                                }
-                        ]
-                }
-        ]
-}
- * 
- * 
- */
+  /** alles im [] --> nur ein item das beispiel Ist eine Section
+   * { SECTION starts here
+          "_id" : "2016",
+          "articleGroups" : [
+                                  {
+                                  "articleGroup" : "Asia",
+                                  "articles" : [
+                                  {
+                                          "articleTitle" : "1st month",
+                                          "articleContent" : "I am its contente",
+                                          "articleDate" : {
+                                                  "year" : "2016",
+                                                  "fullDate" : "05-05-2016"
+                                          },
+                                          "articleGroup" : "Asia"
+                                  },
+                                  {
+                                          "articleTitle" : "2st month",
+                                          "articleContent" : "I am its contente",
+                                          "articleDate" : {
+                                                  "year" : "2016",
+                                                  "fullDate" : "05-06-2016"
+                                          },
+                                          "articleGroup" : "Asia"
+                                  },
+                                  {
+                                          "articleTitle" : "3rd month",
+                                          "articleContent" : "I am its contente",
+                                          "articleDate" : {
+                                                  "year" : "2016",
+                                                  "fullDate" : "15-07-2016"
+                                          },
+                                          "articleGroup" : "Asia"
+                                  }
+                          ]
+                  }
+          ]
+  }
+   * 
+   * 
+   */
 
 
 

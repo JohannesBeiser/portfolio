@@ -6,6 +6,7 @@
             <textarea class="inputItem" type="text" [(ngModel)]="articleToEdit.articleContent"></textarea>
             <input class="inputItem" type="date" [(ngModel)]="articleEditDateRaw">
             <input class="inputItem" type="text" [(ngModel)]="articleToEdit.articleGroup">
+            <input type="file" (change)="fileChanged($event)">
 
             <div class="submitEditButton" (click)="submitEdit()">Submit</div>
             <div class="deleteButton" (click)="deleteArticle()">Delete</div>
@@ -25,7 +26,7 @@
 
         <div class="articles">
             <div (click)="showDetailView(article)" class="article animated fadeIn" *ngFor="let article of renderedArticles">
-                <div class="article-thumbnail" [ngStyle]="{ 'background-image': 'url(' + article.thumbnailURL + ')'}"></div>
+                <div class="article-thumbnail" [ngStyle]="{ 'background-image': 'url(' + article.thumbnailUrl + ')'}"></div>
                 <div class="articleInfo">
                     <div class="articleHeader">
                         <div class="article-title">{{article.articleTitle}} <i (click)="editArticle($event, article)"

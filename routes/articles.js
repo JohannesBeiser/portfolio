@@ -11,10 +11,8 @@ router.post('/addArticle', (req,res,next)=>{
         articleContent: req.body.articleContent,
         articleDate: req.body.articleDate,
         group: req.body.group,
-        thumbnailURL: req.body.thumbnailURL
-    });
-    console.log(newArticle);
-    
+        thumbnailUrl: req.body.thumbnailUrl
+    });    
     Article.addArticle(newArticle, (err, article) =>{
         if(err){
             res.json({success: false, msg: "Failed to add the Article"});
@@ -42,11 +40,7 @@ router.post('/editArticle', (req, res, next)=>{
 })
 
 
-router.post('/deleteArticle', (req,res, next)=>{
-    console.log("deleting:");
-    
-    console.log( req.body.id);
-    
+router.post('/deleteArticle', (req,res, next)=>{    
     Article.deleteArticle(req.body.id, (err, result)=>{
         if(err){
             res.send({success: false, msg: "Couldn't delete Article", err: err});
