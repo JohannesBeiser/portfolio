@@ -41,6 +41,22 @@ router.post('/editArticle', (req, res, next)=>{
     })
 })
 
+
+router.post('/deleteArticle', (req,res, next)=>{
+    console.log("deleting:");
+    
+    console.log( req.body.id);
+    
+    Article.deleteArticle(req.body.id, (err, result)=>{
+        if(err){
+            res.send({success: false, msg: "Couldn't delete Article", err: err});
+        }else{
+            res.send({success: true, msg: "Delete sccessful "});
+        }
+    });
+});
+
+
 router.get('/loadGroupedArticles', (req,res,next)=>{
     Article.getGroupedArticles((err, result)=>{
         if(err){

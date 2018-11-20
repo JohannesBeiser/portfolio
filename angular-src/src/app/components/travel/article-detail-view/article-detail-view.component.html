@@ -3,6 +3,7 @@
   <div class="articleHeader">
     <i class="material-icons close-detailView-button" (click)="closeDetailView()">arrow_back</i>
     <span class="headerText">{{article.articleTitle}}</span>
+    <span class="articleDate">{{getFormattedDate(article.articleDate.fullDate)}}</span>
   </div>
 
 <div class="articleContent">

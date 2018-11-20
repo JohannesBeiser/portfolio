@@ -54,12 +54,21 @@ export class ArticlesService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let id= updatedArticle.id;
-    this.http.post('/articles/editArticle', {id:id, updatedArticle:updatedArticle}, {headers:headers}).subscribe(answer=>{
-      console.log("article added? : ");
-      
+    this.http.post('/articles/editArticle', {id:id, updatedArticle:updatedArticle}, {headers:headers}).subscribe(answer=>{      
       console.log(answer);
     });
 
+  }
+
+  public deleteArticle(article: iArticle){    
+    console.log(article);
+    
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let id= article.id;
+    this.http.post('/articles/deleteArticle', {id:id}, {headers:headers}).subscribe(answer=>{
+      console.log(answer);
+    });
   }
 
   public getGroupedArticles(){

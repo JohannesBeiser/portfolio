@@ -30,5 +30,56 @@ export class DateHelper {
         return dateObject
     }
 
+    /**
+     * Returns Jul-14-2018
+     * @param date value as date
+     */
+    public getSimplifiedDate(date: Date): string {
+        let month= this.getMonthAbrev(date.getMonth());
+        let day = this.getDayFull(date.getDate())
+        let year = date.getFullYear()
+        return month+" "+day+" "+year;
+    }
+
+    private getDayFull(number):string{
+        if(number<=9){
+            return "0" + number
+        }else{
+            return number.toString()
+        }
+    }
+
+    private getMonthAbrev(month: number): string {
+        switch (month) {
+            case 0:
+                return "Jan"
+            case 1:
+                return "Feb"
+            case 2:
+                return "Mar"
+            case 3:
+                return "Apr"
+            case 4:
+                return "May"
+            case 5:
+                return "Jun"
+            case 6:
+                return "Jul"
+            case 7:
+                return "Aug"
+            case 8:
+                return "Sep"
+            case 9:
+                return "Oct"
+            case 10:
+                return "Nov"
+            case 11:
+                return "Dez"
+            default:
+                return "NaN"
+        }
+    }
+
+
 
 }

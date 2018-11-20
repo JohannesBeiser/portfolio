@@ -303,12 +303,19 @@
     flex-direction: column;
   }
   .travelSiteWrapper .editViewContentWrapper .inputItem,
-  .travelSiteWrapper .editViewContentWrapper .submitEditButton {
+  .travelSiteWrapper .editViewContentWrapper .submitEditButton,
+  .travelSiteWrapper .editViewContentWrapper .deleteButton {
     margin: 16px;
   }
   .travelSiteWrapper .editViewContentWrapper .submitEditButton {
     width: 100px;
     background: #6FAC01;
+    padding: 8px;
+    cursor: pointer;
+  }
+  .travelSiteWrapper .editViewContentWrapper .deleteButton {
+    width: 100px;
+    background: #c4342a;
     padding: 8px;
     cursor: pointer;
   }
@@ -321,7 +328,6 @@
   }
   .travelSiteWrapper .content-area {
     order: 2;
-    margin-top: 30px;
   }
   .travelSiteWrapper .content-area .content-area-header {
     border-bottom: 1px solid #aaa;
@@ -345,8 +351,14 @@
     background: rgba(255, 255, 255, 0.7);
     position: absolute;
   }
-  .travelSiteWrapper .content-area .articles .article .articleInfo .article-title {
+  .travelSiteWrapper .content-area .articles .article .articleInfo .articleHeader {
+    display: flex;
+  }
+  .travelSiteWrapper .content-area .articles .article .articleInfo .articleHeader .article-title {
     z-index: 1000;
+  }
+  .travelSiteWrapper .content-area .articles .article .articleInfo .articleHeader .article-date {
+    margin-left: auto;
   }
   .travelSiteWrapper .content-area .articles .article .articleInfo .article-description {
     overflow: hidden;
@@ -358,10 +370,31 @@
     background-size: cover;
     background-repeat: no-repeat;
   }
-  .travelSiteWrapper .content-area .timelineArea {
-    order: 1;
+  .travelSiteWrapper .timelineArea {
+    display: none !important;
   }
-  .travelSiteWrapper .content-area .timelineArea .timelineHeader {
+  .travelSiteWrapper .timelineArea .timelineHeader {
     border-bottom: 1px solid #aaa;
+  }
+  .travelSiteWrapper .timelineAreaMobile {
+    width: 100%;
+    height: 75px;
+    overflow: hidden;
+  }
+  .travelSiteWrapper .timelineAreaMobile .innerScrollWrapper {
+    overflow-x: scroll;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 17px;
+    /* Increase/decrease this value for cross-browser compatibility */
+    box-sizing: content-box;
+    /* So the width will be 100% + 17px */
+  }
+  .travelSiteWrapper .timelineAreaMobile .innerScrollWrapper .testChild {
+    width: 100px;
+    background: red;
+    margin: 0 8px;
+    min-width: 100px;
   }
 }

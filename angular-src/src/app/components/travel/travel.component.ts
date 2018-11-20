@@ -3,6 +3,8 @@ import { Router } from "@angular/router";
 import { ArticlesService , iArticle , iDate} from "../../services/articles.service";
 import { AuthService } from "../../services/auth.service";
 import { DateHelper } from "../../helperClasses/validation";
+import { runInThisContext } from 'vm';
+
 
 // export interface iArticle {
 //   articleTitle: String,
@@ -34,8 +36,10 @@ export class TravelComponent implements OnInit {
   private timelineActiveStateArray: any[] = [];
   private selectedArticleGroup: String = "";
   private allArticles: iArticle[]= [];
-  detailViewShown: boolean = false;
+  public detailViewShown: boolean = false;
   private chosenArticle: iArticle;
+
+  private currentYear = new Date().getFullYear().toString();
 
   private articleToEdit: iArticle;
   private articleEditDateRaw: any;
@@ -57,6 +61,85 @@ export class TravelComponent implements OnInit {
     this.timelineActiveStateArray["initialKey"]=false;
   }
 
+  /**
+   * Sorts the timeline list ranked latest first article groups and articles insite each section
+   * TODO Put this into article Service
+   */
+  private sortTimelineList(){
+    console.log("sort callsed. Initial value:");
+    console.log(this.timelineList);
+    for(var l=0; l<this.timelineList.length;l++){
+      let yearSection: iTimelineList = this.timelineList[l]; 
+       // _id, articleGroups[]
+
+      //Sort articles of all groups within a section
+      for(let k=0; k < yearSection.articleGroups.length;k++){
+        let articleGroup = yearSection.articleGroups[k];
+
+        let tempSortedArticlesArray: iArticle[] = [];
+        //sorts the articles within a single group 
+        for(let j=0;j<articleGroup.articles.length;j++){
+        // articleGroup (name) , articles []
+          let articleToSort= articleGroup.articles[j];
+          //inititlize array for first element
+          if(tempSortedArticlesArray.length == 0){
+            tempSortedArticlesArray.push(articleToSort);
+          }else{
+            //Sort the actual article into right place
+            for(let i=0; i < tempSortedArticlesArray.length; i++){
+              let sortedArticle = tempSortedArticlesArray[i];
+
+              let articleToSortDate = new Date(articleToSort.articleDate.fullDate.toString());
+              let sortedArticleDate = new Date(sortedArticle.articleDate.fullDate.toString());
+
+              //Insert at index if date newer than element
+              if(articleToSortDate > sortedArticleDate){
+                tempSortedArticlesArray.splice(i, 0, articleToSort); 
+                break;     
+              }else if(i == tempSortedArticlesArray.length - 1){
+                tempSortedArticlesArray.push(articleToSort);//must be oldest if couldt splice in before
+              }
+            }                        
+          }
+        }  
+        //Now all the articles are sorted within one group
+        //--> assign sorted to origin
+        articleGroup.articles = tempSortedArticlesArray;
+      }    
+      //now the articles inside the articlegroups are sorted
+      //each [0] element is the latest
+      let tempArticleGroupArr: iArticleGroup[] =[];
+      //go through the groups to re-arrange them
+      for(let i=0; i < yearSection.articleGroups.length;i++){
+        let articleGroup = yearSection.articleGroups[i];
+        if(tempArticleGroupArr.length == 0){
+          tempArticleGroupArr.push(articleGroup)
+        }else{
+          //Go through the already sorted arr to sort in the new group
+          for(let j=0; j<tempArticleGroupArr.length;j++){
+            let sortedArticleGroup = tempArticleGroupArr[j];
+            let groupToSortDate = new Date(articleGroup.articles[0].articleDate.fullDate.toString());
+            let sortedGroupDate = new Date(sortedArticleGroup.articles[0].articleDate.fullDate.toString());
+            if(groupToSortDate > sortedGroupDate){
+              tempArticleGroupArr.splice(j,0,articleGroup);
+              break;
+            }else if(j== tempArticleGroupArr.length-1){ //if searched the whole sorted array but still cant find a newer spot, it must be the oldest and gets pushed to the end
+              tempArticleGroupArr.push(articleGroup);
+              break;
+            }
+          }        
+        }
+      }
+      yearSection.articleGroups = tempArticleGroupArr;   
+    }
+    this.setAllArticles();
+  }
+
+  private getFormattedDate(date: string):string{
+    return this.DateHelper.getSimplifiedDate(new Date(date))
+  }
+
+
   editModalActive: boolean= false;
 
   private closeModal(){
@@ -66,20 +149,20 @@ export class TravelComponent implements OnInit {
   private editArticle(e: Event, article: iArticle){
     e.stopPropagation();
     this.articleToEdit = article;
-
     this.articleEditDateRaw = this.DateHelper.formatDate(article.articleDate.fullDate);//new Date(Date.parse(article.articleDate.fullDate.toString()));    
     this.editModalActive= true;
   }
 
   private submitEdit(){
-
-    console.log(this.articleEditDateRaw);
     let parsedDate = new Date(Date.parse(this.articleEditDateRaw));
     this.articleToEdit.articleDate= this.DateHelper.getIDateFromDate(parsedDate);
-    console.log("date changed now: ");
-    console.log(this.articleToEdit);
+    this._articleService.editArticle(this.articleToEdit);
+    this.closeModal()
+  }
 
-    this._articleService.editArticle(this.articleToEdit)
+  private deleteArticle(){
+    this._articleService.deleteArticle(this.articleToEdit)
+    this.closeModal();
   }
 
   /**
@@ -100,13 +183,13 @@ export class TravelComponent implements OnInit {
 
 
   /**
-   * Gets called when the request finished getting all articles and set the property value
+   * Gets called when the request finished getting all articles and the property TimelineList is set.
    */
   public articlesLoaded() {
     if(this.timelineList != null && this.timelineList.length>0){      
-      this.setAllArticles();
+      console.log("before sort call");
       console.log(this.timelineList);
-      
+      this.sortTimelineList();   
     }
   }
 
@@ -126,7 +209,7 @@ export class TravelComponent implements OnInit {
 
   public loadArticles() {
     this._articleService.getGroupedArticles().subscribe((articleResponseObject) => {
-      this.timelineList = articleResponseObject.articles; 
+      this.timelineList = articleResponseObject.articles;       
       this.articlesLoaded();
     }, (err) => {
       console.log(err);

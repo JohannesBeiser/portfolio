@@ -55,6 +55,15 @@ module.exports.addArticle = function(newArticle, callback) {
     newArticle.save(callback);
 }
 
+module.exports.deleteArticle = function (id, callback) {
+  console.log('delete article called db');
+
+    Article.remove(
+        {_id: id},
+        callback
+   );
+};
+
 module.exports.getGroupedArticles = function(callback){
     // return with the right query
     Article.aggregate(

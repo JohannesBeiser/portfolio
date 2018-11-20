@@ -108,6 +108,7 @@
   background: white;
   position: relative;
   padding: 16px;
+  overflow: auto;
 }
 .modal-view-content .modal-view-body .closeIcon {
   position: absolute;
