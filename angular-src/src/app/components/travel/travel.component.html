@@ -16,7 +16,9 @@
     </modal-view>
 
     <article-detail-view class="animated fadeIn" *ngIf="chosenArticle && detailViewShown" [article]="chosenArticle"
-        (detailViewClosing)="closeDetailView($event)"></article-detail-view>
+        (detailViewClosing)="closeDetailView($event)">
+        <div class="articleContent" [innerHTML]="chosenArticle.articleContent"></div>
+    </article-detail-view>
 
     <!-- Static Content Area -->
 

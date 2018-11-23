@@ -90,8 +90,10 @@
   -webkit-animation-delay: 1700ms;
   animation-delay: 1700ms;
 }
+.detail-view-wrapper {
+  padding-right: 10%;
+}
 .detail-view-wrapper .articleHeader {
-  width: 90%;
   border-bottom: 1px solid #aaa;
   margin: 50px 0 30px;
   display: flex;
@@ -111,7 +113,6 @@
   text-align: right;
 }
 .detail-view-wrapper .articleContent {
-  width: 90%;
   padding: 8px;
 }
 @media only screen and (max-width: 768px) {
