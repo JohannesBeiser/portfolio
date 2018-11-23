@@ -90,8 +90,10 @@
   -webkit-animation-delay: 1700ms;
   animation-delay: 1700ms;
 }
+.detail-view-wrapper {
+  max-width: 950px;
+}
 .detail-view-wrapper .articleHeader {
-  width: 90%;
   border-bottom: 1px solid #aaa;
   margin: 50px 0 30px;
   display: flex;
@@ -109,10 +111,6 @@
 .detail-view-wrapper .articleHeader .articleDate {
   margin-left: auto;
   text-align: right;
-}
-.detail-view-wrapper .articleContent {
-  width: 90%;
-  padding: 8px;
 }
 @media only screen and (max-width: 768px) {
   .detail-view-wrapper .articleHeader .articleDate {

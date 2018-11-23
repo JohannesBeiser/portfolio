@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { HttpModule } from '@angular/http';
 import { ImageUploadService } from "./image-upload.service";
+import { SafeHtml } from '@angular/platform-browser';
 
 export interface iDate {
   fullDate: String,
@@ -10,7 +11,7 @@ export interface iDate {
 
 export interface iArticle {
   articleTitle: String,
-  articleContent: String,
+  articleContent: String | SafeHtml,
   articleDate: iDate,
   group: String,
   thumbnailUrl: String,

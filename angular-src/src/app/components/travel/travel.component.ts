@@ -4,6 +4,7 @@ import { ArticlesService, iArticle, iDate } from "../../services/articles.servic
 import { AuthService } from "../../services/auth.service";
 import { DateHelper } from "../../helperClasses/validation";
 import { runInThisContext } from 'vm';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
 
 // export interface iArticle {
@@ -49,7 +50,8 @@ export class TravelComponent implements OnInit {
   constructor(
     private _articleService: ArticlesService,
     private _authService: AuthService,
-    private DateHelper: DateHelper
+    private DateHelper: DateHelper,
+    private sanitized: DomSanitizer
   ) { }
 
   ngOnInit() {
@@ -88,6 +90,10 @@ export class TravelComponent implements OnInit {
         for (let j = 0; j < articleGroup.articles.length; j++) {
           // articleGroup (name) , articles []
           let articleToSort = articleGroup.articles[j];
+
+          //additionally also modify its content to safehtml
+          articleToSort.articleContent = this.transformToSaveHtml(articleToSort.articleContent);
+
           //inititlize array for first element
           if (tempSortedArticlesArray.length == 0) {
             tempSortedArticlesArray.push(articleToSort);
@@ -157,6 +163,10 @@ export class TravelComponent implements OnInit {
   private editArticle(e: Event, article: iArticle) {
     e.stopPropagation();
     this.articleToEdit = article;
+
+    let safehtml: SafeHtml = article.articleContent
+    console.log(safehtml.toString());
+    
     this.articleEditDateRaw = this.DateHelper.formatDate(article.articleDate.fullDate);//new Date(Date.parse(article.articleDate.fullDate.toString()));    
     this.editModalActive = true;
   }
@@ -182,7 +192,14 @@ export class TravelComponent implements OnInit {
    */
   public showDetailView(article: iArticle) {
     this.detailViewShown = true;
-    this.chosenArticle = article;
+
+    this.chosenArticle= article;
+    console.log(this.chosenArticle);
+    
+  }
+
+  private transformToSaveHtml(value) {
+    return this.sanitized.bypassSecurityTrustHtml(value);
   }
 
   /**
@@ -210,7 +227,7 @@ export class TravelComponent implements OnInit {
     if (this.timelineList != null && this.timelineList.length > 0) {
       console.log("before sort call");
       console.log(this.timelineList);
-      this.sortTimelineList();
+      this.sortTimelineList();      
     }
   }
 
