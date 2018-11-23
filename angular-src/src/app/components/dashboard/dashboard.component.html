@@ -1,13 +1,14 @@
-<h2 class="page-header">Dashboard</h2>
+<div class="dashboardWrapper">
+        <h4>Create a new Article</h4>
+        <hr>
+        <label>Header: <input class="inputItem"  type="text" placeholder="Header" [(ngModel)]="chosenArticleTitle" ></label>
+        <textarea class="inputItem textArea" type="text" placeholder="Content" [(ngModel)]="chosenArticleContent"></textarea>
+        <label>File: <input class="inputItem" type="file" (change)="fileChanged($event)"></label>
+        <label>Date: <input class="inputItem" type="date" placeholder="Date" [(ngModel)]="chosenArticleDate"></label>
+        <label>Group: <input class="inputItem" type="text" placeholder="Group" [(ngModel)]="chosenArticleGroup"></label>
+        
+        <div class="submitButton" (click)="submitPressed()">submit</div>       
+</div>
 
-
-
-<label>Header: <input type="text" placeholder="Header" [(ngModel)]="chosenArticleTitle" ></label>
-<label>Content: <input type="text" placeholder="Content" [(ngModel)]="chosenArticleContent"></label>
-<label>File: <input type="file" (change)="fileChanged($event)"></label>
-<label>Date: <input type="date" placeholder="Date" [(ngModel)]="chosenArticleDate"></label>
-<label>Group: <input type="text" placeholder="Group" [(ngModel)]="chosenArticleGroup"></label>
-
-<div class="submitButton" (click)="submitPressed()">submit</div>
 
 

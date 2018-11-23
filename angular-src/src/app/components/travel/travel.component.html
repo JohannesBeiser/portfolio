@@ -36,7 +36,6 @@
                                 *ngIf="_authService.loggedIn()" class="material-icons editButton">edit</i></div>
                         <span class="article-date">{{getFormattedDate(article.articleDate.fullDate)}}</span>
                     </div>
-
                     <div class="article-description" [innerHTML]="article.articleContent"></div>
                 </div>
             </div>

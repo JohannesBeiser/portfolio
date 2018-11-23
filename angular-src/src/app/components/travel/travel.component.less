@@ -271,7 +271,7 @@
             }
             .articles {
                 .article {
-                    height: 250px;
+                    height: 220px;
                     display: flex;
                     flex-direction: column;
                     border: 1px solid #DDD;
@@ -285,10 +285,11 @@
                         width: 100%;
                         display: flex;
                         flex-direction: column;
-                        background: rgba(255, 255, 255, 0.7);
                         position: absolute;
                         .articleHeader {
                             display: flex;
+                            padding-bottom: 8px;
+                            border-bottom: 1px solid #aaa;
                             .article-title {
                                 z-index: 1000;
                             }
@@ -297,16 +298,18 @@
                             }
                         }
                         .article-description {
+                            padding: 16px 8px;
                             overflow: hidden;
-                            display: none;
+                            width: 100%;
+                            max-height: 11.8em;
+                           
+                            &::ng-deep img {
+                                display: none;
+                            }
                         }
                     }
                     .article-thumbnail {
-                        order: 2;
-                        height: 100%;
-                        background-size: cover;
-                        background-repeat: no-repeat;
-                        background-position: center;
+                        display: none;
                     }
                 }
             }

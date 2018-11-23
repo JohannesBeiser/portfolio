@@ -1,7 +1,18 @@
-.submitButton {
+.dashboardWrapper h4 {
+  margin-top: 30px;
+}
+.dashboardWrapper label {
+  width: 100%;
+}
+.dashboardWrapper .submitButton {
   cursor: pointer;
   background: green;
   padding: 8px;
   width: 300px;
   color: black;
+}
+.dashboardWrapper .textArea {
+  min-height: 60vh;
+  width: 90%;
+  margin: 0 5%;
 }
