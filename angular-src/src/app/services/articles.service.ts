@@ -56,7 +56,6 @@ export class ArticlesService {
   }
 
   public deleteArticle(article: iArticle) {
-    console.log(article);
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
