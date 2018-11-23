@@ -7,7 +7,10 @@
         <label>Date: <input class="inputItem" type="date" placeholder="Date" [(ngModel)]="chosenArticleDate"></label>
         <label>Group: <input class="inputItem" type="text" placeholder="Group" [(ngModel)]="chosenArticleGroup"></label>
         
-        <div class="submitButton" (click)="submitPressed()">submit</div>       
+        <div class="submitButton" (click)="submitPressed()">submit</div>  
+        <hr>
+        <h4>User Actions</h4>
+        <div class="logoutButton" (click)="_authService.logout()">Logout</div>
 </div>
 
 
