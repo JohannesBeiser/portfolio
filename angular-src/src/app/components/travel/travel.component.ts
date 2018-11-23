@@ -75,8 +75,6 @@ export class TravelComponent implements OnInit {
    * TODO Put this into article Service
    */
   private sortTimelineList() {
-    console.log("sort callsed. Initial value:");
-    console.log(this.timelineList);
     for (var l = 0; l < this.timelineList.length; l++) {
       let yearSection: iTimelineList = this.timelineList[l];
       // _id, articleGroups[]
@@ -164,9 +162,7 @@ export class TravelComponent implements OnInit {
     e.stopPropagation();
     this.articleToEdit = article;
 
-    let safehtml: SafeHtml = article.articleContent
-    console.log(safehtml.toString());
-    
+    let safehtml: SafeHtml = article.articleContent    
     this.articleEditDateRaw = this.DateHelper.formatDate(article.articleDate.fullDate);//new Date(Date.parse(article.articleDate.fullDate.toString()));    
     this.editModalActive = true;
   }
@@ -192,10 +188,7 @@ export class TravelComponent implements OnInit {
    */
   public showDetailView(article: iArticle) {
     this.detailViewShown = true;
-
     this.chosenArticle= article;
-    console.log(this.chosenArticle);
-    
   }
 
   private transformToSaveHtml(value) {
@@ -225,8 +218,6 @@ export class TravelComponent implements OnInit {
    */
   public articlesLoaded() {
     if (this.timelineList != null && this.timelineList.length > 0) {
-      console.log("before sort call");
-      console.log(this.timelineList);
       this.sortTimelineList();      
     }
   }
