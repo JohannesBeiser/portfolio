@@ -1,8 +1,16 @@
 @import '../../../globalVariables.less';
-
-.active{
+.active {
     font-weight: bold;
     color: black;
+}
+
+//Default HTML renderer Styles for the Articles defail View
+.articleContent {
+    //Inner HTMl flexible  default styling
+    &::ng-deep img {
+        width: 100%;
+        margin: 20px 0;
+    }
 }
 
 @media screen and (min-width: calc(@mobileBreakpoint + 1px)) {
@@ -14,10 +22,11 @@
         grid-template-columns: 70% 30%;
         grid-template-areas: "content timeline";
         padding: 0 5% 50px;
+       
         .content-area {
             grid-area: content;
             .content-area-header {
-                width: 90%;
+                width: 100%;
                 max-width: 850px;
                 margin-top: 50px;
                 padding-bottom: 8px;
@@ -27,93 +36,84 @@
                 .article {
                     height: 250px;
                     display: flex;
-                    width: 90%;
+                    width: 100%;
                     max-width: 850px;
                     border: 1px solid #DDD;
                     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);
                     margin: 30px 0;
                     cursor: pointer;
                     position: relative;
-
-
-                    .wrapper{
+                    .wrapper {
                         background: grey;
                         width: 100%;
                         max-width: 800px;
                         display: flex;
                         flex-wrap: wrap;
-                        
-                        .header{
-                          background: steelblue;
-                          width: 100%;
-                          display: flex;
-                          padding: 8px;
-                          align-items: center;
-                          flex-wrap: wrap;
-                          margin-bottom: 30px;
-                          
-                          .title{
-                            background:orange;
-                            font-size: 1.6rem;
-                          }
-                          .date{
-                            background: limegreen;
-                            margin: 16px;
-                            margin-left: auto;
-                          }
+                        .header {
+                            background: steelblue;
+                            width: 100%;
+                            display: flex;
+                            padding: 8px;
+                            align-items: center;
+                            flex-wrap: wrap;
+                            margin-bottom: 30px;
+                            .title {
+                                background: orange;
+                                font-size: 1.6rem;
+                            }
+                            .date {
+                                background: limegreen;
+                                margin: 16px;
+                                margin-left: auto;
+                            }
                         }
-                        .content{
-                          background: #444;
-                          width: 100%;
+                        .content {
+                            background: #444;
+                            width: 100%;
                         }
-                      }
-
-
+                    }
                     .articleInfo {
                         flex: 1;
                         margin: 16px;
                         overflow: hidden;
                         display: flex;
                         flex-wrap: wrap;
-
-
-                        .articleHeader{
+                        .articleHeader {
                             width: 100%;
                             display: flex;
                             align-items: center;
                             flex-wrap: wrap;
                             margin-bottom: 16px;
-
                             .article-title {
                                 width: 100%;
                                 font-size: 1.4rem;
-
-                                .editButton{
+                                .editButton {
                                     margin-left: 20px;
                                     transition: transform 100ms ease-in-out;
-                                    &:hover{
+                                    &:hover {
                                         transform: scale(1.2);
                                     }
                                 }
-                               
                             }
-                            .article-date{
+                            .article-date {
                                 width: 100%;
                                 margin-top: 8px;
                                 margin-left: auto;
                             }
                         }
-
                         .article-description {
                             overflow: hidden;
                             width: 100%;
                             max-height: 9em;
                             position: relative;
-                            &:after{
+                            &:after {
                                 content: "...";
                                 position: absolute;
                                 right: 8px;
                                 bottom: 0;
+                            }
+                            &::ng-deep img {
+                                display: none;
                             }
                         }
                     }
@@ -157,7 +157,6 @@
                         position: relative;
                         cursor: pointer;
                         user-select: none;
-
                         &:before {
                             opacity: 0;
                             transition: opacity 200ms ease-in-out;
@@ -181,7 +180,6 @@
                                 content: " -";
                             }
                         }
-                        
                     }
                     .timelineSectionContent {
                         margin-left: 24px;
@@ -197,8 +195,6 @@
                             position: relative;
                             user-select: none;
                             .defaultTextTransition();
-
-
                             &:before {
                                 opacity: 0;
                                 transition: opacity 200ms ease-in-out;
@@ -211,7 +207,6 @@
                             }
                             &:hover {
                                 color: @textColorHover;
-
                                 &:before {
                                     opacity: 1;
                                     content: "- ";
@@ -228,25 +223,37 @@
                 }
             }
         }
-
-
-        .editViewContentWrapper{
-            display: flex;
-            flex-direction: column;
-            .inputItem, .submitEditButton, .deleteButton{
-                margin: 16px;
+        .editViewContentWrapper {
+            height: 100%;
+            >* {
+                width: 100%;
             }
-            .submitEditButton{
-                width: 100px;
-                background: #6FAC01;
-                padding: 8px;
-                cursor: pointer;
+            .inputItem,
+            .submitEditButton,
+            .deleteButton {
+                margin-bottom: 16px;
             }
-            .deleteButton{
-                width: 100px;
-                background: rgb(196, 52, 42);
-                padding: 8px;
-                cursor: pointer;                  
+            .actionWrapper {
+                display: flex;
+                .submitEditButton {
+                    width: 100px;
+                    background: #6FAC01;
+                    padding: 8px;
+                    cursor: pointer;
+                    margin-right: 16px;
+                }
+                .deleteButton {
+                    width: 100px;
+                    background: rgb(196, 52, 42);
+                    padding: 8px;
+                    cursor: pointer;
+                }
+            }
+            .contentTextAreaWrapper {
+                .contentTextArea {
+                    width: 100%;
+                    min-height: 60vh;
+                }
             }
         }
     }
@@ -258,8 +265,7 @@
         display: flex;
         flex-direction: column;
         .content-area {
-            order: 2;
-           // margin-top: 30px;
+            order: 2; // margin-top: 30px;
             .content-area-header {
                 border-bottom: @defaultBorder;
             }
@@ -281,17 +287,15 @@
                         flex-direction: column;
                         background: rgba(255, 255, 255, 0.7);
                         position: absolute;
-                        
-                        .articleHeader{
+                        .articleHeader {
                             display: flex;
                             .article-title {
                                 z-index: 1000;
                             }
-                            .article-date{
+                            .article-date {
                                 margin-left: auto
                             }
                         }
-                        
                         .article-description {
                             overflow: hidden;
                             display: none;
@@ -302,39 +306,67 @@
                         height: 100%;
                         background-size: cover;
                         background-repeat: no-repeat;
-                        background-position: center;                                               
+                        background-position: center;
                     }
                 }
             }
-           
         }
-
         .timelineArea {
             display: none !important;
-
             .timelineHeader {
                 border-bottom: @defaultBorder;
             }
         }
-
-        .timelineAreaMobile{
+        .timelineAreaMobile {
             width: 100%;
             height: 75px;
             overflow: hidden;
-            .innerScrollWrapper{
+            .innerScrollWrapper {
                 overflow-x: scroll;
                 display: flex;
                 width: 100%;
                 height: 100%;
-                padding-bottom: 17px; /* Increase/decrease this value for cross-browser compatibility */
-                box-sizing: content-box; /* So the width will be 100% + 17px */
-                .testChild{
+                padding-bottom: 17px;
+                /* Increase/decrease this value for cross-browser compatibility */
+                box-sizing: content-box;
+                /* So the width will be 100% + 17px */
+                .testChild {
                     width: 100px;
                     background: red;
                     margin: 0 8px;
                     min-width: 100px;
-
                 }
+            }
+        }
+    }
+    .editViewContentWrapper {
+        height: 100%;
+        >* {
+            width: 100%;
+        }
+        .inputItem,
+        .submitEditButton,
+        .deleteButton {
+            margin-bottom: 16px;
+        }
+        .actionWrapper {
+            display: flex;
+            .submitEditButton {
+                width: 100px;
+                background: #6FAC01;
+                padding: 8px;
+                margin-right: 16px;
+            }
+            .deleteButton {
+                width: 100px;
+                background: rgb(196, 52, 42);
+                padding: 8px;
+            }
+        }
+        .contentTextAreaWrapper {
+            .contentTextArea {
+                width: 100%;
+                min-height: 60vh;
             }
         }
     }

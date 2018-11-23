@@ -94,6 +94,10 @@
   font-weight: bold;
   color: black;
 }
+.articleContent::ng-deep img {
+  width: 100%;
+  margin: 20px 0;
+}
 @media screen and (min-width: calc(768px + 1px)) {
   .travelSiteWrapper {
     width: 100%;
@@ -108,7 +112,7 @@
     grid-area: content;
   }
   .travelSiteWrapper .content-area .content-area-header {
-    width: 90%;
+    width: 100%;
     max-width: 850px;
     margin-top: 50px;
     padding-bottom: 8px;
@@ -117,7 +121,7 @@
   .travelSiteWrapper .content-area .articles .article {
     height: 250px;
     display: flex;
-    width: 90%;
+    width: 100%;
     max-width: 850px;
     border: 1px solid #DDD;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.14);
@@ -195,6 +199,9 @@
     position: absolute;
     right: 8px;
     bottom: 0;
+  }
+  .travelSiteWrapper .content-area .articles .article .articleInfo .article-description::ng-deep img {
+    display: none;
   }
   .travelSiteWrapper .content-area .articles .article .article-thumbnail {
     width: 250px;
@@ -300,25 +307,35 @@
     content: " -";
   }
   .travelSiteWrapper .editViewContentWrapper {
-    display: flex;
-    flex-direction: column;
+    height: 100%;
+  }
+  .travelSiteWrapper .editViewContentWrapper > * {
+    width: 100%;
   }
   .travelSiteWrapper .editViewContentWrapper .inputItem,
   .travelSiteWrapper .editViewContentWrapper .submitEditButton,
   .travelSiteWrapper .editViewContentWrapper .deleteButton {
-    margin: 16px;
+    margin-bottom: 16px;
   }
-  .travelSiteWrapper .editViewContentWrapper .submitEditButton {
+  .travelSiteWrapper .editViewContentWrapper .actionWrapper {
+    display: flex;
+  }
+  .travelSiteWrapper .editViewContentWrapper .actionWrapper .submitEditButton {
     width: 100px;
     background: #6FAC01;
     padding: 8px;
     cursor: pointer;
+    margin-right: 16px;
   }
-  .travelSiteWrapper .editViewContentWrapper .deleteButton {
+  .travelSiteWrapper .editViewContentWrapper .actionWrapper .deleteButton {
     width: 100px;
     background: #c4342a;
     padding: 8px;
     cursor: pointer;
+  }
+  .travelSiteWrapper .editViewContentWrapper .contentTextAreaWrapper .contentTextArea {
+    width: 100%;
+    min-height: 60vh;
   }
 }
 @media screen and (max-width: 768px) {
@@ -398,5 +415,34 @@
     background: red;
     margin: 0 8px;
     min-width: 100px;
+  }
+  .editViewContentWrapper {
+    height: 100%;
+  }
+  .editViewContentWrapper > * {
+    width: 100%;
+  }
+  .editViewContentWrapper .inputItem,
+  .editViewContentWrapper .submitEditButton,
+  .editViewContentWrapper .deleteButton {
+    margin-bottom: 16px;
+  }
+  .editViewContentWrapper .actionWrapper {
+    display: flex;
+  }
+  .editViewContentWrapper .actionWrapper .submitEditButton {
+    width: 100px;
+    background: #6FAC01;
+    padding: 8px;
+    margin-right: 16px;
+  }
+  .editViewContentWrapper .actionWrapper .deleteButton {
+    width: 100px;
+    background: #c4342a;
+    padding: 8px;
+  }
+  .editViewContentWrapper .contentTextAreaWrapper .contentTextArea {
+    width: 100%;
+    min-height: 60vh;
   }
 }

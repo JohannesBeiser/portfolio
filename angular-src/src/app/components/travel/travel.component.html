@@ -2,14 +2,15 @@
     <!-- Dynamic Content Area -->
     <modal-view class="editView" (closing)="closeModal()" *ngIf="editModalActive && articleToEdit">
         <div class="editViewContentWrapper">
-            <input class="inputItem" type="text" [(ngModel)]="articleToEdit.articleTitle">
-            <textarea class="inputItem" type="text" [(ngModel)]="articleToEdit.articleContent"></textarea>
-            <input class="inputItem" type="date" [(ngModel)]="articleEditDateRaw">
-            <input class="inputItem" type="text" [(ngModel)]="articleToEdit.articleGroup">
-            <input type="file" (change)="fileChanged($event)">
-
-            <div class="submitEditButton" (click)="submitEdit()">Submit</div>
-            <div class="deleteButton" (click)="deleteArticle()">Delete</div>
+            <label>Title: <input class="inputItem" type="text" [(ngModel)]="articleToEdit.articleTitle"></label>
+            <label>Thumbnail: <input class="inputItem" type="file" (change)="fileChanged($event)"></label>
+            <label class="contentTextAreaWrapper">Content: <textarea class="inputItem contentTextArea" type="text" [(ngModel)]="articleToEdit.articleContent"></textarea></label>
+            <label>Date: <input class="inputItem" type="date" [(ngModel)]="articleEditDateRaw"></label>
+            <label>Group: <input class="inputItem" type="text" [(ngModel)]="articleToEdit.articleGroup"></label>
+            <div class="actionWrapper">
+                <div class="submitEditButton" (click)="submitEdit()">Submit</div>
+                <div class="deleteButton" (click)="deleteArticle()">Delete</div>
+            </div>
 
         </div>
 
@@ -60,7 +61,7 @@
         </div>
     </div>
 
-    <div class="timelineAreaMobile animated slideInRight">
+    <!-- <div class="timelineAreaMobile animated slideInRight">
         <div class="innerScrollWrapper">
             <div class="testChild"></div>
             <div class="testChild"></div>
@@ -84,6 +85,6 @@
             <div class="testChild"></div>
         </div>
 
-    </div>
+    </div> -->
 
 </div>
