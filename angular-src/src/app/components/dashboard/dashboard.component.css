@@ -1,18 +1,23 @@
 .dashboardWrapper h4 {
-  margin-top: 30px;
+  margin-top: 16px;
 }
 .dashboardWrapper label {
   width: 100%;
 }
 .dashboardWrapper .submitButton {
   cursor: pointer;
-  background: green;
-  padding: 8px;
-  width: 300px;
+  background: #489418;
+  padding: 16px;
   color: black;
 }
 .dashboardWrapper .textArea {
   min-height: 60vh;
   width: 90%;
   margin: 0 5%;
+}
+.dashboardWrapper .logoutButton {
+  margin-top: 16px;
+  padding: 16px;
+  background: tomato;
+  cursor: pointer;
 }

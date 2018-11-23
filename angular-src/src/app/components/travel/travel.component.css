@@ -364,10 +364,10 @@
     flex: 1;
     padding: 8px;
     width: 100%;
+    height: 100%;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    position: absolute;
-    height: 100%;
   }
   .travelSiteWrapper .content-area .articles .article .articleInfo .articleHeader {
     display: flex;
@@ -381,9 +381,10 @@
     margin-left: auto;
   }
   .travelSiteWrapper .content-area .articles .article .articleInfo .article-description {
-    padding: 16px 8px;
     overflow: hidden;
     width: 100%;
+    margin-top: 8px;
+    flex: 1;
   }
   .travelSiteWrapper .content-area .articles .article .articleInfo .article-description::ng-deep img {
     display: none;

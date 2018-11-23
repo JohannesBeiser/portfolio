@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageUploadService } from "../../services/image-upload.service";
 import { ArticlesService, iArticle, iDate } from "../../services/articles.service";
+import { AuthService } from "../../services/auth.service";
 import { ThrowStmt } from '@angular/compiler';//TODO: where does this come from?
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +19,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private _imgUpload: ImageUploadService,
-    private _articleService: ArticlesService
+    private _articleService: ArticlesService,
+    private _authService: AuthService
   ) { }
 
   ngOnInit() {
