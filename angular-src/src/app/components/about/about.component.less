@@ -1,0 +1,128 @@
+@import "../../../globalVariables.less";
+.aboutWrapper {
+    height: ~"calc(100vh - 100px)";
+    .contentSectionWrapper {
+        height: ~"calc(100% - 150px)";
+        width: 100%; //  background: steelblue;
+        position: relative;
+        display: flex;
+        .contentSection {
+            width: 100%;
+            display: flex;
+            padding: 24px;
+            .sectionItem {
+                //  border-right: 1px solid #aaa;                
+                flex: 2;
+                height: 100%;
+                padding: 16px;
+                overflow: hidden;
+                .sectionHeader {
+                    font-size: 1.3em;
+                    text-align: center;
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+                    margin-bottom: 24px;
+                    i {
+                        margin-right: 16px;
+                    }
+                }
+                .sectionContent {
+                    flex: 1;
+                    width: 100%;
+                    height: ~"100% - 1.3em - 24px";
+                }
+                &.middleInnerSection {
+                    flex: 1;
+                }
+            }
+        }
+        .profileImage {
+            max-height: 100%;
+            max-width: 30%;
+            background-size: contain;
+            background-position: bottom;
+            background-image: url("../../../assets/images/bewerbungsBild.png");
+            width: 35%;
+            height: 100%;
+            background-repeat: no-repeat;
+            z-index: 9000;
+        }
+    }
+    .infoFooter {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 150px;
+        background: #4a4a4a;
+        .infoWrapper {
+            margin-left: 35%;
+            display: flex;
+            height: 100%;
+            .itemWrapper {
+                color: #eee;
+                display: flex;
+                align-items: center;
+                font-size: 1.2em;
+                i {
+                    color: #dcb979;
+                    margin-right: 16px;
+                    font-size: 2em;
+                    user-select: none;
+                }
+            }
+            .column {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                padding: 20px 0;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: @mobileBreakpoint){
+    .aboutWrapper {
+        height: unset;
+        .contentSectionWrapper {
+            height: unset;
+           
+            .contentSection {
+               
+                .sectionItem {
+                    width: 100%;
+                    .sectionHeader {
+                       
+                        i {
+                        }
+                    }
+                    .sectionContent {
+                       
+                    }
+                    &.middleInnerSection {
+                    }
+                }
+            }
+            .profileImage {
+                display: none;
+            }
+        }
+        .infoFooter {
+           position: unset;        
+            .infoWrapper {
+               
+                .itemWrapper {
+                   
+                    i {
+                       
+                    }
+                }
+                .column {
+                 
+                }
+            }
+        }
+    }
+    
+}

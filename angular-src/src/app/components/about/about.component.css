@@ -1,0 +1,244 @@
+@font-face {
+  font-family: ComfortaaLight;
+  src: url('assets/fonts/Comfortaa-Light.ttf');
+}
+.defaultTextTransition {
+  transition: color 200ms ease-in-out;
+}
+.quickAnimation {
+  -webkit-animation-duration: 300ms;
+  animation-duration: 300ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.animated-300ms {
+  -webkit-animation-duration: 300ms;
+  animation-duration: 300ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.animationFix {
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0) scale(1, 1);
+  transform: translateZ(0);
+}
+.duration-100ms {
+  -webkit-animation-duration: 100ms;
+  animation-duration: 100ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-200ms {
+  -webkit-animation-duration: 200ms;
+  animation-duration: 200ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-300ms {
+  -webkit-animation-duration: 300ms;
+  animation-duration: 300ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-400ms {
+  -webkit-animation-duration: 400ms;
+  animation-duration: 400ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-500ms {
+  -webkit-animation-duration: 500ms;
+  animation-duration: 500ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-600ms {
+  -webkit-animation-duration: 600ms;
+  animation-duration: 600ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-700ms {
+  -webkit-animation-duration: 700ms;
+  animation-duration: 700ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-800ms {
+  -webkit-animation-duration: 800ms;
+  animation-duration: 800ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-900ms {
+  -webkit-animation-duration: 900ms;
+  animation-duration: 900ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.delay-100ms {
+  -webkit-animation-delay: 100ms;
+  animation-delay: 100ms;
+}
+.delay-200ms {
+  -webkit-animation-delay: 200ms;
+  animation-delay: 200ms;
+}
+.delay-300ms {
+  -webkit-animation-delay: 300ms;
+  animation-delay: 300ms;
+}
+.delay-400ms {
+  -webkit-animation-delay: 400ms;
+  animation-delay: 400ms;
+}
+.delay-500ms {
+  -webkit-animation-delay: 500ms;
+  animation-delay: 500ms;
+}
+.delay-600ms {
+  -webkit-animation-delay: 600ms;
+  animation-delay: 600ms;
+}
+.delay-700ms {
+  -webkit-animation-delay: 700ms;
+  animation-delay: 700ms;
+}
+.delay-800ms {
+  -webkit-animation-delay: 800ms;
+  animation-delay: 800ms;
+}
+.delay-900ms {
+  -webkit-animation-delay: 900ms;
+  animation-delay: 900ms;
+}
+.delay-1000ms {
+  -webkit-animation-delay: 1000ms;
+  animation-delay: 1000ms;
+}
+.delay-1100ms {
+  -webkit-animation-delay: 1100ms;
+  animation-delay: 1100ms;
+}
+.delay-1200ms {
+  -webkit-animation-delay: 1200ms;
+  animation-delay: 1200ms;
+}
+.delay-1300ms {
+  -webkit-animation-delay: 1300ms;
+  animation-delay: 1300ms;
+}
+.delay-1400ms {
+  -webkit-animation-delay: 1400ms;
+  animation-delay: 1400ms;
+}
+.delay-1500ms {
+  -webkit-animation-delay: 1500ms;
+  animation-delay: 1500ms;
+}
+.delay-1600ms {
+  -webkit-animation-delay: 1600ms;
+  animation-delay: 1600ms;
+}
+.delay-1700ms {
+  -webkit-animation-delay: 1700ms;
+  animation-delay: 1700ms;
+}
+.aboutWrapper {
+  height: calc(100vh - 100px);
+}
+.aboutWrapper .contentSectionWrapper {
+  height: calc(100% - 150px);
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+.aboutWrapper .contentSectionWrapper .contentSection {
+  width: 100%;
+  display: flex;
+  padding: 24px;
+}
+.aboutWrapper .contentSectionWrapper .contentSection .sectionItem {
+  flex: 2;
+  height: 100%;
+  padding: 16px;
+  overflow: hidden;
+}
+.aboutWrapper .contentSectionWrapper .contentSection .sectionItem .sectionHeader {
+  font-size: 1.3em;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 24px;
+}
+.aboutWrapper .contentSectionWrapper .contentSection .sectionItem .sectionHeader i {
+  margin-right: 16px;
+}
+.aboutWrapper .contentSectionWrapper .contentSection .sectionItem .sectionContent {
+  flex: 1;
+  width: 100%;
+  height: 100% - 1.3em - 24px;
+}
+.aboutWrapper .contentSectionWrapper .contentSection .sectionItem.middleInnerSection {
+  flex: 1;
+}
+.aboutWrapper .contentSectionWrapper .profileImage {
+  max-height: 100%;
+  max-width: 30%;
+  background-size: contain;
+  background-position: bottom;
+  background-image: url("../../../assets/images/bewerbungsBild.png");
+  width: 35%;
+  height: 100%;
+  background-repeat: no-repeat;
+  z-index: 9000;
+}
+.aboutWrapper .infoFooter {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 150px;
+  background: #4a4a4a;
+}
+.aboutWrapper .infoFooter .infoWrapper {
+  margin-left: 35%;
+  display: flex;
+  height: 100%;
+}
+.aboutWrapper .infoFooter .infoWrapper .itemWrapper {
+  color: #eee;
+  display: flex;
+  align-items: center;
+  font-size: 1.2em;
+}
+.aboutWrapper .infoFooter .infoWrapper .itemWrapper i {
+  color: #dcb979;
+  margin-right: 16px;
+  font-size: 2em;
+  user-select: none;
+}
+.aboutWrapper .infoFooter .infoWrapper .column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 20px 0;
+}
+@media only screen and (max-width: 768px) {
+  .aboutWrapper {
+    height: unset;
+  }
+  .aboutWrapper .contentSectionWrapper {
+    height: unset;
+  }
+  .aboutWrapper .contentSectionWrapper .contentSection .sectionItem {
+    width: 100%;
+  }
+  .aboutWrapper .contentSectionWrapper .profileImage {
+    display: none;
+  }
+  .aboutWrapper .infoFooter {
+    position: unset;
+  }
+}
