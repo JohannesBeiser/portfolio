@@ -1,2 +1,99 @@
-<h2 class="page-header">About</h2>
-<p>Welcome to About</p>
+<div class="aboutWrapper">
+
+    <div class="contentSectionWrapper">
+        <div class="profileImage animated slideInLeft delay-500ms duration-500ms"></div>
+        <div class="contentSection ">
+            <div class="sectionItem aboutSection animated fadeIn delay-1100ms">
+                <div class="sectionHeader"> <i class="material-icons">person</i>About me</div>
+                <div class="sectionContent">
+                    <p>
+                        I love everything that has to do with the outdoors.
+                        Basically skiing and hiking. <br>
+                        Also into Thru-hiking & Photography.
+                    </p>
+                    <p>
+                        My friends would probably say I'm a
+                        very open minded kind of person and
+                        really not complicated.
+                        Always open for new things to do and
+                        learn. And once I've found the
+                        motivation for it, I'm committed 110%.
+                    </p>
+                    <p>
+                       Since I discovered Web Development for me, I fell in love with it.
+                       To being able to create something that looks and feels exactly as you want it.
+                       To create a intuitive and user friendly Web Application that is easy to understand for everyone. 
+                       All that can be accomplished in so many different kinds of ways. It never gets boring in the fast changing world of Javascript!                        
+                    </p>
+                </div>
+            </div>
+            <div class="sectionItem experienceSection animated fadeIn delay-700ms">
+                <div class="sectionHeader"> <i class="material-icons">work</i>Experience</div>
+                <div class="sectionContent">
+
+                    <div class="experienceLineWrapper">
+                        <div class="exprienceItem">
+                            <div class="experienceItemHeader">Frontend Developer <span class="subHeader">(Student
+                                    trainee)</span></div>
+                            <div class="experienceItemDescription"><a href="http://www.softwarehelden.com/" class="experienceDescriptionLink"
+                                    target="blank">Softwarehelden, Stuttgart</a></div>
+                            <div class="experienceItemDate">Nov. 2017 - Mar. 2019</div>
+                        </div>
+                        <div class="exprienceItem">
+                            <div class="experienceItemHeader">Photographer</div>
+                            <div class="experienceItemDescription">Freelancing</div>
+                            <div class="experienceItemDate">Since Feb. 2017</div>
+                        </div>
+                        <div class="exprienceItem">
+                            <div class="experienceItemHeader">Computer Science & Media</div>
+                            <div class="experienceItemDescription"><a href="https://www.hdm-stuttgart.de/english" class="experienceDescriptionLink"
+                                    target="blank">Media University, Stuttgart</a></div>
+                            <div class="experienceItemDate">Oct. 2016 - Mar. 2020</div>
+                        </div>
+                        <div class="exprienceItem">
+                            <div class="experienceItemHeader">Receptionist</div>
+                            <div class="experienceItemDescription"><a href="https://www.hotelhinterglemm.com/en/" class="experienceDescriptionLink"
+                                    target="blank">Hotel Edelweiss, Hinterglemm</a></div>
+                            <div class="experienceItemDate">Dec. 2015 - Apr. 2016</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="sectionItem skillSection animated fadeIn delay-900ms">
+                <div class="sectionHeader"> <i class="material-icons">work</i>Skills</div>
+                <div class="sectionContent">
+                    <div class="skillItem" *ngFor="let skillItem of skillItems">
+                        <img class="skillItemIcon" [src]="skillItem.iconPath" alt="">
+                        <div class="techSkillWrapper">
+                            <div class="skillItemTitle">{{skillItem.technology}}</div>
+                            <div class="skillItemLevel">
+                                <div class="skillLevel" [ngStyle]="{'width': skillItem.skillLevel}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="infoFooter animated slideInUp duration-500ms">
+
+        <div class="infoWrapper">
+
+            <div class="column">
+                <div class="itemWrapper"><i class="material-icons">star</i> 06. Feb 1996</div>
+                <div class="itemWrapper"><i class="material-icons">home</i> Stuttgart, Germany</div>
+            </div>
+
+            <div class="column">
+                <div class="itemWrapper"><i class="material-icons">email</i>beiserjohannes@gmail.com</div>
+                <div class="itemWrapper"><i class="material-icons">phone</i>+49 17691395981</div>
+            </div>
+        </div>
+        <div class="mobileProfilePicture"></div>
+    </div>
+</div>

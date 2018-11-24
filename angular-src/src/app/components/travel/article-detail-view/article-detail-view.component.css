@@ -113,6 +113,9 @@
   text-align: right;
 }
 @media only screen and (max-width: 768px) {
+  .detail-view-wrapper .articleHeader {
+    margin: 0 0 30px;
+  }
   .detail-view-wrapper .articleHeader .articleDate {
     display: none;
   }

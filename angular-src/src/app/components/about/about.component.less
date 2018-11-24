@@ -1,0 +1,273 @@
+@import "../../../globalVariables.less";
+.aboutWrapper {
+    .contentSectionWrapper {
+        min-height: ~"calc(100vh - 100px - 150px)";
+        width: 100%; //  background: steelblue;
+        position: relative;
+        display: flex;
+        .contentSection {
+            width: 100%;
+            display: flex;
+            padding: 24px;
+            height: ~"calc(100vh - 100px - 150px - 32px)"; //100 nav, 150 footer, 32 margin
+            overflow: auto;
+            margin: 16px 0 16px 29%;
+            border-left: 1px solid @borderLightColor;
+            .sectionItem {
+                //  border-right: 1px solid #aaa;                
+                flex: 2;
+                height: 100%;
+                padding: 16px; //overflow: hidden;
+                .sectionHeader {
+                    font-size: 1.3em;
+                    display: flex;
+                    width: 100%;
+                    padding-bottom: 6px;
+                    margin-bottom: 8px;
+                    border-bottom: 1px solid @borderLightColor;
+                    i {
+                        margin-right: 8px;
+                    }
+                }
+                .sectionContent {
+                    flex: 1;
+                    width: 100%;
+                    height: ~"100% - 1.3em - 24px";
+                }
+                &.skillSection {
+                   // flex: 1;
+                    .sectionContent {
+                        .skillItem {
+                            display: flex;
+                            align-items: center;
+                            margin-bottom: 16px;
+                            .skillItemIcon {
+                                width: 28px;
+                                height: 28px;
+                                margin-right: 8px;
+                                filter: grayscale(55%);
+                            }
+                            .techSkillWrapper {
+                                flex: 1;
+                                .skillItemLevel {
+                                    width: 100%;                            
+                                    height: 6px;
+                                    flex: 1;
+                                    margin: 0 auto;
+                                    background: #ccc;
+                                    .skillLevel {
+                                        width: 60%;
+                                        height: 100%;
+                                        background: #444;
+                                    }
+                                }
+                            }
+                            .skillItemHeader {
+                                width: 100%;
+                                .skillItemTitle {
+                                    padding-left: 8px;
+                                }
+                            }
+                        }
+                    }
+                }
+                &.aboutSection {
+                    min-width: 300px;
+                    padding-bottom: 0 !important;
+                    order: 3;
+                    .sectionContent {
+                        // font-size: 0.9em;
+                    }
+                }
+                &.experienceSection {
+                    .sectionContent {
+                        .experienceLineWrapper {
+                            .exprienceItem {
+                                margin-left: 8px;
+                                .experienceItemHeader {
+                                    position: relative;
+                                    padding-left: 18px;
+                                    &:before {
+                                        content: "";
+                                        position: absolute;
+                                        left: 0;
+                                        width: 8px;
+                                        height: 8px;
+                                        border-radius: 50%;
+                                        background: #444;
+                                        top: 6px;
+                                        left: -3px;
+                                    }
+                                    .subHeader {
+                                        font-size: 0.9em;
+                                        color: lighten(@textColor, 40%);
+                                    }
+                                }
+                                .experienceItemDescription {
+                                    color: lighten(@textColor, 40%);
+                                    padding: 8px 16px 0;
+                                    border-left: 1px solid #444;
+                                    user-select: none;
+                                    .experienceDescriptionLink {
+                                        user-select: unset;
+                                        cursor: pointer;
+                                        text-decoration: none;
+                                        color: inherit;
+                                        transition: color 200ms ease-in-out;
+                                        &:hover {
+                                            color: @textColor;
+                                        }
+                                    }
+                                }
+                                .experienceItemDate {
+                                    color: lighten(@textColor, 40%);
+                                    padding: 0 16px;
+                                    border-left: 1px solid #444;
+                                    padding-bottom: 16px;
+                                    user-select: none;
+                                }
+                                &:last-child {
+                                    position: relative;
+                                    &:after {
+                                        content: "";
+                                        width: 15px;
+                                        height: 2px;
+                                        background: #444;
+                                        position: absolute;
+                                        left: -7px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .profileImage {
+            max-height: 100%;
+            max-width: 30%;
+            background-size: contain;
+            background-position: bottom;
+            background-image: url("../../../assets/images/bewerbungsBild.png");
+            width: 35%;
+            height: 100%;
+            background-repeat: no-repeat;
+            position: absolute;
+        }
+    }
+    .infoFooter {
+        width: 100%;
+        height: 150px;
+        background: #4a4a4a;
+        .infoWrapper {
+            display: flex;
+            height: 100%;
+            margin-left: 10%;
+            .itemWrapper {
+                color: #eee;
+                display: flex;
+                align-items: center;
+                font-size: 1.2em;
+                i {
+                    color: #dcb979;
+                    margin-right: 16px;
+                    font-size: 2em;
+                    user-select: none;
+                }
+            }
+            .column {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                padding: 20px 0;
+                max-width: 300px;
+            }
+        }
+        .mobileProfilePicture {
+            display: none;
+        }
+    }
+}
+
+@media only screen and (max-width: @mobileBreakpoint) {
+    .aboutWrapper {
+        height: unset;
+        .contentSectionWrapper {
+            min-height: ~"calc(100vh - 100px - 202.88px)"; // 202.88 is the exact height for the footer in mobile
+            height: unset;
+            .contentSection {
+                flex-wrap: wrap;
+                margin: 0;
+                height: unset;
+                overflow: unset;
+                border-left: unset;
+                .sectionItem {
+                    width: 100%;
+                    height: unset;
+                    flex: unset;
+                    .sectionHeader {
+                        i {}
+                    }
+                    .sectionContent {}
+                    &.skillSection {}
+                }
+            }
+            .profileImage {
+                display: none;
+            }
+        }
+        .infoFooter {
+            position: unset;
+            height: unset;
+            display: flex;
+            flex-wrap: wrap;
+            .infoWrapper {
+                flex: 1;
+                margin: 0;
+                padding: 16px 16px 24px;
+                flex-wrap: wrap;
+                order: 2;
+                .itemWrapper {
+                    min-width: 100%;
+                    padding: 8px 16px 0 0;
+                    i {}
+                }
+                .column {
+                    min-width: 100%;
+                    padding: 0;
+                }
+            }
+            .mobileProfilePicture {
+                flex: 1;
+                align-self: center;
+                margin: 24px;
+                display: block;
+                background-image: url("../../../assets/images/bewerbungsBildMobile.png");
+                background-size: contain;
+                background-position: bottom;
+                background-repeat: no-repeat;
+                height: 150px;
+                width: 150px;
+                min-width: 150px;
+                order: 1;
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: 1440px) {
+    .sectionContent {
+       // font-size: 0.9em;
+        height: auto;
+    }
+    .contentSection {
+        display: block !important;
+        height: ~"calc(100vh - 250px)";
+        overflow: auto;
+        .sectionItem {
+            height: unset !important;
+        }
+    }
+}
