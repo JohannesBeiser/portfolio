@@ -28,24 +28,20 @@ export class AboutComponent implements OnInit {
         skillLevel: "90%"
       },{
         iconPath: "../../../assets/icons/javascript.png",
-        technology: "Java- & Typescript",
+        technology: "Javascript, Typescript",
         skillLevel: "70%"
+      },{
+        iconPath: "../../../assets/icons/node.png",
+        technology: "Node.js + Express",
+        skillLevel: "60%"
       },{
         iconPath: "../../../assets/icons/angular.svg",
         technology: "Angular",
         skillLevel: "45%"
       },{
-        iconPath: "../../../assets/icons/node.png",
-        technology: "Node.js",
-        skillLevel: "60%"
-      },{
         iconPath: "../../../assets/icons/mongodb.png",
         technology: "MongoDB",
         skillLevel: "55%"
-      },{
-        iconPath: "../../../assets/icons/express.png",
-        technology: "Express",
-        skillLevel: "50%"
       },{
         iconPath: "../../../assets/icons/vue.png",
         technology: "Vue",
@@ -53,11 +49,15 @@ export class AboutComponent implements OnInit {
       },{
         iconPath: "../../../assets/icons/git.png",
         technology: "Git",
-        skillLevel: "85%"
+        skillLevel: "80%"
       },{
         iconPath: "../../../assets/icons/jquery.png",
         technology: "JQuery",
         skillLevel: "95%"
+      },{
+        iconPath: "../../../assets/icons/adobe.svg",
+        technology: "Photoshop & Lightroom",
+        skillLevel: "65%"
       }
     ];
   }

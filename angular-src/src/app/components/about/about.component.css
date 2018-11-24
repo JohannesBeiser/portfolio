@@ -180,9 +180,6 @@
   width: 100%;
   height: 100% - 1.3em - 24px;
 }
-.aboutWrapper .contentSectionWrapper .contentSection .sectionItem.skillSection {
-  flex: 1;
-}
 .aboutWrapper .contentSectionWrapper .contentSection .sectionItem.skillSection .sectionContent .skillItem {
   display: flex;
   align-items: center;
