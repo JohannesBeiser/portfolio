@@ -1,42 +1,75 @@
 <div class="aboutWrapper">
 
     <div class="contentSectionWrapper">
-        <div class="profileImage animated slideInLeft delay-500ms duration-500ms" ></div>
-        <div class="contentSection">
-
-            <div class="sectionItem leftInnerSection">
-                <div class="sectionHeader"> <i class="material-icons">work</i>Experience</div>
-                <div class="sectionContent"></div>
-            </div>
-            <div class="sectionItem middleInnerSection">
-                <div class="sectionHeader"> <i class="material-icons">work</i>Skills</div>
-                <div class="sectionContent"></div>
-            </div>
-            <div class="sectionItem rightInnerSection">
+        <div class="profileImage animated slideInLeft delay-500ms duration-500ms"></div>
+        <div class="contentSection ">
+            <div class="sectionItem aboutSection animated fadeIn delay-1100ms">
                 <div class="sectionHeader"> <i class="material-icons">person</i>About me</div>
                 <div class="sectionContent">
-
-                    <p>I love everything that has to do with
-                        the outdoors. <br>
-                        Basically skiing and
-                        hiking. <br>
-                        Also into Thru-hiking &
-                        Photography.</p>
-
-                    <p>My friends would probably say I'm a
-                        very open minded kind of Person and
+                    <p>
+                        I love everything that has to do with the outdoors. <br>
+                        Basically skiing and hiking. <br>
+                        Also into Thru-hiking & Photography.
+                    </p>
+                    <p>
+                        My friends would probably say I'm a
+                        very open minded kind of person and
                         really not complicated.<br>
                         Always open for new things to do and
                         learn. And once I've found the
-                        motivation for it, I'm committed 110%.</p>
+                        motivation for it, I'm committed 110%.
+                    </p>
+                    <p>
+                       
+                        
+                    </p>
+                </div>
+            </div>
+            <div class="sectionItem experienceSection animated fadeIn delay-700ms">
+                <div class="sectionHeader"> <i class="material-icons">work</i>Experience</div>
+                <div class="sectionContent">
 
-                    <p>I really don't see most things as too
-                        complicated. <br> 
-                        Lots of things can be
-                        quite easy if you talk about it openly.<br>
-                        Communication is the NO. 1 thing
-                        when it comes to efficiency or general
-                        well being in a job in my opinion.</p>
+                    <div class="experienceLineWrapper">
+                        <div class="exprienceItem">
+                            <div class="experienceItemHeader">Frontend Developer <span class="subHeader">(Student
+                                    trainee)</span></div>
+                            <div class="experienceItemDescription"><a href="http://www.softwarehelden.com/" class="experienceDescriptionLink"
+                                    target="blank">Softwarehelden, Stuttgart</a></div>
+                            <div class="experienceItemDate">Nov. 2017 - Mar. 2019</div>
+                        </div>
+                        <div class="exprienceItem">
+                            <div class="experienceItemHeader">Photographer</div>
+                            <div class="experienceItemDescription">Freelancing</div>
+                            <div class="experienceItemDate">Since Feb. 2017</div>
+                        </div>
+                        <div class="exprienceItem">
+                            <div class="experienceItemHeader">Computer Science & Media</div>
+                            <div class="experienceItemDescription"><a href="https://www.hdm-stuttgart.de/english" class="experienceDescriptionLink"
+                                    target="blank">Media University, Stuttgart</a></div>
+                            <div class="experienceItemDate">Oct. 2016 - Mar. 2020</div>
+                        </div>
+                        <div class="exprienceItem">
+                            <div class="experienceItemHeader">Receptionist</div>
+                            <div class="experienceItemDescription"><a href="https://www.hotelhinterglemm.com/en/" class="experienceDescriptionLink"
+                                    target="blank">Hotel Edelweiss, Hinterglemm</a></div>
+                            <div class="experienceItemDate">Dec. 2015 - Apr. 2016</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="sectionItem skillSection animated fadeIn delay-900ms">
+                <div class="sectionHeader"> <i class="material-icons">work</i>Skills</div>
+                <div class="sectionContent">
+                    <div class="skillItem" *ngFor="let skillItem of skillItems">
+                        <img class="skillItemIcon" [src]="skillItem.iconPath" alt="">
+                        <div class="techSkillWrapper">
+                            <div class="skillItemTitle">{{skillItem.technology}}</div>
+                            <div class="skillItemLevel">
+                                <div class="skillLevel" [ngStyle]="{'width': skillItem.skillLevel}"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -59,5 +92,6 @@
                 <div class="itemWrapper"><i class="material-icons">phone</i>+49 17691395981</div>
             </div>
         </div>
+        <div class="mobileProfilePicture"></div>
     </div>
 </div>

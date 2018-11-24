@@ -22,7 +22,7 @@
     display: flex;
     z-index: 2000;
     height: 100px; // TODO: Remove me, only for iOS Safary& iOS Chrome --> find solution for non-available css-grid
-  //  border-bottom: 1px solid #444;
+    border-bottom: 1px solid #eee;
 
     .navbar-logo-wrapper{
         flex: 4.5;
@@ -127,6 +127,7 @@
         display: none;
     }
     &.onHomeSite{
+        border-bottom:unset;
 
         .homeImageFadeHeader{
             background-image: linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,255,255,0));
