@@ -22,6 +22,60 @@
   -webkit-transform: translateZ(0) scale(1, 1);
   transform: translateZ(0);
 }
+.duration-100ms {
+  -webkit-animation-duration: 100ms;
+  animation-duration: 100ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-200ms {
+  -webkit-animation-duration: 200ms;
+  animation-duration: 200ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-300ms {
+  -webkit-animation-duration: 300ms;
+  animation-duration: 300ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-400ms {
+  -webkit-animation-duration: 400ms;
+  animation-duration: 400ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-500ms {
+  -webkit-animation-duration: 500ms;
+  animation-duration: 500ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-600ms {
+  -webkit-animation-duration: 600ms;
+  animation-duration: 600ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-700ms {
+  -webkit-animation-duration: 700ms;
+  animation-duration: 700ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-800ms {
+  -webkit-animation-duration: 800ms;
+  animation-duration: 800ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-900ms {
+  -webkit-animation-duration: 900ms;
+  animation-duration: 900ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
 .delay-100ms {
   -webkit-animation-delay: 100ms;
   animation-delay: 100ms;
@@ -95,7 +149,7 @@
 }
 .home-wrapper {
   height: calc(100vh - 100px);
-  background-image: url("../../../assets/images/frontPageImage.jpg");
+  background-image: url("../../../assets/images/frontPageImage.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-position-x: center;
