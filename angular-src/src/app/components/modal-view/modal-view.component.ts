@@ -20,15 +20,15 @@ export class ModalViewComponent implements OnInit, OnDestroy {
   }
 
 
-  private closeModal(){
+  public closeModal(){
     this.closing.emit()
   }
 
-  private outerAreaClicked(){
+  public outerAreaClicked(){
   this.closeModal();
   }
 
-  private innerAreaClicked(e: Event){
+  public innerAreaClicked(e: Event){
     e.stopPropagation();
   }
 

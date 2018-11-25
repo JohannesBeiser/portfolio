@@ -12,7 +12,7 @@ import { DomSanitizer  } from '@angular/platform-browser';
 export class ModalComponent implements OnInit {
   
   sanitizer = DomSanitizer.prototype;
-  constructor(private _modalService: ModalService) { }
+  constructor(public _modalService: ModalService) { }
 
   ngOnInit() {
   }
