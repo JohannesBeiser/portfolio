@@ -1,7 +1,4 @@
 @import '../../../globalVariables.less';
-
-
-
 .galleryWrapper{
         margin: 5% 2%;
         display: flex;
@@ -60,7 +57,45 @@
             cursor: initial;
             height: 0px;
             min-height: 0px;
+        }  
+}
+
+.photographyFooter{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+    background: @footerColor;
+ 
+    .cameraThumbnail{
+        margin-left: 24px;
+        height: 100px;
+    }
+    .cameraInfoWrapper{
+        flex: 1;
+        color: @textLightColor;
+        margin-left: 24px;
+        min-width: 300px;
+        .item{
+            padding: 8px;
+
+            .descriptionTitle{
+                width: 6em;
+                display: inline-block;
+            }
+
+            .description{
+                text-decoration: none;
+                color: darken(@textLightColor, 30%);
+                transition: color 200ms ease-in-out;
+                &:hover{
+                    color: darken(@textLightColor, 10%);
+                }
+            }
         }
+       
+    }
 }
 
 @media screen and (max-width: @mobileBreakpoint){
@@ -93,4 +128,10 @@
 }
 
     
-
+@media screen and (min-width: 1440px) {
+    .galleryWrapper {   
+        .imagePreviewWrapper {
+       //     width: 24%;
+        }
+    }
+}

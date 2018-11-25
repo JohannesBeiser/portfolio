@@ -25,7 +25,12 @@
 
     <div class="content-area animated slideInLeft" *ngIf="!detailViewShown">
 
-        <h2 class="content-area-header">Articles <span class="articleGroupSoecification">{{selectedArticleGroup}}</span></h2>
+        <h2 class="content-area-header">
+            <span>Articles</span>    
+            <span class="loading-container" *ngIf="!timelineList || timelineList.length==0">
+                    <div class="loading"></div>
+            </span>
+            <span class="articleGroupSoecification">{{selectedArticleGroup}}</span></h2>
 
         <div class="articles">
             <div (click)="showDetailView(article)" class="article animated fadeIn" *ngFor="let article of renderedArticles">
@@ -42,8 +47,14 @@
         </div>
     </div>
     <div class="timelineArea animated slideInRight">
-        <h2 class="timelineHeader">Timeline</h2>
-        <div class="timelineContent">
+        <h2 class="timelineHeader">
+                <span>Timeline</span>
+                <span class="loading-container" *ngIf="!timelineList || timelineList.length==0">
+                        <div class="loading"></div>
+                </span>
+        </h2>
+        
+        <div class="timelineContent" *ngIf="timelineList && timelineList.length != 0">
             <div class="timelineSection" *ngFor="let timelineSection of timelineList">
                 <div class="timelineSectionHeader" [class.active]="timelineActiveStateArray[timelineSection._id]"
                     (click)="timelineYearSelected(timelineSection)">

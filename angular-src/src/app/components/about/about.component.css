@@ -181,7 +181,7 @@
   height: 100% - 1.3em - 24px;
 }
 .aboutWrapper .contentSectionWrapper .contentSection .sectionItem.skillSection .sectionHeader .skillsIcon {
-  background-image: url("../../../assets/icons/skills.png");
+  background-image: url("../../../assets/icons/skills.webp");
   background-size: contain;
   width: 24px;
   height: 27px;
@@ -374,7 +374,7 @@
     align-self: center;
     margin: 24px;
     display: block;
-    background-image: url("../../../assets/images/bewerbungsBildMobile.png");
+    background-image: url("../../../assets/images/bewerbungsBildMobile.webp");
     background-size: contain;
     background-position: bottom;
     background-repeat: no-repeat;
