@@ -41,7 +41,7 @@ export class NavbarComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private flashMessage: FlashMessagesService,
-    private _compCoService: CompCommunicationService) { }
+    public _compCoService: CompCommunicationService) { }
 
   ngOnInit() {
     this.dropdownActive= false;

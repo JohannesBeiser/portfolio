@@ -20,11 +20,11 @@ export class ArticleDetailViewComponent implements OnInit {
   ngOnInit() {
   }
 
-  private closeDetailView(){
+  public closeDetailView(){
     this.detailViewClosing.next();
   }
 
-  public getFormattedDate(date: string){
-    return this._dateHelper.getSimplifiedDate(new Date(date));
+  public getFormattedDate(date: String){
+    return this._dateHelper.getSimplifiedDate(new Date(date.toString()));
   }
 }
