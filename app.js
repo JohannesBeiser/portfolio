@@ -6,6 +6,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./config/database');
 const multer = require('multer');
+const compression = require('compression');
 
 // Connect To Database (NEW) But not working!!!!!!!!!! (because of secret in db.js!!!!!)
 //const db = require('./config/database');
@@ -41,6 +42,10 @@ const port = process.env.PORT || 8080;
 
 // CORS Middleware
 app.use(cors());
+
+//Compressing for speed loadimg
+app.use(compression());
+
 
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
