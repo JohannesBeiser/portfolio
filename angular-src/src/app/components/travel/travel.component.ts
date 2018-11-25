@@ -32,19 +32,19 @@ export interface iTimelineList {
 export class TravelComponent implements OnInit {
 
   //private articleGroups: iArticleGroup[];
-  private timelineList: iTimelineList[];
+  public timelineList: iTimelineList[];
   private renderedArticles: iArticle[];
   private timelineActiveStateArray: any[] = [];
   private selectedArticleGroup: String = "";
   private allArticles: iArticle[] = [];
   public detailViewShown: boolean = false;
-  private chosenArticle: iArticle;
+  public chosenArticle: iArticle;
 
   public fileReader: FileReader;
 
   private currentYear = new Date().getFullYear().toString();
 
-  private articleToEdit: iArticle;
+  public articleToEdit: iArticle;
   private articleEditDateRaw: any;
 
   constructor(

@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private _imgUpload: ImageUploadService,
     private _articleService: ArticlesService,
-    private _authService: AuthService
+    public _authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
     }, false);
   }
 
-  private submitPressed() {
+  public submitPressed() {
 
     let parsedDate = new Date(this.chosenArticleDate)
 
@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  private fileChanged(event) {
+  public fileChanged(event) {
     let chosenThumbnail = event.target.files[0]
     this.fileReader.readAsDataURL(chosenThumbnail);
 

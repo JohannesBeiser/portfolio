@@ -18,7 +18,7 @@ export class AboutComponent implements OnInit {
   constructor() { }
 
   private testWidth ="10%";
-  private skillItems: iSkillItem[];
+  public skillItems: iSkillItem[];
 
   ngOnInit() {
     this.skillItems=[
