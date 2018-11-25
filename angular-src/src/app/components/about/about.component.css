@@ -144,6 +144,21 @@
   -webkit-animation-delay: 1700ms;
   animation-delay: 1700ms;
 }
+.rotateIn90 {
+  animation-name: rotateIn90;
+}
+@keyframes rotateIn90 {
+  from {
+    transform-origin: center;
+    transform: rotate3d(0, 0, 1, -90deg);
+    opacity: 0;
+  }
+  to {
+    transform-origin: center;
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
 .aboutWrapper .contentSectionWrapper {
   min-height: calc(100vh - 100px - 150px);
   width: 100%;
@@ -164,6 +179,9 @@
   height: 100%;
   padding: 16px;
 }
+.aboutWrapper .contentSectionWrapper .contentSection .sectionItem.customDelay {
+  animation-delay: 1100ms;
+}
 .aboutWrapper .contentSectionWrapper .contentSection .sectionItem .sectionHeader {
   font-size: 1.3em;
   display: flex;
@@ -183,6 +201,7 @@
 .aboutWrapper .contentSectionWrapper .contentSection .sectionItem.skillSection .sectionHeader .skillsIcon {
   background-image: url("../../../assets/icons/skills.webp");
   background-size: contain;
+  background-repeat: no-repeat;
   width: 24px;
   height: 27px;
   display: inline-block;
@@ -345,6 +364,9 @@
     height: unset;
     flex: unset;
   }
+  .aboutWrapper .contentSectionWrapper .contentSection .sectionItem.customDelay {
+    animation-delay: 500ms;
+  }
   .aboutWrapper .contentSectionWrapper .profileImage {
     display: none;
   }
@@ -395,5 +417,8 @@
   }
   .contentSection .sectionItem {
     height: unset !important;
+  }
+  .contentSection .sectionItem.customDelay {
+    animation-delay: 500ms !important;
   }
 }

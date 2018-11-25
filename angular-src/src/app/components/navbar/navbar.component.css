@@ -291,10 +291,11 @@
     width: 100%;
     background: #d4d2cf;
     z-index: 1;
+    height: calc(100vh - 100px);
     cursor: pointer;
   }
   .navBar .dropdownMenu .menuEntry {
-    padding: 5px 0;
+    padding: 20px 0;
     text-align: center;
     text-transform: uppercase;
     color: #2b2a29;

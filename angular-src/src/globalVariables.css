@@ -144,3 +144,18 @@
   -webkit-animation-delay: 1700ms;
   animation-delay: 1700ms;
 }
+.rotateIn90 {
+  animation-name: rotateIn90;
+}
+@keyframes rotateIn90 {
+  from {
+    transform-origin: center;
+    transform: rotate3d(0, 0, 1, -90deg);
+    opacity: 0;
+  }
+  to {
+    transform-origin: center;
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
