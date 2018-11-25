@@ -17,8 +17,7 @@
 
       <div class="burgerMenu fadeIn animated">
           <i (click)="toggleDropdownMenu()" class="material-icons" *ngIf="!dropdownActive">menu</i>
-          <i (click)="toggleDropdownMenu()" class="material-icons" *ngIf="dropdownActive">close</i>
-
+          <i (click)="toggleDropdownMenu()" class="material-icons animated rotateIn90 duration-400ms" *ngIf="dropdownActive">close</i>
       </div>
 
       <div *ngIf="dropdownActive" @swipe class="dropdownMenu">
