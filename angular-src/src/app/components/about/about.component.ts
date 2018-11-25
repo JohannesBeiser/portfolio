@@ -27,11 +27,11 @@ export class AboutComponent implements OnInit {
         technology: "HTML, CSS/LESS",
         skillLevel: "90%"
       },{
-        iconPath: "../../../assets/icons/javascript.webp",
+        iconPath: "../../../assets/icons/javascript.png",
         technology: "Javascript, Typescript",
         skillLevel: "70%"
       },{
-        iconPath: "../../../assets/icons/node.webp",
+        iconPath: "../../../assets/icons/node.png",
         technology: "Node.js + Express",
         skillLevel: "60%"
       },{
@@ -39,19 +39,19 @@ export class AboutComponent implements OnInit {
         technology: "Angular",
         skillLevel: "45%"
       },{
-        iconPath: "../../../assets/icons/mongodb.webp",
+        iconPath: "../../../assets/icons/mongodb.png",
         technology: "MongoDB",
         skillLevel: "55%"
       },{
-        iconPath: "../../../assets/icons/vue.webp",
+        iconPath: "../../../assets/icons/vue.png",
         technology: "Vue",
         skillLevel: "30%"
       },{
-        iconPath: "../../../assets/icons/git.webp",
+        iconPath: "../../../assets/icons/git.png",
         technology: "Git",
         skillLevel: "80%"
       },{
-        iconPath: "../../../assets/icons/jquery.webp",
+        iconPath: "../../../assets/icons/jquery.png",
         technology: "JQuery",
         skillLevel: "95%"
       },{

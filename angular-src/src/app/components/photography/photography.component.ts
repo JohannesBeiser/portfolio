@@ -60,107 +60,107 @@ export class PhotographyComponent implements OnInit {
     this.pictures = [];
   
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (1) + ".webp",
+      'path' : "../../../assets/pictures/"+ (1) + ".jpg",
       'description': "Laos - Luang Prabang",
       'animationDelay' : "delay-100ms"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (3) + ".webp",
+      'path' : "../../../assets/pictures/"+ (3) + ".jpg",
       'description': "Norway - Jotunheimen",
       'animationDelay' : "delay-200ms"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (2) + ".webp",
+      'path' : "../../../assets/pictures/"+ (2) + ".jpg",
       'description': "Japan - Tokyo",
       'animationDelay' : "delay-300ms"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (10) + ".webp",
+      'path' : "../../../assets/pictures/"+ (10) + ".jpg",
       'description': "Tokyo - Shibuya",
       'animationDelay' : "delay-400ms"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (11) + ".webp",
+      'path' : "../../../assets/pictures/"+ (11) + ".jpg",
       'description': "Cambodia - Phnom Penh",
       'animationDelay' : "delay-500ms"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (12) + ".webp",
+      'path' : "../../../assets/pictures/"+ (12) + ".jpg",
       'description': "Myanmar - Yangon",
       'animationDelay' : "delay-600ms"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (13) + ".webp",
+      'path' : "../../../assets/pictures/"+ (13) + ".jpg",
       'description': "Philippines - Bohol",
       'animationDelay' : "delay-700ms"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (6) + ".webp",
+      'path' : "../../../assets/pictures/"+ (6) + ".jpg",
       'description': "New Zealand - Canterbury",
       'animationDelay' : "delay-800ms"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (5) + ".webp",
+      'path' : "../../../assets/pictures/"+ (5) + ".jpg",
       'description': "Norway - Jotunheimen",
       'animationDelay' : "delay-900ms"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (7) + ".webp",
+      'path' : "../../../assets/pictures/"+ (7) + ".jpg",
       'description': "Philippines - Virgin Island",
       'animationDelay' : "delay-1s"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (8) + ".webp",
+      'path' : "../../../assets/pictures/"+ (8) + ".jpg",
       'description': "South Korea - Seoul",
       'animationDelay' : "delay-1s"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (20) + ".webp",
+      'path' : "../../../assets/pictures/"+ (20) + ".jpg",
       'description': "South Africa",
       'animationDelay' : "delay-1s"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (4) + ".webp",
+      'path' : "../../../assets/pictures/"+ (4) + ".jpg",
       'description': "Laos",
       'animationDelay' : "delay-1s"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (21) + ".webp",
+      'path' : "../../../assets/pictures/"+ (21) + ".jpg",
       'description': "New Zealand - Richmond Forest Park",
       'animationDelay' : "delay-1s"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (15) + ".webp",
+      'path' : "../../../assets/pictures/"+ (15) + ".jpg",
       'description': "Philippines",
       'animationDelay' : "delay-1s"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (16) + ".webp",
+      'path' : "../../../assets/pictures/"+ (16) + ".jpg",
       'description': "After the rain",
       'animationDelay' : "delay-1s"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (17) + ".webp",
+      'path' : "../../../assets/pictures/"+ (17) + ".jpg",
       'description': "Kea - New Zealand",
       'animationDelay' : "delay-1s"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (18) + ".webp",
+      'path' : "../../../assets/pictures/"+ (18) + ".jpg",
       'description': "Philippines - Virgin Island",
       'animationDelay' : "delay-1s"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (19) + ".webp",
+      'path' : "../../../assets/pictures/"+ (19) + ".jpg",
       'description': "Laos - Luang Prabang",
       'animationDelay' : "delay-1s"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (9) + ".webp",
+      'path' : "../../../assets/pictures/"+ (9) + ".jpg",
       'description': "Philippines - Panglao Island",
       'animationDelay' : "delay-1s"
     });
     this.pictures.push({
-      'path' : "../../../assets/pictures/"+ (14) + ".webp",
+      'path' : "../../../assets/pictures/"+ (14) + ".jpg",
       'description': "Austria - Hinterglemm",
       'animationDelay' : "delay-1s"
     });
