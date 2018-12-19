@@ -144,6 +144,21 @@
   -webkit-animation-delay: 1700ms;
   animation-delay: 1700ms;
 }
+.rotateIn90 {
+  animation-name: rotateIn90;
+}
+@keyframes rotateIn90 {
+  from {
+    transform-origin: center;
+    transform: rotate3d(0, 0, 1, -90deg);
+    opacity: 0;
+  }
+  to {
+    transform-origin: center;
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
 .active {
   font-weight: bold;
   color: black;
@@ -152,7 +167,7 @@
   width: 100%;
   margin: 20px 0;
 }
-@media screen and (min-width: calc(768px + 1px)) {
+@media screen and (min-width: 769px) {
   .travelSiteWrapper {
     width: 100%;
     min-height: 100%;
@@ -173,6 +188,12 @@
     border-bottom: 1px solid #aaa;
     display: flex;
     align-items: center;
+  }
+  .travelSiteWrapper .content-area .content-area-header .articleGroupSpecification:before {
+    content: "-";
+    margin-left: 16px;
+    position: relative;
+    left: -8px;
   }
   .travelSiteWrapper .content-area .content-area-header .loading-container {
     margin-left: 16px;
@@ -361,6 +382,7 @@
   }
   .travelSiteWrapper .timelineArea .timelineContent .timelineSection .timelineSectionContent .timelineSectionItem {
     margin: 8px;
+    width: 100%;
     padding: 8px;
     cursor: pointer;
     position: relative;

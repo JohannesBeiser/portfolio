@@ -283,7 +283,7 @@ export class TravelComponent implements OnInit {
 
   private setActiveFilterHeader(header: String) {
     if (header != null) {
-      this.selectedArticleGroup = " - " + header;
+      this.selectedArticleGroup = header;
     } else {
       this.selectedArticleGroup = ""
     }

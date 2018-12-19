@@ -187,7 +187,7 @@
   display: flex;
   width: 100%;
   padding-bottom: 6px;
-  margin-bottom: 8px;
+  margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
 }
 .aboutWrapper .contentSectionWrapper .contentSection .sectionItem .sectionHeader i {
@@ -199,7 +199,7 @@
   height: 100% - 1.3em - 24px;
 }
 .aboutWrapper .contentSectionWrapper .contentSection .sectionItem.skillSection .sectionHeader .skillsIcon {
-  background-image: url("../../../assets/icons/skills.webp");
+  background-image: url("../../../assets/icons/skills.png");
   background-size: contain;
   background-repeat: no-repeat;
   width: 24px;
@@ -305,7 +305,7 @@
   max-width: 30%;
   background-size: contain;
   background-position: bottom;
-  background-image: url("../../../assets/images/bewerbungsBild.webp");
+  background-image: url("../../../assets/images/bewerbungsBild.png");
   width: 35%;
   height: 100%;
   background-repeat: no-repeat;
@@ -396,7 +396,7 @@
     align-self: center;
     margin: 24px;
     display: block;
-    background-image: url("../../../assets/images/bewerbungsBildMobile.webp");
+    background-image: url("../../../assets/images/bewerbungsBildMobile.png");
     background-size: contain;
     background-position: bottom;
     background-repeat: no-repeat;
