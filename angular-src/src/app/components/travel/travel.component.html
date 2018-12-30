@@ -30,7 +30,7 @@
             <span class="loading-container" *ngIf="!timelineList || timelineList.length==0">
                     <div class="loading"></div>
             </span>
-            <span class="articleGroupSoecification">{{selectedArticleGroup}}</span></h2>
+            <span class="articleGroupSpecification" *ngIf="selectedArticleGroup != null && selectedArticleGroup.length != 0">{{selectedArticleGroup}}</span></h2>
 
         <div class="articles">
             <div (click)="showDetailView(article)" class="article animated fadeIn" *ngFor="let article of renderedArticles">
