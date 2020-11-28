@@ -1,4 +1,110 @@
-<p>Work in progress...</p>
+<div class="work-component-wrapper">
+    <div class="projectItem">
+
+        <div class="header">
+            <img src="../../../assets/images/expensemanager_icon.png" alt="">
+            <span>ExpenseManager (Mobile only)</span>
+        </div>
+        <div class="content">
+            <div class="slideshow">
+                <span (click)="updateActiveExpenseImage(-1)" class="material-icons">arrow_back_ios</span>
+                <img src="../../../assets/images/expenseManager/home.png" [class.inactive]="activeExpenseImage !=0"
+                    alt="">
+                <img src="../../../assets/images/expenseManager/groups.png" [class.inactive]="activeExpenseImage !=1"
+                    alt="">
+                <img src="../../../assets/images/expenseManager/filter.png" [class.inactive]="activeExpenseImage !=2"
+                    alt="">
+                <img src="../../../assets/images/expenseManager/search_edit.png"
+                    [class.inactive]="activeExpenseImage !=3" alt="">
+                <img src="../../../assets/images/expenseManager/settings.png" [class.inactive]="activeExpenseImage !=4"
+                    alt="">
+                <span (click)="updateActiveExpenseImage(1)" class="material-icons">arrow_forward_ios</span>
+            </div>
+
+            <div class="description">
+                Just another Expense Manager? Sure, but this one is designed to consist of only the core features that
+                are required to track ones daily expenses. There are tons of apps already out there, but I never find
+                the one that is exactly the way I want it to be, so I end up doing it myself. The peace in mind that the
+                data is secure and no update will mess the App up is just great!
+                <br><br>
+                It also considers people with small screens such as the iPhone 5/SE since a lot of Apps have such a
+                large header & footer that there is barely any space left for the content.
+                <br><br>
+                Furthermore optionally, an expense can be assigned to a group like "Iceland trip" which will be listed
+                in the "groups" tab. So after all your travelling over the years you can scroll through the list of
+                trips/groups
+                and see exactly how much you paid, and set a filter to only show those expenses on the overview/home
+                screen.
+                <br><br>
+                It is a PWA made with Angular 9 and operates fully locally through IndexedDB.
+                A Demo can be found <a href="https://expensemanager2-0.herokuapp.com/home" target="blank">here</a> and
+                the Repository can be found <a href="https://github.com/JohannesBeiser/expensemanager2-0"
+                    target="blank">here.</a>
+                Since this is a mobile only design, when viewing the Demo, please open the dev-tools and resize the page
+                to for example the iPhone 5 preset if you use Chrome.
+            </div>
+        </div>
+
+    </div>
+    <div class="projectItem">
+        <div class="header">
+            <img src="../../../assets/images/TravelStatsIcon.png" alt="">
+            <span>TravelStats (Mobile only)</span>
+        </div>
+
+        <div class="content">
+            <div class="slideshow">
+                <span (click)="updateActiveTravelImage(-1)" class="material-icons">arrow_back_ios</span>
+                <img [class.inactive]="activeTravelImage !=0" src="../../../assets/images/TravelStats.png" alt="">
+                <img [class.inactive]="activeTravelImage !=1" src="../../../assets/images/travelStats/home.png" alt="">
+                <img [class.inactive]="activeTravelImage !=2" src="../../../assets/images/travelStats/countries.png"
+                    alt="">
+                <img [class.inactive]="activeTravelImage !=3" src="../../../assets/images/travelStats/edit.png" alt="">
+                <img [class.inactive]="activeTravelImage !=4" src="../../../assets/images/travelStats/hikes.png" alt="">
+                <img [class.inactive]="activeTravelImage !=5" src="../../../assets/images/travelStats/settings.png"
+                    alt="">
+                <span (click)="updateActiveTravelImage(1)" class="material-icons">arrow_forward_ios</span>
+            </div>
+
+            <div class="description">
+                This App lets you keep track of all the trips and travelling you do. You can add countries, flights and
+                trips to see exactly where you were when and how much you spend.
+                The dashboard then shows you how many countries you have visited, how many flights you had, how many
+                days of your life you have spend travelling any many other stats.
+                <br><br>
+                It is a PWA made with Angular 9 and operates fully locally through IndexedDB.
+                A Demo can be found <a href="http://travelstatslist.herokuapp.com/" target="blank">here</a> and the
+                Repository can be found <a href="https://github.com/JohannesBeiser/travelstats" target="blank">here.</a>
+                Since this is a mobile only design, when viewing the Demo, please open the dev-tools and resize the page
+                to for example the iPhone 5 preset if you use Chrome.
+            </div>
+        </div>
+
+
+    </div>
+    <div class="projectItem deepspeech">
+
+        <div class="header">
+            <img src="../../../assets/images/deepSpeech_icon.png" alt="">
+            <span>DeepSpeech Demo</span>
+        </div>
+        <div class="content">
+            <div class="slideshow">
+                <img src="../../../assets/images/DeepSpeech_App.png" alt="">
+            </div>
+
+            <div class="description">
+                DeepSpeech is a rather new Speech-to-Text engine designed by Baidu and implemented as an OpenSource
+                project by Mozilla.
+                This (Angular) Application was developed as part of a Bachelor Thesis to research the possible
+                integrations of DeepSpeech into a Web Application.
+                <br><br>
+                The Demo is currently unavailably but the Repository can be found <a
+                    href="https://github.com/JohannesBeiser/deepspeech-demo" target="blank">here.</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!-- <modal-view title="dynamicTitle">

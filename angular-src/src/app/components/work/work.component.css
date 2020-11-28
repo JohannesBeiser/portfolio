@@ -1,0 +1,217 @@
+@font-face {
+  font-family: ComfortaaLight;
+  src: url('assets/fonts/Comfortaa-Light.ttf');
+}
+.defaultTextTransition {
+  transition: color 200ms ease-in-out;
+}
+.quickAnimation {
+  -webkit-animation-duration: 300ms;
+  animation-duration: 300ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.animated-300ms {
+  -webkit-animation-duration: 300ms;
+  animation-duration: 300ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.animationFix {
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0) scale(1, 1);
+  transform: translateZ(0);
+}
+.duration-100ms {
+  -webkit-animation-duration: 100ms;
+  animation-duration: 100ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-200ms {
+  -webkit-animation-duration: 200ms;
+  animation-duration: 200ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-300ms {
+  -webkit-animation-duration: 300ms;
+  animation-duration: 300ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-400ms {
+  -webkit-animation-duration: 400ms;
+  animation-duration: 400ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-500ms {
+  -webkit-animation-duration: 500ms;
+  animation-duration: 500ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-600ms {
+  -webkit-animation-duration: 600ms;
+  animation-duration: 600ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-700ms {
+  -webkit-animation-duration: 700ms;
+  animation-duration: 700ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-800ms {
+  -webkit-animation-duration: 800ms;
+  animation-duration: 800ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.duration-900ms {
+  -webkit-animation-duration: 900ms;
+  animation-duration: 900ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.delay-100ms {
+  -webkit-animation-delay: 100ms;
+  animation-delay: 100ms;
+}
+.delay-200ms {
+  -webkit-animation-delay: 200ms;
+  animation-delay: 200ms;
+}
+.delay-300ms {
+  -webkit-animation-delay: 300ms;
+  animation-delay: 300ms;
+}
+.delay-400ms {
+  -webkit-animation-delay: 400ms;
+  animation-delay: 400ms;
+}
+.delay-500ms {
+  -webkit-animation-delay: 500ms;
+  animation-delay: 500ms;
+}
+.delay-600ms {
+  -webkit-animation-delay: 600ms;
+  animation-delay: 600ms;
+}
+.delay-700ms {
+  -webkit-animation-delay: 700ms;
+  animation-delay: 700ms;
+}
+.delay-800ms {
+  -webkit-animation-delay: 800ms;
+  animation-delay: 800ms;
+}
+.delay-900ms {
+  -webkit-animation-delay: 900ms;
+  animation-delay: 900ms;
+}
+.delay-1000ms {
+  -webkit-animation-delay: 1000ms;
+  animation-delay: 1000ms;
+}
+.delay-1100ms {
+  -webkit-animation-delay: 1100ms;
+  animation-delay: 1100ms;
+}
+.delay-1200ms {
+  -webkit-animation-delay: 1200ms;
+  animation-delay: 1200ms;
+}
+.delay-1300ms {
+  -webkit-animation-delay: 1300ms;
+  animation-delay: 1300ms;
+}
+.delay-1400ms {
+  -webkit-animation-delay: 1400ms;
+  animation-delay: 1400ms;
+}
+.delay-1500ms {
+  -webkit-animation-delay: 1500ms;
+  animation-delay: 1500ms;
+}
+.delay-1600ms {
+  -webkit-animation-delay: 1600ms;
+  animation-delay: 1600ms;
+}
+.delay-1700ms {
+  -webkit-animation-delay: 1700ms;
+  animation-delay: 1700ms;
+}
+.rotateIn90 {
+  animation-name: rotateIn90;
+}
+@keyframes rotateIn90 {
+  from {
+    transform-origin: center;
+    transform: rotate3d(0, 0, 1, -90deg);
+    opacity: 0;
+  }
+  to {
+    transform-origin: center;
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+.work-component-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 64px;
+}
+@media only screen and (max-width: 768px) {
+  .work-component-wrapper .content .slideshow img {
+    max-width: 100% !important;
+  }
+}
+.work-component-wrapper a {
+  font-weight: bold;
+  color: black;
+}
+.work-component-wrapper .projectItem {
+  width: 100%;
+  margin-bottom: 32px;
+}
+.work-component-wrapper .projectItem .header {
+  font-size: 1.7em;
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 24px;
+  padding: 32px 32px 16px 0px;
+  width: 100%;
+}
+.work-component-wrapper .projectItem .header img {
+  width: 48px;
+}
+.work-component-wrapper .projectItem .content {
+  display: flex;
+  flex-wrap: wrap;
+}
+.work-component-wrapper .projectItem .content .slideshow {
+  display: flex;
+  align-items: center;
+  align-self: baseline;
+}
+.work-component-wrapper .projectItem .content .slideshow span {
+  cursor: pointer;
+  user-select: none;
+}
+.work-component-wrapper .projectItem .content .slideshow img {
+  max-width: 300px;
+  flex: 1;
+  margin-bottom: 32px;
+}
+.work-component-wrapper .projectItem .content .slideshow img.inactive {
+  display: none !important;
+}
+.work-component-wrapper .projectItem .content .description {
+  padding-left: 16px;
+  max-width: 500px;
+}
+.work-component-wrapper .projectItem.deepspeech .content .slideshow img {
+  max-width: 800px;
+}

@@ -1,0 +1,85 @@
+@import "../../../globalVariables.less";
+
+.work-component-wrapper {
+    display: flex;
+    // align-items: center;
+    // justify-content: center;
+    flex-wrap: wrap;
+    padding: 64px;
+
+    @media only screen and (max-width: @mobileBreakpoint) {
+        .content {
+            .slideshow {
+                img {
+                    max-width: 100% !important;
+                }
+            }
+        }
+    }
+
+    a {
+        font-weight: bold;
+        color: black;
+    }
+
+    .projectItem {
+
+        width: 100%;
+        margin-bottom: 32px;
+
+        .header {
+            font-size: 1.7em;
+            border-bottom: 1px solid #aaa;
+            margin-bottom: 24px;
+            padding: 32px 32px 16px 0px;
+            width: 100%;
+
+            img {
+                width: 48px;
+            }
+        }
+
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+
+            .slideshow {
+                display: flex;
+                align-items: center;
+                align-self: baseline;
+
+                span {
+                    cursor: pointer;
+                    user-select: none;
+                }
+
+                img {
+                    max-width: 300px;
+                    flex: 1;
+                    margin-bottom: 32px;
+
+                    &.inactive {
+                        display: none !important;
+                    }
+                }
+            }
+
+            .description {
+                padding-left: 16px;
+                max-width: 500px;
+            }
+        }
+
+
+
+        &.deepspeech {
+            .content {
+                .slideshow {
+                    img {
+                        max-width: 800px;
+                    }
+                }
+            }
+        }
+    }
+}
